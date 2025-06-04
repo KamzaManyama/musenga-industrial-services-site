@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musenga | Strategic Business Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/mvg.png">
+
+    <!-- <link rel="stylesheet" href="dd.css"> -->
+    <style>
+        :root {
+            --primary-green: #1C4C33;
+            --accent-yellow: #F0C300;
+            --dark-charcoal: #222222;
+            --bg-soft-gray: #F5F5F5;
+            --highlight-lime: #8BC34A;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-soft-gray);
+            color: var(--dark-charcoal);
+            scroll-behavior: smooth;
+        }
+        
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./images/heroImage.jpg') no-repeat center center/cover;
+        }
+        
+        .animated-underline {
+            position: relative;
+            padding-bottom: 2px;
+        }
+        
+        
+
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        .animated-underline:hover::after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #153827;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(28, 76, 51, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary-green);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-yellow);
+            color: var(--dark-charcoal);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background-color: #d9af00;
+            transform: translateY(-3px);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .journey-step {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .journey-step::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 2px solid var(--primary-green);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .careers-container {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to right, #fff 50%, var(--bg-soft-gray) 50%);
+            height: auto;
+        }
+        
+        @media (min-width: 768px) {
+            .careers-container {
+                flex-direction: row;
+                height: 75vh;
+            }
+        }
+        
+        .careers-image {
+            flex: 1;
+            background: url('./images/ssedrfgvbhknlm,.jpg') no-repeat center center/cover;
+            min-height: 400px;
+        }
+        
+        @media (min-width: 768px) {
+            .careers-image {
+                min-height: auto;
+            }
+        }
+        
+        .careers-content {
+            flex: 1;
+            padding: 2rem;
+            background-color: white;
+        }
+        
+        @media (min-width: 768px) {
+            .careers-content {
+                padding: 4rem;
+            }
+        }
+        
+        .divider {
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-yellow);
+            margin: 1.5rem 0;
+        }
+        
+        .industry-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+        
+        .industry-btn {
+            background-color: var(--bg-soft-gray);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--dark-charcoal);
+            font-size: 0.9rem;
+        }
+        
+        .industry-btn:hover, .industry-btn.active {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--highlight-lime);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: rgba(28, 76, 51, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .service-icon i {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+        }
+        
+        .stats-section {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        .footer {
+            background-color: var(--dark-charcoal);
+            color: white;
+        }
+        
+        .highlight-hover:hover {
+            color: var(--highlight-lime);
+        }
+        
+        .section-title {
+            color: var(--primary-green);
+        }
+        
+        .contact-icon {
+            background-color: var(--primary-green);
+        }
+        
+        .form-focus:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 2px rgba(28, 76, 51, 0.2);
+        }
+        
+        .social-icon:hover {
+            color: var(--accent-yellow);
+        }
+        
+        .text-accent {
+            color: var(--accent-yellow);
+        }
+        
+        .bg-soft-gray {
+            background-color: var(--bg-soft-gray);
+        }
+        
+        .border-highlight {
+            border-color: var(--highlight-lime);
+        }
+        
+        /* Enhanced Styles */
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--primary-green);
+            opacity: 0.1;
+            font-family: Georgia, serif;
+        }
+        
+        .partner-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .partner-logos img {
+            max-height: 80px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logos img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .scroll-top-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-top-btn:hover {
+            background-color: #153827;
+            transform: translateY(-5px);
+        }
+        
+        .nav-active {
+            color: var(--primary-green) !important;
+            font-weight: 600;
+        }
+        
+        .nav-active::after {
+            width: 100% !important;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .partner-logos {
+                gap: 15px;
+            }
+            
+            .partner-logos img {
+                max-height: 60px;
+                max-width: 120px;
+            }
+            
+            .careers-content {
+                padding: 1.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-section .grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .stats-section .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+            
+            .partner-logos img {
+                max-height: 50px;
+                max-width: 100px;
+            }
+        }
+        
+        .mission-statement {
+            background: linear-gradient(to right, var(--primary-green), #2a6d4c);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mission-statement::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+        
+        .mission-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-soft-gray">
+    <!-- Header/Navigation -->
+    <nav class="fixed top-0 w-full p-4 z-50 transition-all duration-300 bg-white shadow-md" id="main-nav">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <a href="#" class="flex items-center flex-shrink-0">
+                <img width="180" height="80" src="https://www.musenga.co.za/wp-content/uploads/2022/12/Musenga-Logo.png" alt="Musenga Logo">
+            </a>
+
+            <div class="hidden md:flex flex-grow justify-center space-x-6 items-center">
+                <a href="#Home" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">About</a>
+                <a href="#services" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Services</a>
+                <a href="#industries" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Solutions</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Contact</a>
+            </div>
+
+            <div class="hidden md:flex ml-auto">
+                <a href="#consultation" class="btn-primary font-semibold py-2 px-6 rounded-md">Get Started</a>
+            </div>
+
+            <button class="md:hidden hamburger-menu focus:outline-none">
+                <div class="bar bg-primary-green w-6 h-0.5 mb-1.5 transition-colors duration-300"></div>
+                <div class="bar bg-primary-green w-6 h-0.5 mb-1.5 transition-colors duration-300"></div>
+                <div class="bar bg-primary-green w-6 h-0.5 transition-colors duration-300"></div>
+            </button>
+        </div>
+
+        <div class="md:hidden absolute top-full left-0 right-0 bg-white shadow-md rounded-b-md overflow-hidden hidden" id="mobile-menu">
+        <!-- Make hamburger bars green -->
+        <style>
+            .hamburger-menu .bar {
+            background-color: var(--primary-green) !important;
+            }
+        </style>
+            <a href="#Home" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Home</a>
+            <a href="#about" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">About Us</a>
+            <a href="#services" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Services</a>
+            <a href="#industries" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Solutions</a>
+            <a href="#contact" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Contact</a>
+            <a href="#consultation" class="block px-4 py-3 btn-primary font-semibold">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-top-btn" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="Home"class="hero relative min-h-screen flex items-center">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl hero-text">
+                <span class="inline-block text-accent uppercase tracking-wider mb-3 font-semibold text-sm fade-in">Integrated Service Solutions</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 font-heading">
+                    Building Clean, Sustainable Communities
+                </h1>
+                <p class="text-xl text-gray-200 mb-8">
+                    Musenga specializes in construction, waste management, and cleaning services delivering reliable, high-quality solutions that support safe, functional, and environmentally responsible spaces.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="btn-primary py-3 px-8 rounded-md">Get in Touch</a>
+                    <a href="#services" class="btn-secondary py-3 px-8 rounded-md">Explore Services</a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Animated Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <a href="#about" class="flex flex-col items-center text-white opacity-80 hover:opacity-100 transition duration-300">
+                <span class="mb-2 text-sm">Scroll Down</span>
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+    
+
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center mb-12">
+                <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">Who We Are</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-4">About Musenga</h2>
+                <div class="w-20 h-1 mb-4" style="background-color: var(--accent-yellow);"></div>
+            </div>
+    
+            <!-- About Content Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h3 class="text-2xl font-semibold text-primary-green mb-6">Our Vision</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Musenga is a leading South African service provider dedicated to delivering innovative, sustainable solutions in construction, waste management, and professional cleaning. Our mission is to foster cleaner, safer, and healthier communities through expert service and environmental responsibility.
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        We proudly partner with municipalities, corporate clients, and private developments, offering tailored solutions that support infrastructure growth, waste reduction, and hygiene excellence. By prioritizing sustainability and quality, we aim to build long-lasting relationships and contribute to a better future for all South Africans.
+                    </p>
+                    <div class="flex mt-8">
+                        <a href="AboutUSMosenga.html" class="btn-primary py-3 px-8 rounded-md flex items-center font-semibold transition duration-300">
+                            Contact Us <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden shadow-xl transform transition duration-500 hover:scale-105 reveal">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2023/03/WhatsApp-Image-2023-01-05-at-9.27.22-PM-300x225-1.jpeg" alt="Workers building sustainable communities" class="w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+  
+ <!-- Enhanced Services Section -->
+<section id="services" class="py-24 bg-gradient-to-b from-soft-gray to-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col items-center mb-16">
+      <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm animate-fade-in">
+        Our Core Services
+      </span>
+      <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-4 text-gray-900">
+        Specialized <span class="relative">Solutions
+          <span class="absolute bottom-1 left-0 w-full h-2 bg-accent-yellow/40 -z-10"></span>
+        </span>
+      </h2>
+      <div class="w-20 h-1 mb-4" style="background-color: var(--accent-yellow);"></div>
+      <p class="text-lg md:text-xl text-gray-600 max-w-3xl text-center mb-6 leading-relaxed">
+        Comprehensive services designed to build, maintain, and enhance community spaces
+      </p>
+      <div class="w-20 h-1.5 bg-gradient-to-r from-accent-yellow to-yellow-300 rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Construction Service -->
+      <div class="service-card group relative bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-500 hover:-translate-y-3 hover:shadow-xl reveal border border-gray-100">
+        <div class="absolute inset-0 bg-gradient-to-br from-white to-green-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="relative p-8 z-10">
+          <div class="service-icon mb-6 w-14 h-14 rounded-lg bg-green-100 flex items-center justify-center group-hover:bg-green-200 transition-colors duration-300">
+            <i class="fas fa-hard-hat text-3xl text-primary-green"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-primary-green transition-colors duration-300">
+            Construction Services
+          </h3>
+          <p class="text-gray-600 mb-5 leading-relaxed">
+            Building sustainable infrastructure with a focus on quality, safety, and environmental responsibility.
+          </p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Road and infrastructure development</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Building and facility construction</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Renovation and restoration projects</span>
+            </li>
+          </ul>
+        <a href="ConstructionMangement.html" class="inline-flex items-center font-semibold text-primary-green hover:text-green-800 transition-colors group">
+            Learn more 
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
+        </a>
+        </div>
+        <div class="relative service-footer bg-gradient-to-r from-green-50 to-green-100 py-4 px-8 border-t border-green-200">
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-medium text-green-700 flex items-center">
+              <i class="fas fa-award mr-2"></i> CIDB Certified
+            </span>
+            <div class="flex space-x-2">
+              <span class="bg-green-200/80 text-green-800 text-xs px-2.5 py-1 rounded-full font-medium">Commercial</span>
+              <span class="bg-green-200/80 text-green-800 text-xs px-2.5 py-1 rounded-full font-medium">Residential</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Waste Management -->
+      <div class="service-card group relative bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-500 hover:-translate-y-3 hover:shadow-xl reveal border border-gray-100" style="animation-delay: 0.2s;">
+        <div class="absolute inset-0 bg-gradient-to-br from-white to-green-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="relative p-8 z-10">
+          <div class="service-icon mb-6 w-14 h-14 rounded-lg bg-green-100 flex items-center justify-center group-hover:bg-green-200 transition-colors duration-300">
+            <i class="fas fa-recycle text-3xl text-primary-green"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-primary-green transition-colors duration-300">
+            Waste Management
+          </h3>
+          <p class="text-gray-600 mb-5 leading-relaxed">
+            Sustainable waste solutions that reduce environmental impact while maintaining community cleanliness.
+          </p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Municipal waste collection</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Recycling programs</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Hazardous waste disposal</span>
+            </li>
+          </ul>
+          <a href="WasteManagement1.html" class="inline-flex items-center font-semibold text-primary-green hover:text-green-800 transition-colors group">
+            Learn more 
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
+          </a>
+        </div>
+        <div class="relative service-footer bg-gradient-to-r from-green-50 to-green-100 py-4 px-8 border-t border-green-200">
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-medium text-green-700 flex items-center">
+              <i class="fas fa-leaf mr-2"></i> Eco-Certified
+            </span>
+            <div class="flex space-x-2">
+              <span class="bg-green-200/80 text-green-800 text-xs px-2.5 py-1 rounded-full font-medium">Municipal</span>
+              <span class="bg-green-200/80 text-green-800 text-xs px-2.5 py-1 rounded-full font-medium">Commercial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cleaning Services -->
+      <div class="service-card group relative bg-white rounded-xl shadow-lg overflow-hidden ">
+        <div class="absolute inset-0 bg-gradient-to-br from-white to-green-50 opacity-0 "></div>
+        <div class="relative p-8 z-10">
+          <div class="service-icon mb-6 w-14 h-14 rounded-lg bg-green-100 flex items-center justify-center group-hover:bg-green-200 transition-colors duration-300">
+            <i class="fas fa-broom text-3xl text-primary-green"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-primary-green transition-colors duration-300">
+            Professional Cleaning
+          </h3>
+          <p class="text-gray-600 mb-5 leading-relaxed">
+            Comprehensive cleaning services for healthier public spaces and commercial environments.
+          </p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Commercial facility maintenance</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Public space sanitation</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+              <span class="text-gray-700">Specialized industrial cleaning</span>
+            </li>
+          </ul>
+          <a href="Cleaning.html" class="inline-flex items-center font-semibold text-primary-green hover:text-green-800 transition-colors group">
+            Learn more 
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
+          </a>
+        </div>
+        <div class="relative service-footer bg-gradient-to-r from-green-50 to-green-100 py-4 px-8 border-t border-green-200">
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-medium text-green-700 flex items-center">
+              <i class="fas fa-certificate mr-2"></i> ISO Certified
+            </span>
+            <div class="flex space-x-2">
+              <span class="bg-green-200/80 text-green-800 text-xs px-2.5 py-1 rounded-full font-medium">Public</span>
+              <span class="bg-green-200/80 text-green-800 text-xs px-2.5 py-1 rounded-full font-medium">Private</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <style>
+    /* Enhanced partner logo animation */
+    .partner-logos-container {
+      mask-image: linear-gradient(
+        to right, 
+        transparent, 
+        black 10%, 
+        black 90%, 
+        transparent
+      );
+      -webkit-mask-image: linear-gradient(
+        to right, 
+        transparent, 
+        black 10%, 
+        black 90%, 
+        transparent
+      );
+    }
+    
+    .partner-logos-track {
+      animation: scroll 30s linear infinite;
+      min-width: 200%;
+    }
+    
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    /* Service card enhancements */
+    .service-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+  
+    
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: rgba(28, 76, 51, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .service-footer {
+      margin-top: auto;
+    }
+    
+    /* Dot pattern background for partners */
+    .pattern-dots {
+      background-image: radial-gradient(currentColor 1px, transparent 1px);
+      background-size: 10px 10px;
+    }
+  </style>
+  
+  <script>
+    // Initialize partner logos animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const track = document.querySelector('.partner-logos-track');
+      const logos = track.querySelectorAll('div');
+      const logoWidth = logos[0].offsetWidth + 32; // width + margin
+      
+      // Calculate total width needed
+      const totalWidth = logoWidth * logos.length;
+      track.style.width = `${totalWidth}px`;
+    });
+  </script>
+    <!-- Stats Section -->
+    <section class="py-16 stats-section text-white bg-primary-green bg-opacity-90">
+        <div class="container mx-auto px-4">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="reveal">
+              <div class="text-4xl font-bold mb-2">
+                <span class="counter-value" data-count="120">120</span>+
+              </div>
+              <p class="text-sm uppercase tracking-wider text-gray-200">Clients Served</p>
+            </div>
+            <div class="reveal">
+              <div class="text-4xl font-bold mb-2">
+                <span class="counter-value" data-count="23">23</span>+
+              </div>
+              <p class="text-sm uppercase tracking-wider text-gray-200">Years Experience</p>
+            </div>
+            <div class="reveal">
+              <div class="text-4xl font-bold mb-2">
+                <span class="counter-value" data-count="98">98</span>%
+              </div>
+              <p class="text-sm uppercase tracking-wider text-gray-200">Client Satisfaction</p>
+            </div>
+            <div class="reveal">
+              <div class="text-4xl font-bold mb-2">
+                <span class="counter-value" data-count="50">50</span>+
+              </div>
+              <p class="text-sm uppercase tracking-wider text-gray-200">Expert Consultants</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+    <!-- Industries Section -->
+    <section id="industries" class="careers-section bg-white">
+        <div class="careers-container flex flex-col md:flex-row">
+          
+            <!-- Left Image -->
+            <div class="careers-image md:w-1/2 h-64 md:h-auto bg-cover bg-center" style="background-image: url('https://www.musenga.co.za/wp-content/uploads/2022/12/Alliance-Partnership.jpg');"></div>
+            
+            <!-- Right Content -->
+            <div class="careers-content md:w-1/2 flex items-center">
+                <div class="max-w-3xl">
+                    <span class="careers-label text-accent block mb-2 font-medium">INDUSTRIES WE SERVE</span>
+                    <h2 class="careers-heading text-3xl font-bold font-heading text-primary-green mb-3 leading-tight">
+                        Sector-Focused Solutions<br>Built for Impact
+                    </h2>
+                    <div class="divider h-1 bg-accent-yellow mb-4 w-16"></div>
+                    
+                    <p class="careers-description text-gray-700 mb-5 font-medium">
+                        Musenga delivers expert operational services tailored to South Africa’s key sectors, combining local knowledge with sustainable practices.
+                    </p>
+                    
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-accent-yellow mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Municipal & Public Sector</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Comprehensive waste management, infrastructure maintenance, and cleaning services for municipalities and government facilities.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-accent-yellow mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Commercial & Industrial</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Facility cleaning, waste solutions, and site maintenance for office parks, retail centers, and manufacturing plants.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-accent-yellow mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Construction & Post-Construction</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Waste management, site preparation, and thorough post-construction cleaning for residential and commercial projects.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <p class="text-sm text-gray-500 italic">
+                        Every solution is customized to comply with South African regulations while meeting your operational needs.
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+      
+    
+   
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-soft-gray">
+
+        
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center mb-16">
+                <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">Get In Touch</span>
+                <h2 class="text-3xl md:text-4xl font-bold font-heading text-center section-title mb-4">Contact Us</h2>
+                <div class="w-20 h-1 bg-accent-yellow"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Let's Start a Conversation</h3>
+                    <p class="text-gray-600 mb-8">We're here to support your goals. Whether you have a question about our services or want to partner on a project, feel free to reach out.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="contact-icon w-12 h-12 rounded-full flex items-center justify-center mr-4 bg-primary-green">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Our Location</h4>
+                                <p class="text-gray-600">13 Rivonia Road, Sandton<br>Johannesburg, South Africa</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="contact-icon w-12 h-12 rounded-full flex items-center justify-center mr-4 bg-primary-green">
+                                <i class="fas fa-phone-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Phone</h4>
+                                <p class="text-gray-600">+27 10 555 7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="contact-icon w-12 h-12 rounded-full flex items-center justify-center mr-4 bg-primary-green">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Email</h4>
+                                <p class="text-gray-600">connect@musenga.co.za</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 p-6 bg-white rounded-lg">
+                        <h4 class="font-bold text-gray-900 mb-4">Business Hours</h4>
+                        <div class="space-y-2">
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Monday - Friday:</span>
+                                <span class="font-medium">8:00 AM - 5:00 PM</span>
+                            </p>
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Saturday:</span>
+                                <span class="font-medium">9:00 AM - 1:00 PM</span>
+                            </p>
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Sunday:</span>
+                                <span class="font-medium">Closed</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="reveal" style="animation-delay: 0.2s;">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <form action="https://formspree.io/f/mayvzvne" method="POST">
+                            <div class="mb-6">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                <input type="text" id="name" name="name" required class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" required class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="service" class="block text-gray-700 font-medium mb-2">Service Interested In</label>
+                                <select id="service" name="service" required class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none">
+                                    <option value="" disabled selected>Select a service</option>
+                                    <option value="consulting">CIVIL, BUILDING CONSTRUCTION, REFURBISHMENT AND MAINTENANCE</option>
+                                    <option value="waste">COMMERCIAL AND INDUSTRIAL CLEANING AND HYGIENE</option>
+                                    <option value="cleaning">WASTE MANAGEMENT SOLUTIONS</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                                <textarea id="message" name="message" rows="5" required class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none"></textarea>
+                            </div>
+                            
+                            <button type="submit" 
+                                    class="w-full bg-green-800 text-white font-semibold py-4 px-8 rounded-lg hover:bg-green-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Send Message
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer class="footer pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-between">
+                <!-- Company Info -->
+                <div class="w-full md:w-1/2 lg:w-1/3 mb-10 md:mb-0">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2022/12/Musenga-Logo.png" alt="Musenga Logo" class="mb-6" style="max-width:180px;">
+                    <p class="mb-6 text-gray-400 max-w-xs">South Africa's leading service provider specializing in construction, waste management, and cleaning solutions.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="w-full md:w-1/2 lg:w-1/3 mb-10 md:mb-0">
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Services</a></li>
+                        <li><a href="#industries" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Solutions</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="w-full md:w-full lg:w-1/3">
+                    <h4 class="text-lg font-bold mb-6">Contact Us</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-accent-yellow"></i>
+                            <span class="text-gray-400">13 Rivonia Road, Sandton<br>Johannesburg, 2196<br>South Africa</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-accent-yellow"></i>
+                            <span class="text-gray-400">+27 10 555 7890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-accent-yellow"></i>
+                            <span class="text-gray-400">connect@musenga.co.za</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="border-gray-700 my-10">
+
+            <!-- Copyright -->
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">&copy; 2023 Musenga Business Solutions. All rights reserved.</p>
+               
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.reveal');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 50) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize on load
+        window.addEventListener('load', revealOnScroll);
+        window.addEventListener('scroll', revealOnScroll);
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter-value');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = target / speed;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Initialize counter animation when counters are in view
+        function initCounters() {
+            const counterSection = document.querySelector('.stats-section');
+            const sectionTop = counterSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (sectionTop < windowHeight - 100) {
+                animateCounters();
+                window.removeEventListener('scroll', initCounters);
+            }
+        }
+
+        window.addEventListener('scroll', initCounters);
+
+        // Mobile menu toggle
+        document.querySelector('.hamburger-menu').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Industry selector buttons
+        const industryBtns = document.querySelectorAll('.industry-btn');
+        industryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                industryBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - sectionHeight/3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('nav-active');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

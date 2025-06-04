@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Musenga | Building Sustainable Communities</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #1C4C33;
+            --accent-yellow: #F0C300;
+            --dark-charcoal: #222222;
+            --bg-soft-gray: #F5F5F5;
+            --highlight-lime: #8BC34A;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-soft-gray);
+        }
+        
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #153a28;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-yellow);
+            color: var(--dark-charcoal);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-accent:hover {
+            background-color: #d8b100;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        .history-timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-green);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-yellow);
+            border: 3px solid var(--primary-green);
+        }
+        
+        .team-card {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            height: fit-content;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-yellow);
+        }
+        
+        .value-card {
+            background: white;
+            border-left: 4px solid var(--primary-green);
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left-width: 6px;
+        }
+        
+        .hero {
+            background-image: linear-gradient(rgba(28, 76, 51, 0.8), rgba(28, 76, 51, 0.8)), url('https://www.musenga.co.za/wp-content/uploads/2023/03/IMG_3531-768x576.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 95vh;
+        }
+        
+        .animated-underline {
+            position: relative;
+        }
+        
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        .animated-underline:hover::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer {
+            background-color: var(--dark-charcoal);
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-soft-gray">
+    <!-- Header/Navigation -->
+    <nav class="fixed top-0 w-full p-4 z-50 transition-all duration-300 bg-white shadow-md" id="main-nav">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <a href="index.html" class="flex items-center flex-shrink-0">
+                <img width="180" height="80" src="https://www.musenga.co.za/wp-content/uploads/2022/12/Musenga-Logo.png" alt="Musenga Logo">
+            </a>
+
+            <div class="hidden md:flex flex-grow justify-center space-x-6 items-center">
+                <a href="#aboutHero" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Home</a>
+                <a href="#storySection" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">About</a>
+                <a href="#Ourvalues" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Values</a>
+                <a href="#teams" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Team</a>
+                <a href="#community" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Impact</a>
+                <a href="#certifications" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Accreditations</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Contact</a>
+            </div>
+
+            <div class="hidden md:flex ml-auto">
+                <a href="#contact" class="btn-primary font-semibold py-2 px-6 rounded-md">Get Started</a>
+            </div>
+
+            <button class="md:hidden hamburger-menu focus:outline-none">
+                <div class="bar bg-primary-green w-6 h-0.5 mb-1.5 transition-colors duration-300"></div>
+                <div class="bar bg-primary-green w-6 h-0.5 mb-1.5 transition-colors duration-300"></div>
+                <div class="bar bg-primary-green w-6 h-0.5 transition-colors duration-300"></div>
+            </button>
+        </div>
+
+        <div class="md:hidden absolute top-full left-0 right-0 bg-white shadow-md rounded-b-md overflow-hidden hidden" id="mobile-menu">
+            <a href="#aboutHero" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Home</a>
+            <a href="#storySection" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">About</a>
+            <a href="#Ourvalues" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Values</a>
+            <a href="#teams" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Team</a>
+            <a href="#community" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Impact</a>
+            <a href="#certifications" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Accreditations</a>
+            <a href="#contact" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Contact</a>
+            <a href="#contact" class="block px-4 py-3 btn-primary font-semibold">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- About Hero Section with Background Image -->
+    <section id="aboutHero" class="hero relative flex items-center">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl">
+                <span class="inline-block text-yellow-400 uppercase tracking-wider mb-3 font-semibold text-sm fade-in">About Musenga</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 font-heading">
+                    Empowering Communities Through Service
+                </h1>
+                <p class="text-xl text-gray-200 mb-8">
+                    Since 2017, Musenga has delivered innovative cleaning, construction, and waste management solutions across South Africa committed to building safer, cleaner, and more sustainable communities.
+                </p>
+                <a href="#our-story" class="btn-accent py-3 px-8 rounded-md inline-block">Learn More</a>
+            </div>
+        </div>
+    </section>
+    
+
+    
+
+    <!-- Our Story Section -->
+    <section id="storySection" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2 reveal">
+                    <div class="rounded-lg overflow-hidden shadow-xl">
+                        <img src="images/about.jpg" alt="Musenga team meeting" class="w-full h-auto">
+                    </div>
+                </div>
+                <div class="md:w-1/2 reveal">
+                    <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">Who We Are</span>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Proudly South African</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Musenga Investments (Pty) Ltd is more than just a service provider  we’re a purpose-driven enterprise born from the vision of creating impact where it matters most. Established in 2017 and proudly 100% Black woman-owned, our roots trace back to Musengavhadzimu Business Enterprise cc (founded in 2002), with a deep commitment to excellence in every solution we offer.
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Based in Midrand, Gauteng, we offer integrated services in waste management, construction, and commercial & industrial cleaning. Our reach spans across multiple provinces, working with both public and private sectors to deliver efficient, sustainable, and community-focused solutions.
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        At our core, we believe transformation starts with opportunity. That’s why we actively create employment, upskill local communities, and partner with organizations that share our passion for empowerment and progress.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="p-4 rounded-lg" style="background-color: var(--primary-green);">
+                            <div class="text-2xl font-bold" style="color: var(--accent-yellow);">2017</div>
+                            <div class="text-sm" style="color: #fff;">Year Founded</div>
+                        </div>
+                        <div class="p-4 rounded-lg" style="background-color: var(--primary-green);">
+                            <div class="text-2xl font-bold" style="color: var(--accent-yellow);">3+</div>
+                            <div class="text-sm" style="color: #fff;">Provinces Served</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    
+
+    <!-- Our Values Section -->
+    <section id="Ourvalues" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">Our Foundation</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-4">Core Values</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed">
+                    These principles guide every decision we make and every service we deliver
+                </p>
+                <div class="w-20 h-1 bg-accent-yellow mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="value-card p-8 rounded-lg reveal">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-primary-green text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Integrity</h3>
+                    <p class="text-gray-700">
+                        We maintain the highest ethical standards, ensuring transparency and honesty in all our operations and client relationships.
+                    </p>
+                </div>
+                
+                <div class="value-card p-8 rounded-lg reveal">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-hands-helping text-primary-green text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Community</h3>
+                    <p class="text-gray-700">
+                        Our work exists to serve communities. We prioritize local employment and invest in skills development programs.
+                    </p>
+                </div>
+                
+                <div class="value-card p-8 rounded-lg reveal">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-medal text-primary-green text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Quality</h3>
+                    <p class="text-gray-700">
+                        From small cleaning contracts to major construction projects, we deliver consistent excellence in every detail.
+                    </p>
+                </div>
+                
+                <div class="value-card p-8 rounded-lg reveal">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb text-primary-green text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Innovation</h3>
+                    <p class="text-gray-700">
+                        We continuously evolve our methods and adopt sustainable technologies to solve modern challenges.
+                    </p>
+                </div>
+                
+                <div class="value-card p-8 rounded-lg reveal">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-clock text-primary-green text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Reliability</h3>
+                    <p class="text-gray-700">
+                        Clients trust us to deliver on time, within budget, and to specification - every time.
+                    </p>
+                </div>
+                
+                <div class="value-card p-8 rounded-lg reveal">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-primary-green text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Growth</h3>
+                    <p class="text-gray-700">
+                        We're committed to expanding opportunities for our employees, clients, and the communities we serve.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Leadership Team -->
+<section id="teams" class="py-20 bg-white" id="leadership">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <span class="inline-block text-green-800 uppercase tracking-wider mb-2 font-semibold text-sm">Meet The Team</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-4 font-serif">Leadership Team</h2>
+            <div class="w-20 h-1 bg-yellow-400 mx-auto mb-4"></div>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed">
+                Our experienced leadership team guides Musenga's strategic direction and ensures we stay true to our mission
+            </p>
+            <!-- <div class="w-20 h-1 bg-yellow-400 mx-auto"></div> -->
+        </div>
+        
+        <!-- Managing Director Row -->
+        <div class="flex justify-center mb-12">
+            <div class="w-full md:w-12/3 lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden border-t-4 border-yellow-400 transform hover:scale-105 transition-all duration-300">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="images/managingdirector.jpg" 
+                             alt="Nomsa Mavhungu" 
+                             class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Nomsa Mavhungu</h3>
+                        <p class="text-yellow-600 font-semibold mb-4 uppercase tracking-wide">Managing Director</p>
+                        <p class="text-gray-700 leading-relaxed">
+                            Provides strategic leadership and oversees the company's operations, growth, and stakeholder relationships. With over 20 years of experience in business management, Nomsa has guided Musenga's expansion across multiple provinces.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Other Team Members -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- SHEQ Manager -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="images/sheq manager.jpg" 
+                         alt="Machume Happy Nhlangwini" 
+                         class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Machume Happy Nhlangwini</h3>
+                    <p class="text-yellow-600 font-semibold mb-3 uppercase tracking-wide text-sm">SHEQ Manager</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Ensures compliance with Safety, Health, Environment, and Quality (SHEQ) standards across all operations.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Operations Manager -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="images/MphoRamade.jpg" 
+                         alt="Mpho Ramade" 
+                         class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Mpho Ramade</h3>
+                    <p class="text-yellow-600 font-semibold mb-3 uppercase tracking-wide text-sm">Operations Manager</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Manages day-to-day operations, service delivery, and ensures efficient execution of all projects.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- General Manager -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="images/Ntsumbeni Mavhungu.jpg" 
+                         alt="Ntsumbeni Mavhungu" 
+                         class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Ntsumbeni Mavhungu</h3>
+                    <p class="text-yellow-600 font-semibold mb-3 uppercase tracking-wide text-sm">General Manager</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Oversees multiple departments and ensures alignment with company objectives and performance targets.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Procurement Officer -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="images/Fulu Mnisi.jpg" 
+                         alt="Fulu Mnisi" 
+                         class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Fulu Mnisi</h3>
+                    <p class="text-yellow-600 font-semibold mb-3 uppercase tracking-wide text-sm">Procurement Officer</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Manages supplier relationships, procurement processes, and ensures cost-effective purchasing strategies.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Tender Manager -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="images/Eluby Chilongozi.jpg" 
+                         alt="Eluby Chilongozi" 
+                         class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Eluby Chilongozi</h3>
+                    <p class="text-yellow-600 font-semibold mb-3 uppercase tracking-wide text-sm">Tender Manager</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Leads the tender process, proposal development, and ensures compliance with bidding requirements.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- HR Manager -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="images/Vule Magavha.jpg" 
+                         alt="Vule Magavha" 
+                         class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Vule Magavha</h3>
+                    <p class="text-yellow-600 font-semibold mb-3 uppercase tracking-wide text-sm">HR Manager</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Oversees human resources functions including recruitment, training, and employee relations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Community Impact -->
+    <section id="community" class="py-20 text-white" style="background-color: var(--primary-green);">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 reveal">
+                    <span class="inline-block text-accent-yellow uppercase tracking-wider mb-2 font-semibold text-sm">Our Impact</span>
+                    <h2 class="text-3xl font-bold mb-6 font-heading">Beyond Service Delivery</h2>
+                    <p class="mb-6 leading-relaxed">
+                        At Musenga, we believe true success is measured by the lives we uplift and the futures we help shape. Our work goes far beyond contracts — it’s rooted in social responsibility and a deep commitment to nation-building.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent-yellow mt-1 mr-3"></i>
+                            <span>Over <strong>500 permanent jobs</strong> created in underserved and rural communities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent-yellow mt-1 mr-3"></i>
+                            <span><strong>Annual skills training</strong> for more than 200 workers in critical trades and services</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent-yellow mt-1 mr-3"></i>
+                            <span><strong>Active collaborations</strong> with 15+ local NGOs to amplify social impact</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent-yellow mt-1 mr-3"></i>
+                            <span>Over <strong>R15 million reinvested</strong> into education, health, and community infrastructure annually</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="btn-accent py-3 px-8 rounded-md inline-block shadow-md">Partner With Us</a>
+                </div>
+                <div class="md:w-1/2 reveal">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-700 p-6 rounded-lg text-center border-b-4 border-accent-yellow">
+                            <div class="text-3xl font-bold mb-2">85%</div>
+                            <div class="text-sm">Local Hiring Rate</div>
+                        </div>
+                        <div class="bg-green-700 p-6 rounded-lg text-center border-b-4 border-accent-yellow">
+                            <div class="text-3xl font-bold mb-2">R15m+</div>
+                            <div class="text-sm">Annual Community Investment</div>
+                        </div>
+                        <div class="bg-green-700 p-6 rounded-lg text-center border-b-4 border-accent-yellow">
+                            <div class="text-3xl font-bold mb-2">12</div>
+                            <div class="text-sm">Enterprise Development Partners</div>
+                        </div>
+                        <div class="bg-green-700 p-6 rounded-lg text-center border-b-4 border-accent-yellow">
+                            <div class="text-3xl font-bold mb-2">3</div>
+                            <div class="text-sm">Provinces Served</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Certifications Section -->
+    <section  id="certifications" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">Our Standards</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-4">Accreditations</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed">
+                    We maintain the highest industry certifications to ensure quality and compliance
+                </p>
+                <div class="w-20 h-1 bg-accent-yellow mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-8 items-center justify-center">
+                <div class="p-6 flex items-center justify-center reveal">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2023/01/CIDB_LogoCMYK-1.png" alt="CIDB" class="h-16 object-contain opacity-80 hover:opacity-100 transition-opacity">
+                </div>
+                <div class="p-6 flex items-center justify-center reveal">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2023/01/1538657513-51-department-of-labour-removebg-preview-300x225.png" alt="dol" class="h-28 object-contain opacity-80 hover:opacity-100 transition-opacity" style="max-width:120px;">
+                </div>
+                <div class="p-6 flex items-center justify-center reveal">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2023/01/download__1_-removebg-preview.png" alt="B-BBEE" class="h-16 object-contain opacity-80 hover:opacity-100 transition-opacity">
+                </div>
+                <div class="p-6 flex items-center justify-center reveal">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2023/01/Ncc-logo-removebg-preview-300x88.png" alt="SAQA" class="h-16 object-contain opacity-80 hover:opacity-100 transition-opacity">
+                </div>
+                <div class="p-6 flex items-center justify-center reveal">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2023/01/download-removebg-preview.png" alt="B-BBEE" class="h-16 object-contain opacity-80 hover:opacity-100 transition-opacity">
+                </div>
+                <div class="p-6 flex items-center justify-center reveal">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2023/01/BCCCI_Logo_navy-copy111111-removebg-preview.png" alt="SAQA" class="h-16 object-contain opacity-80 hover:opacity-100 transition-opacity">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-accent-yellow">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Ready to Partner With Musenga?</h2>
+            <p class="text-lg text-gray-800 mb-8 max-w-3xl mx-auto">
+                Whether you need reliable services or want to collaborate on community initiatives, we'd love to hear from you.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#contact" class="btn-primary py-3 px-8 rounded-md">Contact Our Team</a>
+                <a href="#" class="btn-secondary py-3 px-8 rounded-md border-primary-green text-primary-green hover:bg-primary-green hover:text-white">Download Company Profile</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block text-green-800 uppercase tracking-wider mb-2 font-semibold text-sm">Get In Touch</span>
+                <h2 class="text-3xl md:text-4xl font-bold font-serif text-center mb-4">Contact Us</h2>
+                <div class="w-20 h-1 bg-yellow-400 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Let's Start a Conversation</h3>
+                    <p class="text-gray-600 mb-8 leading-relaxed">We're here to support your goals. Whether you have a question about our services or want to partner on a project, feel free to reach out.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start group">
+                            <div class="w-12 h-12 bg-green-800 rounded-full flex items-center justify-center mr-4 group-hover:bg-yellow-400 transition-colors duration-300">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Our Location</h4>
+                                <p class="text-gray-600">13 Rivonia Road, Sandton<br>Johannesburg, South Africa</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start group">
+                            <div class="w-12 h-12 bg-green-800 rounded-full flex items-center justify-center mr-4 group-hover:bg-yellow-400 transition-colors duration-300">
+                                <i class="fas fa-phone-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Phone</h4>
+                                <p class="text-gray-600">+27 10 555 7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start group">
+                            <div class="w-12 h-12 bg-green-800 rounded-full flex items-center justify-center mr-4 group-hover:bg-yellow-400 transition-colors duration-300">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Email</h4>
+                                <p class="text-gray-600">connect@musenga.co.za</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 p-6 bg-gray-100 rounded-lg">
+                        <h4 class="font-bold text-gray-900 mb-4">Business Hours</h4>
+                        <div class="space-y-2">
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Monday - Friday:</span>
+                                <span class="font-medium">8:00 AM - 5:00 PM</span>
+                            </p>
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Saturday:</span>
+                                <span class="font-medium">9:00 AM - 1:00 PM</span>
+                            </p>
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Sunday:</span>
+                                <span class="font-medium">Closed</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
+                    <form action="https://formspree.io/f/mayvzvne" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Full Name *</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent transition-all duration-300">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address *</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent transition-all duration-300">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent transition-all duration-300">
+                        </div>
+                        
+                        <div>
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Service Interested In *</label>
+                            <select id="service" name="service" required 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent transition-all duration-300">
+                                <option value="" disabled selected>Select a service</option>
+                                <option value="consulting">Business Consulting</option>
+                                <option value="waste">Waste Management</option>
+                                <option value="cleaning">Cleaning Solutions</option>
+                                <option value="construction">Construction Support</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Your Message *</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent transition-all duration-300 resize-vertical"></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-green-800 text-white font-semibold py-4 px-8 rounded-lg hover:bg-green-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-between">
+                <!-- Company Info -->
+                <div class="w-full md:w-1/2 lg:w-1/3 mb-10 md:mb-0">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2022/12/Musenga-Logo.png" alt="Musenga Logo" class="mb-6" style="max-width:180px;">
+                    <p class="mb-6 text-gray-400 max-w-xs">South Africa's leading service provider specializing in construction, waste management, and cleaning solutions.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="w-full md:w-1/2 lg:w-1/3 mb-10 md:mb-0">
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Services</a></li>
+                        <li><a href="#industries" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Solutions</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="w-full md:w-full lg:w-1/3">
+                    <h4 class="text-lg font-bold mb-6">Contact Us</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-accent-yellow"></i>
+                            <span class="text-gray-400">13 Rivonia Road, Sandton<br>Johannesburg, 2196<br>South Africa</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-accent-yellow"></i>
+                            <span class="text-gray-400">+27 10 555 7890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-accent-yellow"></i>
+                            <span class="text-gray-400">connect@musenga.co.za</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="border-gray-700 my-10">
+
+            <!-- Copyright -->
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">&copy; 2023 Musenga Business Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    reveals[i].classList.remove("active");
+                }
+            }
+        }
+        
+        window.addEventListener("scroll", reveal);
+        
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        hamburger.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            // Animate hamburger to X
+            this.classList.toggle('open');
+        });
+        
+        // Initialize scroll reveal on page load
+        reveal();
+    </script>
+</body>
+</html>

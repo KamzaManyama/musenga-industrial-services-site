@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning & Hygiene Services | Musenga</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #059669;
+            --accent-teal: #0D9488;
+            --primary-blue: #1E40AF;
+            --accent-yellow: #F59E0B;
+            --dark-charcoal: #222222;
+            --bg-soft-gray: #F5F5F5;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-soft-gray);
+        }
+        
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .bg-primary-green { background-color: var(--primary-green); }
+        .bg-accent-teal { background-color: var(--accent-teal); }
+        .bg-primary-blue { background-color: var(--primary-blue); }
+        .bg-accent-yellow { background-color: var(--accent-yellow); }
+        .bg-charcoal { background-color: var(--dark-charcoal); }
+        .bg-soft-gray { background-color: var(--bg-soft-gray); }
+        
+        .text-primary-green { color: var(--primary-green); }
+        .text-accent-teal { color: var(--accent-teal); }
+        .text-primary-blue { color: var(--primary-blue); }
+        .text-accent-yellow { color: var(--accent-yellow); }
+        
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #047857;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-teal);
+            color: white;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-accent:hover {
+            background-color: #0F766E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary-green);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-top-color: var(--accent-teal);
+        }
+        
+        .hero {
+            background: 
+            linear-gradient(rgba(5,150,105,0.8), rgba(5,150,105,0.8)),
+            url('images/pest\ control.jpg') center center/cover no-repeat;
+            height: 85vh;
+        }
+        
+        .stats-counter {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .process-step {
+            position: relative;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .process-step:hover {
+            border-color: var(--accent-teal);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+        
+        .animated-underline {
+            position: relative;
+        }
+        
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-teal);
+            transition: width 0.3s ease;
+        }
+        
+        .animated-underline:hover::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .project-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .project-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--accent-teal);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .contact-icon {
+            background-color: var(--primary-green);
+        }
+
+        .form-focus:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .footer {
+            background-color: var(--dark-charcoal);
+            color: white;
+        }
+
+        .social-icon:hover {
+            color: var(--accent-yellow) !important;
+        }
+        
+        .cleaning-icon {
+            background-color: #D1FAE5;
+            color: var(--primary-green);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray">
+    <!-- Header/Navigation -->
+    <nav class="fixed top-0 w-full p-4 z-50 transition-all duration-300 bg-white shadow-md" id="main-nav">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <a href="index.html" class="flex items-center flex-shrink-0">
+                <img width="180" height="80" src="https://www.musenga.co.za/wp-content/uploads/2022/12/Musenga-Logo.png" alt="Musenga Logo" class="h-12 w-auto">
+            </a>
+
+            <div class="hidden md:flex flex-grow justify-center space-x-6 items-center">
+                <a href="#hero" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Home</a>
+                <a href="#services" class="text-primary-green transition duration-300 animated-underline nav-link">Services</a>
+                <a href="#about" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">About</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Contact</a>
+            </div>
+
+            <div class="hidden md:flex ml-auto">
+                <a href="#contact" class="btn-primary font-semibold py-2 px-6 rounded-md">Get Quote</a>
+            </div>
+
+            <button class="md:hidden hamburger-menu focus:outline-none" id="hamburger" onclick="toggleMobileMenu()">
+                <div class="bar bg-primary-green w-6 h-0.5 mb-1.5 transition-colors duration-300"></div>
+                <div class="bar bg-primary-green w-6 h-0.5 mb-1.5 transition-colors duration-300"></div>
+                <div class="bar bg-primary-green w-6 h-0.5 transition-colors duration-300"></div>
+            </button>
+        </div>
+
+        <div class="md:hidden absolute top-full left-0 right-0 bg-white shadow-md rounded-b-md overflow-hidden hidden" id="mobile-menu">
+            <a href="#hero" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Home</a>
+            <a href="#services" class="block px-4 py-3 text-primary-green hover:bg-gray-50 transition duration-300 border-b border-gray-100">Services</a>
+            <a href="#about" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">About</a>
+            <a href="#contact" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Contact</a>
+            <a href="#contact" class="block px-4 py-3 btn-primary font-semibold text-center">Get Quote</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero relative flex items-center pt-16">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl">
+                <span class="inline-block text-accent-yellow uppercase tracking-wider mb-3 font-semibold text-sm">Professional Cleaning Since 2002</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 font-heading">
+                    Comprehensive Cleaning & Hygiene Solutions
+                </h1>
+                <p class="text-xl text-gray-200 mb-8 max-w-3xl">
+                    From industrial cleaning to corporate hygiene services, Musenga delivers spotless environments with precision and professionalism.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#services" class="btn-accent py-3 px-8 rounded-md inline-block">Our Services</a>
+                    <a href="#contact" class="py-3 px-8 rounded-md inline-block border-2 border-white text-white hover:bg-primary-green hover:text-white hover:border-white transition-all duration-300">Get a Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">Our Expertise</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-4 font-heading">Cleaning & Hygiene Services</h2>
+                <div class="w-20 h-1 bg-accent-teal mx-auto mb-4"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed">
+                    Comprehensive cleaning solutions from floor to ceiling, delivering pristine environments for commercial, industrial, and corporate clients.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Industrial Cleaning -->
+                <div class="service-card reveal">
+                    <div class="p-8">
+                        <div class="w-16 h-16 cleaning-icon rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-industry text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Industrial Cleaning</h3>
+                        <p class="text-gray-700 mb-6">
+                            Comprehensive cleaning services for industrial facilities including factories, warehouses, and production areas.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>High-pressure cleaning</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Machinery cleaning</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Waste removal</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Specialized floor care</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Corporate Cleaning -->
+                <div class="service-card reveal">
+                    <div class="p-8">
+                        <div class="w-16 h-16 cleaning-icon rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-building text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Corporate Cleaning</h3>
+                        <p class="text-gray-700 mb-6">
+                            Professional office cleaning services tailored to maintain a pristine work environment for your business.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Daily office cleaning</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Carpet and upholstery</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Window cleaning</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Kitchen and restroom sanitation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Hygiene Services -->
+                <div class="service-card reveal">
+                    <div class="p-8">
+                        <div class="w-16 h-16 cleaning-icon rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-hand-sparkles text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Hygiene Services</h3>
+                        <p class="text-gray-700 mb-6">
+                            Complete hygiene solutions to maintain sanitary conditions and prevent the spread of germs.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>SHE bin service</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Restroom supplies replenishment</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Hand sanitizer stations</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Air freshener systems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Specialized Cleaning -->
+                <div class="service-card reveal">
+                    <div class="p-8">
+                        <div class="w-16 h-16 cleaning-icon rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-broom text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Specialized Cleaning</h3>
+                        <p class="text-gray-700 mb-6">
+                            Expert solutions for unique cleaning challenges and specialized surfaces.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Vinyl and linoleum care</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Terrazzo and tile maintenance</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Wood and parquet floor care</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>High-traffic area maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pest Control -->
+                <div class="service-card reveal">
+                    <div class="p-8">
+                        <div class="w-16 h-16 cleaning-icon rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-bug text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Pest Control</h3>
+                        <p class="text-gray-700 mb-6">
+                            Comprehensive pest management solutions for commercial and residential properties.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Structural pest control</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Termite management</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Fumigation services</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Weed control</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Facility Maintenance -->
+                <div class="service-card reveal">
+                    <div class="p-8">
+                        <div class="w-16 h-16 cleaning-icon rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-clipboard-check text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Facility Maintenance</h3>
+                        <p class="text-gray-700 mb-6">
+                            Ongoing maintenance services to keep your facility in top condition year-round.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Preventative maintenance</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Parking area maintenance</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Walkway and stair care</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-green mr-2"></i>Building exterior cleaning</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Stats Section -->
+    <section class="py-16 bg-primary-green">
+       <div class="container mx-auto px-4">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+             <div class="reveal">
+                <div class="stats-counter text-gray-100">20+</div>
+                <p class="text-gray-100 font-semibold">Years Experience</p>
+             </div>
+             <div class="reveal">
+                <div class="stats-counter text-gray-100">500+</div>
+                <p class="text-gray-100 font-semibold">Clients Served</p>
+             </div>
+             <div class="reveal">
+                <div class="stats-counter text-accent-yellow">24/7</div>
+                <p class="text-gray-100 font-semibold">Emergency Service</p>
+             </div>
+             <div class="reveal">
+                <div class="stats-counter text-gray-100">100%</div>
+                <p class="text-gray-100 font-semibold">Satisfaction Guarantee</p>
+             </div>
+          </div>
+       </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 reveal">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cleaning Team" class="rounded-lg shadow-xl w-full h-auto">
+                </div>
+                <div class="md:w-1/2 reveal">
+                    <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">About Us</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 font-heading">Professional Cleaning Solutions</h2>
+                    <div class="w-20 h-1 bg-accent-teal mb-6"></div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Musenga is South Africa's leading provider of comprehensive cleaning and hygiene solutions. With over 20 years of experience, we deliver exceptional service to industrial, corporate, and residential clients.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Our team of trained professionals uses eco-friendly products and state-of-the-art equipment to ensure your space is not just clean, but hygienically maintained to the highest standards.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-primary-green text-xl"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Fully trained and vetted cleaning staff</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-primary-green text-xl"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Eco-friendly cleaning products</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-primary-green text-xl"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Customized cleaning plans</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-primary-green text-xl"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">24/7 emergency response</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">Our Approach</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-center section-title mb-4 font-heading">The Musenga Cleaning Process</h2>
+                <div class="w-20 h-1 bg-accent-teal mx-auto mb-4"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed">
+                    A systematic methodology that ensures cleanliness, hygiene, and client satisfaction at every stage.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="process-step reveal">
+                    <div class="step-number">1</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Assessment & Planning</h3>
+                    <p class="text-gray-600 text-sm">
+                        Detailed facility assessment to identify cleaning requirements and develop a customized cleaning plan.
+                    </p>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="step-number">2</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Specialized Equipment</h3>
+                    <p class="text-gray-600 text-sm">
+                        Deployment of appropriate cleaning equipment and eco-friendly products for each specific area.
+                    </p>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="step-number">3</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Thorough Cleaning</h3>
+                    <p class="text-gray-600 text-sm">
+                        Systematic cleaning following industry best practices and your specific requirements.
+                    </p>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="step-number">4</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Quality Inspection</h3>
+                    <p class="text-gray-600 text-sm">
+                        Final inspection to ensure all areas meet our high standards before client review.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center mb-16">
+                <span class="inline-block text-primary-green uppercase tracking-wider mb-2 font-semibold text-sm">Get In Touch</span>
+                <h2 class="text-3xl md:text-4xl font-bold font-heading text-center section-title mb-4">Contact Us</h2>
+                <div class="w-20 h-1 bg-accent-teal"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Request a Free Quote</h3>
+                    <p class="text-gray-600 mb-8">We're here to support your cleaning needs. Whether you have a question about our services or want to schedule a consultation, feel free to reach out.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="contact-icon w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Our Location</h4>
+                                <p class="text-gray-600">13 Rivonia Road, Sandton<br>Johannesburg, South Africa</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="contact-icon w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Phone</h4>
+                                <p class="text-gray-600">+27 10 555 7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="contact-icon w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Email</h4>
+                                <p class="text-gray-600">connect@musenga.co.za</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 p-6 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold text-gray-900 mb-4">Business Hours</h4>
+                        <div class="space-y-2">
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Monday - Friday:</span>
+                                <span class="font-medium">8:00 AM - 5:00 PM</span>
+                            </p>
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Saturday:</span>
+                                <span class="font-medium">9:00 AM - 1:00 PM</span>
+                            </p>
+                            <p class="text-gray-600 flex justify-between">
+                                <span>Sunday:</span>
+                                <span class="font-medium">Closed</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- Contact Form -->
+                 <div class="reveal" style="animation-delay: 0.2s;">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <form action="https://formspree.io/f/mayvzvne" method="POST">
+                            <div class="mb-6">
+                                <label for="name" class="block text-primary-blue font-medium mb-2">Full Name</label>
+                                <input type="text" id="name" name="name" required class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="email" class="block text-primary-blue font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" required class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="phone" class="block text-primary-blue font-medium mb-2">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="service" class="block text-primary-blue font-medium mb-2">Service Interested In *</label>
+                                <input type="text" id="service" name="service" value="CLEANING & HYGIENE SERVICES" readonly
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent transition-all duration-300 text-primary-green font-semibold">
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="message" class="block text-primary-blue font-medium mb-2">Your Message</label>
+                                <textarea id="message" name="message" rows="5" required class="form-focus w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none"></textarea>
+                            </div>
+                            
+                            <button type="submit" 
+                                    class="w-full btn-accent text-white font-semibold py-4 px-8 rounded-lg hover:bg-accent-yellow hover:text-primary-green transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer class="footer pt-16 pb-8 bg-charcoal">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-between">
+                <!-- Company Info -->
+                <div class="w-full md:w-1/2 lg:w-1/3 mb-10 md:mb-0">
+                    <img src="https://www.musenga.co.za/wp-content/uploads/2022/12/Musenga-Logo.png" alt="Musenga Logo" class="mb-6" style="max-width:180px;">
+                    <p class="mb-6 text-gray-400 max-w-xs">South Africa's leading service provider specializing in construction, waste management, and cleaning solutions.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 text-xl hover:text-accent-yellow transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="w-full md:w-1/2 lg:w-1/3 mb-10 md:mb-0">
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Services</a></li>
+                        <li><a href="#industries" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Solutions</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent-yellow transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="w-full md:w-full lg:w-1/3">
+                    <h4 class="text-lg font-bold mb-6">Contact Us</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-white"></i>
+                            <span class="text-gray-400">13 Rivonia Road, Sandton<br>Johannesburg, 2196<br>South Africa</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-white"></i>
+                            <span class="text-gray-400">+27 10 555 7890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-white"></i>
+                            <span class="text-gray-400">connect@musenga.co.za</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="border-gray-700 my-10">
+
+            <!-- Copyright -->
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">&copy; 2023 Musenga Business Solutions. All rights reserved.</p>
+               
+            </div>
+        </div>
+    </footer>
