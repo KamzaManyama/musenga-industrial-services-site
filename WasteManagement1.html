@@ -99,7 +99,7 @@
             url('./images/wasre.jpg') center center/cover no-repeat;
             position: relative;
             overflow: hidden;
-            height: 75vh;
+            height: 85vh;
         }
         .hero::before {
             content: '';
@@ -252,20 +252,20 @@
     <nav class="fixed top-0 w-full p-4 z-50 transition-all duration-300 bg-white shadow-md" id="main-nav">
         <div class="container mx-auto px-4 py-2 flex items-center justify-between">
             <a href="index.html" class="flex items-center flex-shrink-0">
-                <img width="180" height="80" src="https://www.musenga.co.za/wp-content/uploads/2022/12/Musenga-Logo.png" alt="Musenga Logo" class="h-12 w-auto">
+                <img width="180" height="80" src="https://www.musenga.co.za/wp-content/uploads/2022/12/Musenga-Logo.png" alt="Musenga Logo">
             </a>
 
             <div class="hidden md:flex flex-grow justify-center space-x-6 items-center">
                 <a href="#constractionHero" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Home</a>
-                <a href="#services" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">services</a>
+                <a href="#services" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Services</a>
                 <a href="#equipment" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Equipment</a>
                 <a href="#process" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Process</a>
                 <a href="#certification" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Certifications</a>
                 <a href="#contact" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">Contact</a>
             </div>
 
-            <div class="hidden md:flex ml-auto"></div>
-                <a href="#contact" class="btn-primary font-semibold py-2 px-6 rounded-md">Get Quote</a>
+            <div class="hidden md:flex ml-auto">
+                <a href="#contact" class="btn-primary font-semibold py-2 px-6 rounded-md">Get Started</a>
             </div>
 
             <button class="md:hidden hamburger-menu focus:outline-none" id="hamburger">
@@ -276,13 +276,18 @@
         </div>
 
         <div class="md:hidden absolute top-full left-0 right-0 bg-white shadow-md rounded-b-md overflow-hidden hidden" id="mobile-menu">
+            <style>
+                .hamburger-menu .bar {
+                    background-color: var(--primary-green) !important;
+                }
+            </style>
             <a href="#constractionHero" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Home</a>
-            <a href="#services" class="text-gray-700 hover:text-primary-green transition duration-300 animated-underline nav-link">services</a>
+            <a href="#services" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Services</a>
             <a href="#equipment" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Equipment</a>
             <a href="#process" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Process</a>
             <a href="#certification" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Certifications</a>
             <a href="#contact" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-green transition duration-300 border-b border-gray-100">Contact</a>
-            <a href="#contact" class="block px-4 py-3 btn-primary font-semibold text-center">Get Quote</a>
+            <a href="#contact" class="block px-4 py-3 btn-primary font-semibold">Get Started</a>
         </div>
     </nav>
 
@@ -607,7 +612,7 @@
                 </div>
 
                 <div class="certification-badge reveal">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-au</div>to mb-4">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-recycle text-blue-600 text-xl"></i>
                     </div>
                     <h3 class="font-bold text-gray-900 mb-2">Wastehub</h3>
