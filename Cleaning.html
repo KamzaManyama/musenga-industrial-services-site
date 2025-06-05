@@ -688,3 +688,35 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.querySelector('.hamburger-menu').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+        hamburger.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            // Animate hamburger to X
+            this.classList.toggle('open');
+        });
+    </script>
+</body>
