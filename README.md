@@ -6,40 +6,40 @@ Welcome to the official GitHub repository for **Musenga Investments**, a 100% Bl
 
 ---
 
-## 📌 About Us
+##  About Us
 
 Musenga Investments (Pty) Ltd is a diversified company based in Midrand, Gauteng. Established in 2002 (formerly Musengavhadzimu Business Enterprise cc) and incorporated in 2017, we deliver sustainable, high-impact services that support South Africa’s economic growth and environmental well-being.
 
 ---
 
-## 🧩 Services
+##  Services
 
-### 🔄 Waste Management
+### Waste Management
 - General and hazardous waste collection
 - Recycling, treatment, and safe disposal
 - HAZMAT spill response (oil, chemical, asbestos)
 - Equipment: skips, compactors, balers
 
-### 🧼 Cleaning & Hygiene
+###  Cleaning & Hygiene
 - Industrial and commercial cleaning
 - Furniture, flooring, window, and wall deep cleaning
 - Hygiene consumables and pest control
 
-### 🏗 Construction
+###  Construction
 - Turnkey residential housing development
 - Estate stand acquisition, construction, and resale
 
-### 🏘 Property Development
+###  Property Development
 - Real estate development and management
 - Project execution and housing delivery
 
-### 📊 Census & Data Collection
+###  Census & Data Collection
 - Informal settlement and waste bin censuses
 - Field data capture and registration
 
 ---
 
-## 🌍 Vision
+##  Vision
 
 To be a leader in sustainable environmental and infrastructure solutions while promoting empowerment and inclusive growth in South Africa.
 
@@ -57,13 +57,13 @@ To be a leader in sustainable environmental and infrastructure solutions while p
 
 ---
 
-## 🤝 Empowerment & Transformation
+##  Empowerment & Transformation
 
 Musenga is committed to creating opportunities for previously disadvantaged communities through skills transfer, job creation, and ethical business practices.
 
 ---
 
-## 📂 Repository Purpose
+##  Repository Purpose
 
 This repository may contain:
 - Company documentation
@@ -75,7 +75,7 @@ This repository may contain:
 
 ---
 
-## 📃 License
+##  License
 
 This repository is proprietary. No license is granted for commercial use unless explicitly provided in writing by Musenga Investments.
 
