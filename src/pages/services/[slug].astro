@@ -1,0 +1,181 @@
+---
+// Service page template. One page is generated per entry in src/data/services.ts.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import SplitHero from '../../components/SplitHero.astro';
+import { services, type Service } from '../../data/services';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+// Heading: first word bold, the rest regular (e.g. **Waste** management).
+const [titleBold, ...rest] = service.title.split(' ');
+const titleRest = rest.join(' ');
+// The "not listed" tile stretches to fill the last row of the offerings grid.
+const n = service.offerings.length;
+const ctaSpan = [
+  n % 2 === 0 ? 'sm:col-span-2' : '',
+  { 0: 'lg:col-span-3', 1: 'lg:col-span-2', 2: '' }[n % 3],
+].join(' ');
+const eyebrow = 'flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green';
+---
+
+<BaseLayout
+  title={`${service.title} | Musenga Investments`}
+  description={service.summary}
+>
+  <SplitHero
+    eyebrow={`Our services · ${service.number} / ${service.category}`}
+    line1Bold={titleBold}
+    line1={`${titleRest},`}
+    line2={service.heroLine2}
+    line2Bold={service.heroLine2Bold}
+    intro={service.tagline}
+    image={{ src: service.heroImage, alt: service.heroAlt, position: service.heroPosition }}
+    primary={{ label: `Discuss a ${service.shortName} project`, href: '#contact', service: service.formOption }}
+    secondary={{ label: 'What we offer', href: '#offer' }}
+    index={services.map((s) => ({ number: s.number, label: s.title, href: `/services/${s.slug}/`, active: s.slug === service.slug }))}
+    scrollTarget="#overview"
+  />
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+    <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
+      <div class="lg:col-span-5">
+        <!-- On desktop the image stretches to match the height of the text column. -->
+        <div class="relative lg:h-full lg:min-h-[560px]">
+          <img src={service.featureImage ?? service.heroImage} alt={service.featureAlt ?? service.heroAlt} class="h-[420px] w-full object-cover sm:h-[560px] lg:absolute lg:inset-0 lg:h-full" loading="lazy">
+        </div>
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7 lg:self-center">
+        <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 01 / Overview</p>
+        <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">{service.headline}</h2>
+        {service.intro.map((paragraph, i) => (
+          <p class={i === 0 ? 'mt-8 text-lg leading-8 text-musenga-muted' : 'mt-5 text-base leading-7 text-musenga-muted'}>{paragraph}</p>
+        ))}
+        <dl class="mt-12 divide-y divide-musenga-line border-y border-musenga-line">
+          <div class="grid grid-cols-[120px_1fr] gap-5 py-5 sm:grid-cols-[160px_1fr]">
+            <dt class="text-[10px] font-bold uppercase tracking-[.15em] text-musenga-muted">Clients</dt>
+            <dd class="text-sm leading-6">Public- and private-sector organisations</dd>
+          </div>
+          <div class="grid grid-cols-[120px_1fr] gap-5 py-5 sm:grid-cols-[160px_1fr]">
+            <dt class="text-[10px] font-bold uppercase tracking-[.15em] text-musenga-muted">Credentials</dt>
+            <dd class="text-sm leading-6">
+              {service.credentials}
+              <a href={`/certifications/#${service.slug}`} class="link-line focus-ring mt-3 flex w-fit rounded-sm">View certifications</a>
+            </dd>
+          </div>
+          <div class="grid grid-cols-[120px_1fr] gap-5 py-5 sm:grid-cols-[160px_1fr]">
+            <dt class="text-[10px] font-bold uppercase tracking-[.15em] text-musenga-muted">Head office</dt>
+            <dd class="text-sm leading-6">Midrand, Gauteng</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE OFFER -->
+  <section id="offer" class="scroll-mt-24 bg-musenga-mist px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+    <div class="mx-auto max-w-[1320px]">
+      <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 02 / What we offer</p>
+      <h2 class="mt-7 max-w-2xl text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Our {service.shortName} services.</h2>
+      <ul data-reveal class="mt-14 grid grid-cols-1 border-l border-t border-musenga-line sm:grid-cols-2 lg:grid-cols-3">
+        {service.offerings.map((offering, i) => (
+          <li class="border-b border-r border-musenga-line bg-white p-7 sm:p-9">
+            <span class="text-xs font-semibold text-musenga-green">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-6 text-xl font-semibold tracking-[-.02em]">{offering.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-musenga-muted">{offering.text}</p>
+          </li>
+        ))}
+        <li class={`flex flex-col justify-between border-b border-r border-musenga-ink bg-musenga-ink p-7 text-white sm:p-9 ${ctaSpan}`}>
+          <p class="text-xl font-semibold leading-snug tracking-[-.02em]">Need something not listed here?</p>
+          <a href="#contact" class="link-line link-line-light focus-ring mt-8 w-fit rounded-sm">Tell us your requirements</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- STATS BANNER: separates "What we offer" from the tile section (same style as the key facts strip) -->
+  {service.stats && (
+    <section aria-label="Key figures" class="bg-musenga-ink px-5 text-white sm:px-8 lg:px-14">
+      <dl data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-2 lg:grid-cols-4">
+        {service.stats.map((stat, i) => (
+          <div class:list={[
+            'flex flex-col-reverse justify-end py-10 lg:py-14',
+            i % 2 === 0 ? 'border-r border-white/10 pr-5' : 'pl-5',
+            i < 2 && 'border-b border-white/10 lg:border-b-0',
+            i > 0 && 'lg:pl-8',
+            i < service.stats!.length - 1 && 'lg:border-r lg:pr-8',
+          ]}>
+            <dt class="mt-3 text-[11px] font-semibold uppercase leading-snug tracking-[.15em] text-white/65">{stat.label}</dt>
+            <dd class:list={['display whitespace-nowrap font-semibold tracking-[-.04em]', stat.value.length > 8 ? 'text-2xl sm:text-3xl xl:text-4xl' : 'text-3xl sm:text-4xl xl:text-5xl']}>{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  )}
+
+  <!-- SHOWCASE: editorial tile grid (layout follows the reference exactly)
+         row 1: [wide photo 43%] [photo 27%] [text 30%]
+         row 2: [text 22%] [green promo 23%] [wide photo 55%]
+       Every tile: meta line, title, short text, footer line. -->
+  {service.showcase && (() => {
+    const { tiles, cta } = service.showcase;
+    const rows = [
+      { cols: 'lg:grid-cols-[43fr_27fr_30fr]', cells: [0, 1, 2] as (number | 'cta')[] },
+      { cols: 'lg:grid-cols-[22fr_23fr_55fr]', cells: [3, 'cta', 4] as (number | 'cta')[] },
+    ];
+    return (
+      <section id="showcase" aria-label={service.showcase.label} class="scroll-mt-24 bg-musenga-mist px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+        <div class="mx-auto max-w-[1320px] space-y-1">
+          {rows.map((row) => (
+            <div data-reveal-stagger class:list={['grid grid-cols-1 gap-1 sm:grid-cols-2', row.cols]}>
+              {row.cells.map((cell) => {
+                if (cell === 'cta') {
+                  return (
+                    <a href="#contact" data-contact-service={service.formOption} class="focus-ring group relative flex min-h-[300px] flex-col bg-musenga-green p-7 text-white transition-colors hover:bg-musenga-deep sm:p-8 lg:h-[340px]">
+                      <span class="absolute right-5 top-5 flex h-9 w-9 items-center justify-center border border-white/50 text-sm transition group-hover:bg-white group-hover:text-musenga-green" aria-hidden="true">↗</span>
+                      <p class="text-[10px] font-semibold uppercase tracking-editorial text-white/75">Get in touch</p>
+                      <p class="mt-4 max-w-[14rem] text-2xl font-semibold leading-tight tracking-[-.03em]">{cta.title}</p>
+                      <p class="mt-3 text-sm leading-6 text-white/85">{cta.text}</p>
+                      <p class="mt-auto border-t border-white/25 pt-3 text-[10px] font-bold uppercase tracking-[.14em]">{cta.label} <span aria-hidden="true">→</span></p>
+                    </a>
+                  );
+                }
+                const tile = tiles[cell];
+                // Photo tiles show the photo only; text tiles are numbered among themselves.
+                const textNumber = tiles.slice(0, cell + 1).filter((t) => !t.image).length;
+                const meta = `${String(textNumber).padStart(2, '0')} · ${tile.category}`;
+                const footer = (tile.items ?? []).join(' · ');
+                // Sizes (m², m³) stay in normal case; the rest of the footer line is uppercase.
+                const spec = tile.spec ? <span class="normal-case tracking-normal text-[12px] font-semibold">{tile.items?.length ? ' · ' : ''}{tile.spec}</span> : null;
+                return tile.image ? (
+                  <div class="service-card relative min-h-[300px] overflow-hidden bg-musenga-ink lg:h-[340px]">
+                    <img src={tile.image} alt={`${tile.title}: ${tile.text}`} class="service-image absolute inset-0 h-full w-full object-cover" style={tile.imagePosition ? `object-position: ${tile.imagePosition}` : undefined} loading="lazy">
+                  </div>
+                ) : (
+                  <div class="flex min-h-[300px] flex-col bg-white p-7 sm:p-8 lg:h-[340px]">
+                    <p class="text-[10px] font-semibold uppercase tracking-editorial text-musenga-green">{meta}</p>
+                    <p class="mt-4 text-2xl font-semibold leading-tight tracking-[-.03em]">{tile.title}</p>
+                    <p class="mt-3 text-sm leading-6 text-musenga-muted">{tile.text}</p>
+                    {(footer || spec) && <p class="mt-auto border-t border-musenga-line pt-3 text-[10px] font-bold uppercase tracking-[.14em] text-musenga-muted">{footer}{spec}</p>}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  })()}
+
+  <div class="border-t border-musenga-line">
+    <ContactSection number="03" service={service.formOption} />
+  </div>
+</BaseLayout>

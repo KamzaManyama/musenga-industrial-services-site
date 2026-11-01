@@ -1,0 +1,35 @@
+---
+import { images } from '../data/images';
+// Custom "page not found" page: the site's split hero on its own (no header or footer).
+// Astro serves this for any URL that doesn't exist.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SplitHero from '../components/SplitHero.astro';
+
+// Rendered on request (not pre-built) so the redirect rules in src/middleware.ts run first
+// for every unknown address, in production as well as in development.
+export const prerender = false;
+---
+
+<BaseLayout
+  title="Page not found | Musenga Investments"
+  description="The page you were looking for could not be found."
+  hasContact={false}
+  noindex
+  bare
+>
+  <SplitHero
+    standalone
+    bigText="404"
+    eyebrow=""
+    line1Bold="Page"
+    line1="not found,"
+    line2="let's get you"
+    line2Bold="home."
+    intro="The link may be broken, or the page may have moved. Head back to the home page to continue browsing the Musenga Investments website."
+    image={images.hero}
+    primary={{ label: 'Back to home', href: '/' }}
+    primaryStyle="button"
+    secondary={null}
+    index={[]}
+  />
+</BaseLayout>

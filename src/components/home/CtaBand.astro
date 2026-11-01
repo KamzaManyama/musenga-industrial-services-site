@@ -1,0 +1,19 @@
+---
+// Call to action after "Who we work with". Same layout as the "For procurement & tender teams" band
+// on the Certifications page, on the dark charcoal background.
+import { company } from '../../data/company';
+---
+
+<!-- CALL TO ACTION -->
+<section aria-label="Request a quote" class="bg-musenga-ink px-5 py-16 text-white sm:px-8 lg:px-14 lg:py-20">
+  <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-8 md:grid-cols-12 md:items-center">
+    <div class="md:col-span-8">
+      <p class="text-[10px] font-semibold uppercase tracking-editorial text-white/65">Ready when you are</p>
+      <p class="mt-3 max-w-2xl text-2xl font-medium leading-snug tracking-[-.025em] sm:text-3xl">Need waste, cleaning or maintenance support for your site?</p>
+      <p class="mt-4 text-sm leading-6 text-white/65">Or call us on <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="focus-ring rounded-sm font-semibold text-white transition hover:text-musenga-green">{company.phone}</a></p>
+    </div>
+    <div class="md:col-span-4 md:justify-self-end">
+      <a href="#contact" class="btn btn-outline-light focus-ring">Request a quote <span class="btn-arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>

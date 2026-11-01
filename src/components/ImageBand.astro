@@ -1,0 +1,27 @@
+---
+// Full-width photo band with a dark overlay and a centred statement.
+// Used on the Careers page (recruitment fraud warning).
+// Anything placed inside <ImageBand>…</ImageBand> appears under the statement.
+interface Props {
+  image: string;
+  /** Small label above the statement; " · " separators are shown as green dots. */
+  label: string;
+  statement: string;
+  ariaLabel: string;
+}
+const { image, label, statement, ariaLabel } = Astro.props;
+const labelParts = label.split(' · ');
+---
+
+<section aria-label={ariaLabel} class="relative flex h-[70dvh] min-h-[480px] max-h-[760px] items-center overflow-hidden bg-black text-white">
+  <img src={image} alt="" class="absolute inset-0 h-full w-full object-cover" loading="lazy">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40"></div>
+  <div data-reveal-stagger class="relative mx-auto w-full max-w-[1440px] px-5 text-center sm:px-8 lg:px-14">
+    <p class="text-[10px] font-semibold uppercase tracking-editorial text-white/70">
+      {labelParts.map((part, i) => <>{i > 0 && <span class="mx-2 text-musenga-green">·</span>}{part}</>)}
+    </p>
+    <p class="display mx-auto mt-7 max-w-4xl text-3xl font-semibold leading-[1.12] tracking-[-.04em] sm:text-5xl lg:text-6xl">{statement}</p>
+    {Astro.slots.has('default') && <div class="mx-auto mt-8 max-w-2xl"><slot /></div>}
+  </div>
+</section>

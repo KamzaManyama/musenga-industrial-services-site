@@ -1,0 +1,88 @@
+---
+// Light page hero for inner pages, matching the home page's split hero.
+// - With `image`: text on the left, photo on the right, optional green index bar under the text.
+// - Without `image`: white text header; anything passed in the default slot appears on the right.
+// The green `index` bar is page navigation: a service switcher, or jump links to sections.
+
+interface Crumb { label: string; href?: string }
+interface IndexItem { label: string; href: string; number?: string; active?: boolean }
+interface Props {
+  breadcrumb: Crumb[];
+  eyebrow?: string;
+  /** Bold first part of the heading, e.g. "Built on service," */
+  titleBold: string;
+  /** Regular-weight remainder of the heading. */
+  title?: string;
+  intro?: string;
+  image?: { src: string; alt: string };
+  cta?: { label: string; href: string; service?: string };
+  index?: IndexItem[];
+  indexLabel?: string;
+}
+
+const { breadcrumb, eyebrow, titleBold, title, intro, image, cta, index, indexLabel = 'On this page' } = Astro.props;
+const hasAside = Astro.slots.has('default');
+---
+
+<section class:list={['relative bg-white text-musenga-ink', image && 'lg:grid lg:min-h-[640px] lg:h-[82dvh] lg:max-h-[880px] lg:grid-cols-12 lg:grid-rows-[1fr_auto]']}>
+  <!-- Text -->
+  <div class:list={['flex px-5 pb-12 pt-36 sm:px-8 lg:pl-14', image ? 'items-center lg:col-span-6 lg:row-start-1 lg:pb-14 lg:pr-10 lg:pt-32' : 'lg:pr-14 lg:pb-16 lg:pt-44']}>
+    <div class:list={['w-full', !image && 'mx-auto grid max-w-[1320px] grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end']}>
+      <div class:list={[image ? 'max-w-2xl' : 'lg:col-span-8']}>
+        <nav aria-label="Breadcrumb" class="text-[10px] font-semibold uppercase tracking-editorial text-musenga-muted">
+          {breadcrumb.map((crumb, i) => (
+            <>
+              {i > 0 && <span class="mx-3 text-musenga-green">/</span>}
+              {crumb.href
+                ? <a href={crumb.href} class="focus-ring rounded-sm transition hover:text-musenga-ink">{crumb.label}</a>
+                : <span aria-current="page" class="text-musenga-ink">{crumb.label}</span>}
+            </>
+          ))}
+        </nav>
+        {eyebrow && (
+          <div class="mt-8 flex items-center gap-4">
+            <span class="flex h-9 w-9 items-center justify-center rounded-full border border-musenga-green" aria-hidden="true"><span class="h-1.5 w-1.5 rounded-full bg-musenga-green"></span></span>
+            <p class="text-[10px] font-semibold uppercase tracking-editorial text-musenga-muted">{eyebrow}</p>
+          </div>
+        )}
+        <h1 class="display mt-7 text-4xl leading-[1.1] tracking-[-.04em] sm:text-5xl lg:text-[44px] xl:text-[54px]">
+          <span class="font-bold">{titleBold}</span>{title && <> <span class="font-normal">{title}</span></>}
+        </h1>
+        {intro && <p class="mt-6 max-w-lg text-base leading-7 text-musenga-muted sm:text-lg sm:leading-8">{intro}</p>}
+        {cta && (
+          <a href={cta.href} data-contact-service={cta.service} class="link-line focus-ring mt-9 rounded-sm">
+            {cta.label}
+          </a>
+        )}
+      </div>
+      {!image && hasAside && <div class="lg:col-span-4 lg:justify-self-end"><slot /></div>}
+    </div>
+  </div>
+
+  <!-- Photo (spans the full height on desktop, beside the text and the index bar) -->
+  {image && (
+    <div class="relative h-[44vh] min-h-[300px] lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1 lg:mt-[var(--header-offset)] lg:h-auto">
+      <img src={image.src} alt={image.alt} class="absolute inset-0 h-full w-full object-cover">
+    </div>
+  )}
+
+  <!-- Green index bar -->
+  {index && (
+    <nav aria-label={indexLabel} class:list={['bg-musenga-green px-5 py-7 text-white sm:px-8 lg:pl-14', image ? 'lg:col-span-6 lg:row-start-2 lg:flex lg:min-h-28 lg:items-center lg:py-6' : '']}>
+      <ol class:list={['flex flex-wrap gap-x-7 gap-y-4', !image && 'mx-auto max-w-[1320px]']}>
+        {index.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={item.active ? 'page' : undefined}
+              class:list={['focus-ring group block rounded-sm border-b pb-1.5 transition', item.active ? 'border-white text-white' : 'border-transparent text-white/70 hover:border-white/60 hover:text-white']}
+            >
+              {item.number && <span class="display mr-2 text-sm font-medium">{item.number}</span>}
+              <span class="text-[10px] font-semibold uppercase tracking-[.16em]">{item.label}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )}
+</section>

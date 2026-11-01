@@ -1,0 +1,31 @@
+---
+// 04 / Our objectives. The mission, vision and values sit in the banner just above (MissionVision.astro).
+const objectives = [
+  'Build a self-sustaining organisation.',
+  'Deliver quality service at competitive cost.',
+  'Create employment by drawing on local, low-skilled labour.',
+  'Meet or exceed our customers’ expectations.',
+  'Generate capital to fund growth and expansion.',
+  'Expand into other provinces and diversify our services.',
+  'Continuously improve the way we work.',
+];
+---
+
+<section id="objectives" class="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+  <div class="mx-auto max-w-[1320px]">
+    <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 04 / Our objectives</p>
+    <h2 class="mt-7 max-w-2xl text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Where we’re heading.</h2>
+
+    <ol data-reveal class="mt-14 grid grid-cols-1 border-l border-t border-musenga-line sm:grid-cols-2 lg:grid-cols-4">
+      {objectives.map((text, i) => (
+        <li class="border-b border-r border-musenga-line bg-white p-6 sm:p-7">
+          <span class="text-xs font-semibold text-musenga-green">{String(i + 1).padStart(2, '0')}</span>
+          <p class="mt-4 text-base leading-6">{text}</p>
+        </li>
+      ))}
+      <li class="flex items-end border-b border-r border-musenga-green bg-musenga-green p-6 sm:p-7">
+        <a href="#contact" class="link-line link-line-light focus-ring rounded-sm [--link-line:#fff]">Work with us</a>
+      </li>
+    </ol>
+  </div>
+</section>

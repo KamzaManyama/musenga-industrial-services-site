@@ -1,0 +1,79 @@
+---
+// Pages with a contact section keep "Contact" on the page; others send it to the home page form.
+interface Props {
+  hasContact?: boolean;
+  /** 'light' = dark text while the header sits over a white hero (until the page scrolls). */
+  tone?: 'dark' | 'light';
+}
+const { hasContact = true, tone = 'dark' } = Astro.props;
+const contactHref = hasContact ? '#contact' : '/#contact';
+const path = Astro.url.pathname;
+const isHome = path === '/';
+const links = [
+  // On the home page "About" scrolls to the "Who we are" section; elsewhere it opens the About page.
+  { label: 'About', href: isHome ? '#about' : '/about/', active: path.startsWith('/about') },
+  { label: 'Services', href: '/#services', active: path.startsWith('/services') },
+  { label: 'Certifications', href: '/certifications/', active: path.startsWith('/certifications') },
+  { label: 'Careers', href: '/careers/', active: path.startsWith('/careers') },
+  { label: 'Contact', href: contactHref, active: false },
+];
+---
+
+<header id="siteHeader" class:list={['site-header fixed inset-x-0 top-0 z-50 border-b border-[var(--hdr-line)] text-[var(--hdr-fg)]', tone === 'light' && 'on-light']}>
+  <div class="header-inner mx-auto flex max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-14">
+    <a href="/" class="focus-ring flex items-center gap-3 rounded-sm" aria-label="Musenga Investments home">
+      <img src="/assets/Musenga-Logo.png" alt="Musenga Investments" width="350" height="100" class="h-10 w-auto sm:h-11">
+    </a>
+
+    <nav class="hidden items-center gap-8 text-[11px] font-semibold uppercase tracking-[.14em] lg:flex" aria-label="Main navigation">
+      {links.map((link) => (
+        <a
+          class:list={['focus-ring relative rounded-sm py-1 transition', link.active ? 'text-[var(--hdr-fg)] after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-musenga-green' : 'text-[var(--hdr-muted)] hover:text-[var(--hdr-fg)]']}
+          href={link.href}
+          aria-current={link.active ? 'page' : undefined}
+        >{link.label}</a>
+      ))}
+    </nav>
+
+    <a href={contactHref} class="btn btn-sm focus-ring hidden border-[var(--hdr-border)] hover:border-musenga-green hover:bg-musenga-green hover:text-white sm:inline-flex">
+      Discuss an enquiry <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+    <button id="menuButton" class="focus-ring rounded-sm border border-[var(--hdr-border)] p-2 lg:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileMenu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </div>
+  <nav id="mobileMenu" class="hidden border-t border-white/20 bg-musenga-ink/95 text-white px-5 py-5 sm:px-8 lg:hidden" aria-label="Mobile navigation">
+    <div class="flex flex-col gap-5 text-xs font-semibold uppercase tracking-[.14em]">
+      {links.map((link) => (
+        <a href={link.href} class={link.active ? 'text-musenga-green' : ''} aria-current={link.active ? 'page' : undefined}>{link.label}</a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<script>
+const header = document.getElementById('siteHeader')!;
+const menuButton = document.getElementById('menuButton')!;
+const mobileMenu = document.getElementById('mobileMenu')!;
+
+// Give the header a solid background once the page scrolls past the top.
+const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
+menuButton.addEventListener('click', () => {
+  const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+  menuButton.setAttribute('aria-expanded', String(!isOpen));
+  menuButton.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
+  mobileMenu.classList.toggle('hidden', isOpen);
+  header.classList.toggle('menu-open', !isOpen);
+});
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    header.classList.remove('menu-open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation');
+  });
+});
+</script>

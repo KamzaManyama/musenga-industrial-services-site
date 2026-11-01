@@ -1,0 +1,27 @@
+---
+import { images } from '../../data/images';
+---
+<section id="partnerships" class="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+  <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
+    <div class="lg:col-span-6">
+      <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 06 / Community &amp; partnerships</p>
+      <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Growth that reaches the communities we work in.</h2>
+      <img src={images.waste.src} alt={images.waste.alt} class="mt-12 aspect-[16/10] w-full object-cover" loading="lazy">
+    </div>
+    <div class="lg:col-span-5 lg:col-start-8 lg:self-end">
+      <div class="border-t border-musenga-line pt-8">
+        <h3 class="text-xl font-semibold tracking-[-.02em]">Local first</h3>
+        <p class="mt-3 text-base leading-7 text-musenga-muted">Wherever a project takes us, we look to employ local residents first and to support community programmes, creating work and building skills where it matters most.</p>
+        <a href="/careers/" class="link-line focus-ring mt-5 rounded-sm">Looking for work? See opportunities</a>
+      </div>
+      <div class="mt-10 border-t border-musenga-line pt-8">
+        <h3 class="text-xl font-semibold tracking-[-.02em]">Alliance partnerships</h3>
+        <p class="mt-3 text-base leading-7 text-musenga-muted">We pursue joint ventures with reputable organisations in government and the private sector. The partners we look for share our commitment to skills transfer, capacity building and creating opportunities for previously disadvantaged individuals and communities.</p>
+      </div>
+      <div class="mt-10 flex flex-col items-start gap-x-8 gap-y-6 sm:flex-row sm:items-center">
+        <a href="#contact" data-contact-service="Partnership or procurement enquiry" class="btn btn-outline focus-ring">Discuss a partnership <span class="btn-arrow" aria-hidden="true">→</span></a>
+        <a href="/#services" class="link-line focus-ring rounded-sm">Our services</a>
+      </div>
+    </div>
+  </div>
+</section>

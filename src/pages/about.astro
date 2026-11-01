@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SplitHero from '../components/SplitHero.astro';
+import OurStory from '../components/about/OurStory.astro';
+import Leadership from '../components/about/Leadership.astro';
+import Team from '../components/about/Team.astro';
+import WhatDrivesUs from '../components/about/WhatDrivesUs.astro';
+import CommunityPartnerships from '../components/about/CommunityPartnerships.astro';
+import VisitUs from '../components/about/VisitUs.astro';
+import ContactSection from '../components/ContactSection.astro';
+import RegisteredWith from '../components/RegisteredWith.astro';
+import MissionVision from '../components/about/MissionVision.astro';
+---
+
+<BaseLayout
+  title="About Us | Musenga Investments"
+  description="Founded in 2002, Musenga Investments is a 100% Black woman-owned company. Meet the team, and learn about our story, mission, vision and values."
+>
+  <!-- Temporary hero photo until Musenga supplies a proper About photo (e.g. Nomsa on site with a crew). -->
+  <SplitHero
+    eyebrow="About Musenga · Est. 2002"
+    line1Bold="Built"
+    line1="on service,"
+    line2="growing since"
+    line2Bold="2002."
+    intro="A 100% Black woman-owned company delivering waste management, cleaning and hygiene, and building construction and maintenance, with people from the communities we serve."
+    image={{ src: '/assets/waste/skip-bins.jpg', alt: 'A Musenga Waste skip on site, branded with the company name and number' }}
+    primary={{ label: 'Meet the team', href: '#team' }}
+    secondary={{ label: 'Our values', href: '#mission' }}
+    indexLabel="On this page"
+    index={[
+      { number: '01', label: 'Our story', href: '#story' },
+      { number: '02', label: 'Leadership', href: '#leadership' },
+      { number: '03', label: 'Team', href: '#team' },
+      { number: '04', label: 'Objectives', href: '#objectives' },
+      { number: '05', label: 'Registered', href: '#registrations' },
+      { number: '06', label: 'Partnerships', href: '#partnerships' },
+      { number: '07', label: 'Visit us', href: '#visit' },
+    ]}
+    scrollTarget="#story"
+  />
+  <OurStory />
+  <Leadership />
+  <Team />
+  <MissionVision />
+  <WhatDrivesUs />
+  <RegisteredWith />
+  <CommunityPartnerships />
+  <VisitUs />
+  <ContactSection number="08" />
+</BaseLayout>

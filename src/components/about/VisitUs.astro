@@ -1,0 +1,29 @@
+---
+import OfficeMap from '../OfficeMap.astro';
+const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('64 Dane Road, Glen Austin, Midrand')}`;
+---
+
+<section id="visit" class="scroll-mt-24 bg-musenga-mist px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+  <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-20">
+    <div class="lg:col-span-4">
+      <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 07 / Visit us</p>
+      <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Our head office.</h2>
+      <dl class="mt-10 divide-y divide-musenga-line border-y border-musenga-line">
+        <div class="py-5">
+          <dt class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Address</dt>
+          <dd class="mt-2 text-base leading-7">64 Dane Road, Glen Austin<br>Midrand, South Africa</dd>
+        </div>
+        <div class="py-5">
+          <dt class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Office hours</dt>
+          <dd class="mt-2 text-base leading-7">Monday – Friday, 08:00 – 17:00</dd>
+        </div>
+      </dl>
+      <a href={directionsUrl} target="_blank" rel="noopener" class="link-line focus-ring mt-9 rounded-sm">
+        Get directions <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="lg:col-span-8">
+      <OfficeMap class="aspect-[4/3] sm:aspect-[16/9]" />
+    </div>
+  </div>
+</section>

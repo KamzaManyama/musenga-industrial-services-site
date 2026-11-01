@@ -1,0 +1,65 @@
+---
+// "02 / Who we work with": the client sectors Musenga serves (taken from their current website).
+// Built only from the site's existing patterns: numbered items, hairline dividers, small uppercase links.
+import { services } from '../../data/services';
+
+const service = (slug: string) => {
+  const s = services.find((x) => x.slug === slug)!;
+  return { label: s.title.split(' ')[0], href: `/services/${s.slug}/` };
+};
+
+const sectors = [
+  {
+    title: 'Government & municipalities',
+    text: 'Registered with municipal and provincial bodies, including the City of Tshwane, and ready for public-sector tenders.',
+    links: [service('waste-management'), service('cleaning-hygiene'), service('building-maintenance')],
+  },
+  {
+    title: 'Residential complexes & suburbs',
+    text: 'Turnkey home construction, waste-bin supply and ongoing maintenance for estates, complexes and suburbs.',
+    links: [service('building-maintenance'), service('waste-management')],
+  },
+  {
+    title: 'Commercial & industrial sites',
+    text: 'Commercial and industrial cleaning, hygiene services and responsible waste disposal for offices, facilities and industrial sites.',
+    links: [service('cleaning-hygiene'), service('waste-management')],
+  },
+  {
+    title: 'Communities',
+    text: 'Census work in informal settlements, and a local-first approach that hires residents wherever we work.',
+    links: [{ label: 'Our approach', href: '/about/#partnerships' }, { label: 'Careers', href: '/careers/' }],
+  },
+];
+---
+
+<!-- WHO WE WORK WITH -->
+<section id="sectors" class="scroll-mt-20 bg-musenga-mist px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+  <div class="mx-auto max-w-[1320px]">
+    <div data-reveal-stagger class="grid grid-cols-1 gap-8 md:grid-cols-12 md:items-end">
+      <div class="md:col-span-7">
+        <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 02 / Who we work with</p>
+        <h2 class="mt-7 max-w-2xl text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">One partner for every kind of site.</h2>
+      </div>
+     
+    </div>
+
+    <ol data-reveal class="mt-14 grid grid-cols-1 divide-y divide-musenga-line border-y border-musenga-line sm:grid-cols-2 sm:divide-y-0 xl:grid-cols-4 xl:divide-x">
+      {sectors.map((sector, i) => (
+        <li class:list={['flex flex-col py-8 sm:py-10 xl:px-8', i === 0 && 'xl:pl-0', i === sectors.length - 1 && 'xl:pr-0', i % 2 === 1 && 'sm:pl-8 xl:pl-8', i < 2 && 'sm:border-b sm:border-musenga-line xl:border-b-0']}>
+          <span class="w-5 text-xs font-semibold text-musenga-green">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="mt-6 text-xl font-semibold leading-snug tracking-[-.02em]">{sector.title}</h3>
+          <p class="mt-3 text-sm leading-6 text-musenga-muted">{sector.text}</p>
+          <p class="mt-auto pt-7 text-[10px] font-bold uppercase tracking-[.14em]">
+            {sector.links.map((link, j) => (
+              <>
+                {j > 0 && <span class="mx-2 text-musenga-line" aria-hidden="true">/</span>}
+                <a href={link.href} class="focus-ring rounded-sm text-musenga-ink transition hover:text-musenga-green">{link.label}</a>
+              </>
+            ))}
+            <span class="ml-2 text-musenga-green" aria-hidden="true">→</span>
+          </p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

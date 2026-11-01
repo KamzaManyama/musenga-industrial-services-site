@@ -1,0 +1,32 @@
+---
+const milestones = [
+  { label: '2002', title: 'Where it started', text: 'Founded as Musengavhadzimu Business Enterprise cc, providing waste management, cleaning and hygiene services.' },
+  { label: 'Growth', title: 'Musenga Investments (Pty) Ltd', text: 'The business grew into Musenga Investments and broadened its offering to public- and private-sector clients.' },
+  { label: 'Today', title: 'Three service divisions', text: 'Waste management, cleaning and hygiene, and building construction and maintenance, plus census work and waste-bin supply for suburbs and complexes.' },
+];
+---
+
+<section id="story" class="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+  <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
+    <div class="lg:col-span-5">
+      <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 01 / Our story</p>
+      <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">From a family business to a multi-division company.</h2>
+    </div>
+    <div class="lg:col-span-6 lg:col-start-7">
+      <p class="text-lg leading-8 text-musenga-muted">Musenga Investments (Pty) Ltd grew out of Musengavhadzimu Business Enterprise cc, established in 2002. What began as a waste management, cleaning and hygiene business has expanded into building construction and maintenance, census work in informal settlements, and the supply of waste bins to suburbs and residential complexes.</p>
+      <p class="mt-5 text-base leading-7 text-musenga-muted">Through every stage, one principle has stayed the same: we pride ourselves on offering superior service in whatever we choose to do.</p>
+
+      <ol class="mt-12 border-t border-musenga-line">
+        {milestones.map((m) => (
+          <li class="grid grid-cols-[88px_1fr] gap-5 border-b border-musenga-line py-6 sm:grid-cols-[120px_1fr]">
+            <span class="display text-xl font-semibold tracking-[-.03em] text-musenga-green">{m.label}</span>
+            <div>
+              <h3 class="text-sm font-bold">{m.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-musenga-muted">{m.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

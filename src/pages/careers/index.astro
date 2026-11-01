@@ -1,0 +1,175 @@
+---
+import { images } from '../../data/images';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SplitHero from '../../components/SplitHero.astro';
+import ImageBand from '../../components/ImageBand.astro';
+import { openJobs, formatDate } from '../../data/jobs';
+import { company } from '../../data/company';
+
+const roles = openJobs();
+const PER_PAGE = 3; // roles per page in the Open roles list
+const pageCount = Math.ceil(roles.length / PER_PAGE);
+const eyebrow = 'flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green';
+
+const reasons = [
+  { title: 'Local first', text: 'Wherever a project takes us, we look to employ residents from the surrounding community first.' },
+  { title: 'Work at every skill level', text: 'Our projects need skilled, semi-skilled and unskilled workers, so there are opportunities for many backgrounds.' },
+  { title: 'Three divisions to grow in', text: 'Waste management, cleaning and hygiene, and building construction and maintenance.' },
+  { title: 'Safe, quality-driven work', text: 'Health, safety and quality are managed across every division, backed by our ISO 9001:2015 system.' },
+];
+
+---
+
+<BaseLayout
+  title="Careers | Musenga Investments"
+  description="Join Musenga Investments. View open roles in waste management, cleaning and hygiene, and building construction, or register for local project work."
+  hasContact={false}
+>
+  <SplitHero
+    eyebrow="Careers · Join our team"
+    line1Bold="Build"
+    line1="your career"
+    line2="with"
+    line2Bold="Musenga."
+    intro="We create work for local people across waste management, cleaning and hygiene, and building construction and maintenance."
+    image={{ src: '/assets/stock/careers-team-briefing.jpg', alt: 'A team of workers in hard hats and overalls at a morning briefing', position: '72% center' }}
+    primary={{ label: 'View open roles', href: '#roles' }}
+    secondary={{ label: 'Why work with us', href: '#why' }}
+    indexLabel="On this page"
+    index={[
+      { number: '01', label: 'Why work with us', href: '#why' },
+      { number: '02', label: 'Open roles', href: '#roles' },
+    ]}
+    scrollTarget="#why"
+  />
+
+  <!-- 01 WHY WORK WITH US -->
+  <section id="why" class="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+    <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
+      <div class="lg:col-span-5">
+        <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 01 / Why work with us</p>
+        <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Local people. Real opportunities.</h2>
+        <p class="mt-6 max-w-md text-base leading-7 text-musenga-muted">Creating employment is part of our mission. We uplift the communities we work in by hiring locally and supporting community programmes.</p>
+      </div>
+      <ol class="divide-y divide-musenga-line border-y border-musenga-line lg:col-span-6 lg:col-start-7 lg:self-center">
+        {reasons.map((reason, i) => (
+          <li class="flex gap-5 py-6">
+            <span class="w-5 shrink-0 text-xs font-semibold text-musenga-green">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="text-lg font-semibold tracking-[-.02em]">{reason.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-musenga-muted">{reason.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 02 OPEN ROLES -->
+  <section id="roles" class="scroll-mt-24 bg-musenga-mist px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+    <div class="mx-auto max-w-[1320px]">
+      <div data-reveal-stagger class="grid grid-cols-1 gap-8 md:grid-cols-12 md:items-end">
+        <div class="md:col-span-7">
+          <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 02 / Open roles</p>
+          <h2 class="mt-7 max-w-2xl text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Current opportunities.</h2>
+        </div>
+       
+      </div>
+
+      {roles.length ? (
+        <ul id="roleList" data-reveal-stagger class="mt-14 divide-y divide-musenga-line border-y border-musenga-line">
+          {roles.map((job, i) => (
+            <li data-page={Math.floor(i / PER_PAGE) + 1}>
+              <a href={`/careers/${job.slug}/`} class="focus-ring group grid grid-cols-1 gap-3 py-7 sm:grid-cols-12 sm:items-center sm:gap-6">
+                <span class="w-5 text-xs font-semibold text-musenga-green sm:col-span-1">{String(i + 1).padStart(2, '0')}</span>
+                <span class="sm:col-span-6">
+                  <span class="block text-xl font-semibold tracking-[-.02em] transition group-hover:text-musenga-green">{job.title}</span>
+                  <span class="mt-1 block text-sm text-musenga-muted">{job.division} · {job.location} · {job.type}</span>
+                </span>
+                <span class="text-[10px] font-bold uppercase tracking-[.14em] text-musenga-muted sm:col-span-4">
+                  Closes {formatDate(job.closingDate)}
+                </span>
+                <span class="hidden text-xl text-musenga-green transition-transform duration-300 group-hover:translate-x-1 sm:col-span-1 sm:block sm:justify-self-end" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {roles.length > 0 && pageCount > 1 && (
+        <nav id="rolePager" aria-label="Open roles pages" class="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between" data-per-page={PER_PAGE} data-total={roles.length}>
+          <div class="-ml-2 flex items-center gap-1 text-[11px] font-bold uppercase tracking-[.13em]">
+            <button type="button" data-step="-1" class="focus-ring rounded-sm px-2 py-2 text-musenga-ink transition hover:text-musenga-green disabled:cursor-default disabled:text-musenga-line" aria-label="Previous page">←</button>
+            {Array.from({ length: pageCount }, (_, i) => (
+              <button type="button" data-goto={i + 1} class="focus-ring relative rounded-sm px-2.5 py-2 text-musenga-muted transition hover:text-musenga-ink aria-[current=page]:text-musenga-green aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-2.5 aria-[current=page]:after:bottom-1 aria-[current=page]:after:h-px aria-[current=page]:after:bg-musenga-green" aria-label={`Page ${i + 1}`}>{String(i + 1).padStart(2, '0')}</button>
+            ))}
+            <button type="button" data-step="1" class="focus-ring rounded-sm px-2 py-2 text-musenga-ink transition hover:text-musenga-green disabled:cursor-default disabled:text-musenga-line" aria-label="Next page">→</button>
+          </div>
+          <p id="roleCount" class="text-[10px] font-bold uppercase tracking-[.14em] text-musenga-muted" aria-live="polite">Showing 1–{Math.min(PER_PAGE, roles.length)} of {roles.length} roles</p>
+        </nav>
+      )}
+      {roles.length === 0 && (
+        <div class="mt-14 border-y border-musenga-line py-10">
+          <h3 class="text-xl font-semibold tracking-[-.02em]">There are no open positions right now.</h3>
+          <p class="mt-3 max-w-xl text-sm leading-6 text-musenga-muted">New roles are posted here as projects start. Please check back soon, or send your CV to <a href={`mailto:${company.careersEmail}`} class="font-semibold text-musenga-ink hover:text-musenga-green">{company.careersEmail}</a> for future opportunities.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- RECRUITMENT FRAUD WARNING -->
+  <ImageBand
+    ariaLabel="Recruitment fraud warning"
+    image={images.waste.src}
+    label="Recruitment fraud warning"
+    statement="We never ask for payment at any stage of recruitment."
+  >
+    <p class="text-base leading-7 text-white/80">If anyone asks you to pay for a job, an interview, training or a uniform in Musenga's name, it is a scam. Please report it to <a href={`mailto:${company.email}`} class="font-semibold text-white underline decoration-white/40 underline-offset-4 transition hover:decoration-musenga-green">{company.email}</a>.</p>
+  </ImageBand>
+</BaseLayout>
+
+<script>
+// Open roles pagination: shows PER_PAGE roles at a time. The page is kept in the address (?page=2)
+// so it can be shared. Without JavaScript every role is simply listed.
+const pager = document.getElementById('rolePager');
+if (pager) {
+  const items = [...document.querySelectorAll<HTMLElement>('#roleList > li')];
+  const perPage = Number(pager.dataset.perPage);
+  const total = Number(pager.dataset.total);
+  const pages = Math.ceil(total / perPage);
+  const count = document.getElementById('roleCount')!;
+  let current = 1;
+
+  const show = (page: number, scroll: boolean) => {
+    current = Math.min(Math.max(page, 1), pages);
+    items.forEach((li, i) => {
+      const onPage = Number(li.dataset.page) === current;
+      li.hidden = !onPage;
+      if (onPage) {
+        // Restart the gentle reveal for the roles on this page, one after another.
+        li.style.setProperty('--reveal-delay', `${(i % perPage) * 90}ms`);
+        if (scroll) li.classList.add('is-visible');
+      }
+    });
+    const first = (current - 1) * perPage + 1;
+    const last = Math.min(current * perPage, total);
+    count.textContent = `Showing ${first === last ? first : `${first}–${last}`} of ${total} roles`;
+    pager.querySelectorAll<HTMLButtonElement>('[data-goto]').forEach((b) => {
+      if (Number(b.dataset.goto) === current) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+    pager.querySelector<HTMLButtonElement>('[data-step="-1"]')!.disabled = current === 1;
+    pager.querySelector<HTMLButtonElement>('[data-step="1"]')!.disabled = current === pages;
+    const url = new URL(location.href);
+    if (current === 1) url.searchParams.delete('page'); else url.searchParams.set('page', String(current));
+    history.replaceState(null, '', url);
+    if (scroll) document.getElementById('roles')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  pager.addEventListener('click', (event) => {
+    const button = (event.target as HTMLElement).closest('button');
+    if (!button || button.disabled) return;
+    show(button.dataset.goto ? Number(button.dataset.goto) : current + Number(button.dataset.step), true);
+  });
+  show(Number(new URL(location.href).searchParams.get('page')) || 1, false);
+}
+</script>

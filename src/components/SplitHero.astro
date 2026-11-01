@@ -1,0 +1,156 @@
+---
+import { images } from '../data/images';
+// Split hero used on every main page: white text panel left, photo right,
+// green index bar along the bottom, animated scroll arrow and quick-contact block.
+// Defaults are the home page content; other pages pass their own text, image and links.
+// Pages using it set headerTone="light" (the default) so the header text is dark over the white panel.
+import { services } from '../data/services';
+
+interface Link { label: string; href: string; service?: string }
+interface IndexItem { number: string; label: string; href: string; active?: boolean }
+interface Props {
+  eyebrow?: string;
+  /** Heading line 1: bold word(s) then regular, e.g. **Practical** solutions, */
+  line1Bold?: string;
+  line1?: string;
+  /** Heading line 2 (indented): regular then bold, e.g. built around **your needs.** */
+  line2?: string;
+  line2Bold?: string;
+  intro?: string;
+  image?: { src: string; alt: string; /** CSS object-position, e.g. 'center 20%' to keep a face in frame */ position?: string };
+  primary?: Link;
+  /** Pass null to show only the primary action. */
+  secondary?: Link | null;
+  /** 'link' (default): green line + text. 'button': bordered button. */
+  primaryStyle?: 'link' | 'button';
+  index?: IndexItem[];
+  /** Key facts shown in the green bar instead of `index` links (home page). */
+  facts?: { value: string; label: string }[];
+  indexLabel?: string;
+  /** Where the scroll arrow goes: the first section after the hero. */
+  scrollTarget?: string;
+  /** For pages without the site header (e.g. 404): shows the logo in the panel, runs the photo full height,
+   *  and leaves the scroll-arrow cell empty. */
+  standalone?: boolean;
+  /** Large figure shown above the heading in the text panel (e.g. "404"). */
+  bigText?: string;
+}
+
+const {
+  eyebrow = '100% Black woman-owned · Est. 2002',
+  line1Bold = 'Practical',
+  line1 = 'solutions,',
+  line2 = 'built around',
+  line2Bold = 'your needs.',
+  intro = 'Waste management, cleaning and hygiene, and building construction and maintenance for public- and private-sector clients.',
+  image = images.hero,
+  primary = { label: 'Explore our services', href: '#services' },
+  secondary = { label: 'Discover Musenga', href: '#about' },
+  index = services.map((s) => ({ number: s.number, label: s.title, href: `/services/${s.slug}/` })),
+  indexLabel = 'Our services',
+  scrollTarget = '#about',
+  standalone = false,
+  facts,
+  bigText,
+  primaryStyle = 'link',
+} = Astro.props;
+
+// Pass eyebrow="" to hide the eyebrow line.
+const eyebrowParts = eyebrow.split(' · ');
+---
+
+<!-- HERO (split) -->
+<section class="relative bg-white text-musenga-ink lg:grid lg:min-h-[100dvh] lg:grid-cols-12 lg:grid-rows-[1fr_auto]">
+  <!-- Text panel -->
+  <div class:list={['flex px-5 pb-14 sm:px-8 lg:col-span-6 lg:row-start-1 lg:pb-16 lg:pl-14 lg:pr-10', standalone ? 'flex-col pt-8 lg:pt-10' : 'items-center pt-36 lg:pt-32']}>
+    {standalone && (
+      <a href="/" class="focus-ring mb-14 w-fit rounded-sm lg:mb-0" aria-label="Musenga Investments home">
+        <img src="/assets/Musenga-Logo.png" alt="Musenga Investments" width="350" height="100" class="h-11 w-auto">
+      </a>
+    )}
+    <div class:list={['max-w-2xl', standalone && 'my-auto pt-6']}>
+      {bigText && <p style="--i:0" class="hero-rise display mb-6 text-[88px] font-bold leading-none tracking-[-.06em] text-musenga-green sm:text-[110px] xl:text-[124px]" aria-hidden="true">{bigText}</p>}
+      {eyebrow && <div style="--i:0" class="hero-rise flex items-center gap-4">
+        <span class="flex h-11 w-11 items-center justify-center rounded-full border border-musenga-green" aria-hidden="true">
+          <span class="h-2 w-2 rounded-full bg-musenga-green"></span>
+        </span>
+        <p class="text-[10px] font-semibold uppercase tracking-editorial text-musenga-muted">{eyebrowParts.map((part, i) => <>{i > 0 && <span class="mx-1.5 text-musenga-green">·</span>}{part}</>)}</p>
+      </div>}
+      <h1 style="--i:1" class:list={['hero-rise display text-4xl leading-[1.12] tracking-[-.04em] sm:text-5xl lg:text-[38px] xl:text-[50px]', eyebrow && 'mt-9']}>
+        <span class="font-bold">{line1Bold}</span> <span class="font-normal">{line1}</span><br>
+        <span class="inline-block font-normal sm:whitespace-nowrap sm:pl-[1.4em]">{line2} <span class="font-bold">{line2Bold}</span></span>
+      </h1>
+      <p style="--i:2" class="hero-rise mt-7 max-w-md text-base leading-7 text-musenga-muted sm:text-lg sm:leading-8">{intro}</p>
+      <div style="--i:3" class="hero-rise mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+        {primaryStyle === 'button' ? (
+          <a href={primary.href} data-contact-service={primary.service} class="btn btn-outline focus-ring">
+            <span class="btn-arrow btn-arrow-back" aria-hidden="true">←</span>
+            {primary.label}
+          </a>
+        ) : (
+          <a href={primary.href} data-contact-service={primary.service} class="link-line focus-ring rounded-sm">
+            {primary.label}
+          </a>
+        )}
+        {secondary && <a href={secondary.href} data-contact-service={secondary.service} class="link-quiet focus-ring rounded-sm">{secondary.label}</a>}
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo -->
+  <div class:list={['relative overflow-hidden h-[52vh] min-h-[320px] lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:h-auto', !standalone && 'lg:mt-[var(--header-offset)]']}>
+    <img src={image.src} alt={image.alt} class="hero-photo absolute inset-0 h-full w-full object-cover" style={image.position ? `object-position: ${image.position}` : undefined}>
+  </div>
+
+  <!-- Green index bar -->
+  {facts ? (
+    <div class="hero-wipe bg-musenga-green px-5 py-8 text-white sm:px-8 lg:col-span-6 lg:row-start-2 lg:flex lg:h-36 lg:items-center lg:py-0 lg:pl-14 lg:pr-8">
+      <dl class:list={['grid w-full grid-cols-2 gap-y-6 sm:gap-y-0 sm:divide-x sm:divide-white/25', facts.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-4']}>
+        {facts.map((fact, i) => (
+          <div class:list={['flex flex-col-reverse justify-end', i > 0 && 'sm:pl-4 xl:pl-6', i < facts.length - 1 && 'sm:pr-4 xl:pr-6']}>
+            <dt class="mt-1.5 text-[9px] font-semibold uppercase leading-snug tracking-[.16em] text-white/75">{fact.label}</dt>
+            <dd class="display whitespace-nowrap text-xl font-semibold tracking-[-.03em] text-white lg:text-lg xl:text-2xl">{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  ) : index.length === 0 ? (
+    <div class="hero-wipe h-16 bg-musenga-green lg:col-span-6 lg:row-start-2 lg:h-36" aria-hidden="true"></div>
+  ) : (
+  <nav aria-label={indexLabel} class="hero-wipe bg-musenga-green px-5 py-8 text-white sm:px-8 lg:col-span-6 lg:row-start-2 lg:flex lg:h-36 lg:items-center lg:py-0 lg:pl-14">
+    <ol class:list={['flex flex-wrap items-start gap-y-5', index.length > 6 ? 'gap-x-4 xl:gap-x-5' : 'gap-x-6 xl:gap-x-8']}>
+      {index.map((item, i) => (
+        <li class="flex items-start gap-6 xl:gap-8">
+          <a href={item.href} aria-current={item.active ? 'page' : undefined} class="focus-ring group block rounded-sm">
+            <span class:list={['display block text-lg font-medium transition', item.active ? 'text-white' : 'text-white/90 group-hover:text-white']}>{item.number}</span>
+            <span class:list={['mt-1 block border-b pb-1 text-[9px] font-semibold uppercase tracking-[.16em] transition', item.active ? 'border-white text-white' : 'border-transparent text-white/70 group-hover:text-white']}>{item.label}</span>
+          </a>
+          {i === 0 && index.length <= 3 && <span class="mt-3.5 hidden h-px w-16 bg-white/70 sm:block lg:hidden xl:block" aria-hidden="true"></span>}
+        </li>
+      ))}
+    </ol>
+  </nav>
+  )}
+
+  <!-- Scroll cue -->
+  <div class="hidden items-center justify-center lg:col-span-5 lg:col-start-7 lg:row-start-2 lg:flex lg:h-36">
+    {!standalone && (
+      <a href={scrollTarget} class="focus-ring flex flex-col items-center gap-3 rounded-sm text-musenga-ink transition hover:text-musenga-green" aria-label="Scroll to explore">
+        <svg class="scroll-cue" width="18" height="34" viewBox="0 0 18 34" fill="none" aria-hidden="true"><path d="M9 1v31M2 25l7 7 7-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    )}
+  </div>
+
+  <!-- Quick contact -->
+  <div style="--i:4" class="hero-rise relative z-10 hidden flex-col items-center justify-center gap-4 bg-musenga-green text-white lg:col-span-1 lg:col-start-12 lg:row-start-2 lg:-mt-24 lg:flex lg:h-60">
+    <a href="tel:+27110243412" class="focus-ring rounded-sm text-white/80 transition hover:text-white" aria-label="Call Musenga">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="mailto:info@musenga.co.za" class="focus-ring rounded-sm text-white/80 transition hover:text-white" aria-label="Email Musenga">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 6l8.5 7 8.5-7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=64+Dane+Road,+Glen+Austin,+Midrand" target="_blank" rel="noopener" class="focus-ring rounded-sm text-white/80 transition hover:text-white" aria-label="Get directions to Musenga">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+    </a>
+  </div>
+</section>

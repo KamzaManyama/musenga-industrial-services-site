@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroClassic from '../components/home/HeroClassic.astro';
+import SplitHero from '../components/SplitHero.astro';
+import About from '../components/home/About.astro';
+import Sectors from '../components/home/Sectors.astro';
+import CtaBand from '../components/home/CtaBand.astro';
+import { keyFacts } from '../data/company';
+import Capabilities from '../components/home/Capabilities.astro';
+import Showcase from '../components/home/Showcase.astro';
+import ContactSection from '../components/ContactSection.astro';
+
+// Which hero to show on the home page:
+//   'split'   – white text panel + photo + green service index (current)
+//   'classic' – full-screen photo with white text (previous version)
+const hero: 'split' | 'classic' = 'split';
+
+// PLACEHOLDER for the demo only: a reference photo from Pinterest (not owned by Musenga or us).
+// Replace with Musenga's own photo before the site goes live, then delete public/assets/placeholder/.
+const heroImage = { src: '/assets/placeholder/home-hero-placeholder.jpg', alt: 'Two site managers in hard hats reviewing a building under construction', position: 'center 62%' };
+---
+
+<BaseLayout
+  headerTone={hero === 'split' ? 'light' : 'dark'}
+  title="Musenga Investments | Waste Management, Cleaning & Construction"
+  description="Musenga Investments is a 100% Black woman-owned company providing waste management, cleaning and hygiene, and building construction and maintenance since 2002."
+>
+  {hero === 'split' ? <SplitHero eyebrow="Waste · Cleaning · Construction" facts={keyFacts} image={heroImage} /> : <HeroClassic />}
+  <About />
+  <Sectors />
+  <CtaBand />
+  <Capabilities />
+  <Showcase />
+  <ContactSection number="04" />
+</BaseLayout>

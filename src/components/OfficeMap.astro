@@ -1,0 +1,44 @@
+---
+// Click-to-load Google Map of the head office. Google Maps only loads (and can set cookies)
+// after the visitor clicks "Show map"; that choice is remembered for later visits.
+interface Props {
+  class?: string;
+}
+const { class: className = 'aspect-[16/10]' } = Astro.props;
+const address = '64 Dane Road, Glen Austin, Midrand';
+const embedUrl = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+---
+
+<div class:list={['map-embed relative overflow-hidden border border-musenga-line bg-musenga-mist', className]} data-map-src={embedUrl}>
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+    <span class="map-grid absolute inset-0" aria-hidden="true"></span>
+    <span class="relative flex h-14 w-14 items-center justify-center rounded-full bg-musenga-green text-white shadow-soft" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.7"/></svg>
+    </span>
+    <p class="relative mt-4 text-sm font-semibold">Musenga Investments · Glen Austin, Midrand</p>
+    <button type="button" class="map-load btn btn-sm btn-outline focus-ring relative mt-5 bg-white">Show map</button>
+    <p class="relative mt-3 max-w-xs text-[11px] leading-5 text-musenga-muted">Loads Google Maps, which may set cookies. See our <a href="/privacy/#cookies" class="underline underline-offset-2 hover:text-musenga-ink">privacy policy</a>.</p>
+  </div>
+</div>
+
+<script>
+const MAP_CONSENT = 'musenga-map-consent';
+const loadMap = (container: HTMLElement) => {
+  const iframe = document.createElement('iframe');
+  iframe.src = container.dataset.mapSrc ?? '';
+  iframe.title = 'Map showing Musenga Investments head office in Glen Austin, Midrand';
+  iframe.loading = 'lazy';
+  iframe.referrerPolicy = 'no-referrer-when-downgrade';
+  iframe.className = 'absolute inset-0 h-full w-full border-0';
+  container.replaceChildren(iframe);
+};
+document.querySelectorAll<HTMLElement>('.map-embed').forEach((container) => {
+  let consented = false;
+  try { consented = localStorage.getItem(MAP_CONSENT) === '1'; } catch {}
+  if (consented) return loadMap(container);
+  container.querySelector('.map-load')?.addEventListener('click', () => {
+    try { localStorage.setItem(MAP_CONSENT, '1'); } catch {}
+    loadMap(container);
+  });
+});
+</script>

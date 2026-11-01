@@ -1,0 +1,43 @@
+<!--
+  Lightweight scroll animations (no library, ~1 KB).
+  - Add data-reveal-stagger to a container: its direct children fade/slide in one after another.
+  - Add data-reveal to a single element: it fades/slides in on its own.
+  Only content BELOW the fold animates; anything already on screen at load is shown immediately
+  (no flicker, and nothing stays hidden if JavaScript fails). Skipped entirely for reduced motion.
+-->
+<script>
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const STEP_MS = 90;   // delay between staggered items
+  const MAX_MS = 450;   // longest stagger delay
+
+  const targets = new Set<HTMLElement>(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+  document.querySelectorAll<HTMLElement>('[data-reveal-stagger]').forEach((container) => {
+    Array.from(container.children).forEach((child, i) => {
+      const el = child as HTMLElement;
+      el.style.setProperty('--reveal-delay', `${Math.min(i * STEP_MS, MAX_MS)}ms`);
+      targets.add(el);
+    });
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        // Reveal when on screen, or if a fast scroll skipped right past it (now above the screen).
+        if (!entry.isIntersecting && entry.boundingClientRect.top > 0) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+  );
+
+  const fold = window.innerHeight * 0.92;
+  targets.forEach((el) => {
+    if (el.getBoundingClientRect().top < fold) return; // already on screen: leave as is
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+}
+</script>

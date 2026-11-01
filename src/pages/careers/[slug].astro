@@ -1,0 +1,142 @@
+---
+import { images } from '../../data/images';
+// Job page template. One page per open job in src/data/jobs.ts.
+// Layout follows how South African roles are advertised (LinkedIn / job boards):
+// about the role → responsibilities → minimum requirements → advantageous → skills → what we offer,
+// with job details and how to apply alongside.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SplitHero from '../../components/SplitHero.astro';
+import { openJobs, formatDate, whatWeOffer, type Job } from '../../data/jobs';
+import { company } from '../../data/company';
+
+export function getStaticPaths() {
+  return openJobs().map((job) => ({ params: { slug: job.slug }, props: { job } }));
+}
+
+interface Props {
+  job: Job;
+}
+const { job } = Astro.props;
+
+const divisionImages: Record<Job['division'], string> = {
+  'Building & maintenance': images.building.src,
+  'Cleaning & hygiene': images.cleaning.src,
+  'Waste management': images.waste.src,
+  'Head office': images.hero.src,
+};
+const [titleBold, ...titleRest] = job.title.split(' ');
+const { reference } = job;
+const subject = encodeURIComponent(`Application: ${job.title} (Ref ${reference})`);
+const body = encodeURIComponent(`Dear Musenga team,\n\nPlease find my CV attached for the ${job.title} position (Ref ${reference}).\n\nFull name:\nPhone number:\n\nKind regards,`);
+const applyHref = `mailto:${company.careersEmail}?subject=${subject}&body=${body}`;
+const shortType: Record<Job['type'], string> = { Permanent: 'Permanent', 'Fixed-term contract': 'Contract', 'Project-based': 'Project' };
+const shortDate = new Intl.DateTimeFormat('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(job.closingDate + 'T12:00:00'));
+
+const eyebrow = 'flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green';
+const h2 = 'mt-6 text-2xl font-semibold leading-tight tracking-[-.03em] sm:text-3xl';
+const sections = [
+  { id: 'responsibilities', label: 'Key responsibilities', title: 'What you’ll do.', items: job.responsibilities },
+  { id: 'requirements', label: 'Minimum requirements', title: 'What you’ll need.', items: job.requirements },
+  { id: 'advantageous', label: 'Advantageous', title: 'It would help if you have.', items: job.advantageous },
+  { id: 'offer', label: 'What we offer', title: 'Why join us.', items: whatWeOffer },
+];
+const details: [string, string][] = [
+  ['Division', job.division],
+  ['Employment type', job.type],
+  ['Location', job.location],
+  ['Reports to', job.reportsTo],
+  ['Working hours', job.workingHours],
+  ['Experience', job.experienceLevel],
+  ['Salary', job.salary],
+  ['Reference', reference],
+  ['Closing date', formatDate(job.closingDate)],
+];
+---
+
+<BaseLayout
+  title={`${job.title} | Careers | Musenga Investments`}
+  description={job.summary}
+  hasContact={false}
+>
+  <SplitHero
+    eyebrow={`Careers · ${job.division}`}
+    line1Bold={titleBold}
+    line1={titleRest.join(' ')}
+    line2="join the"
+    line2Bold="Musenga team."
+    intro={job.summary}
+    image={{ src: divisionImages[job.division], alt: `${job.division} work at Musenga Investments` }}
+    primary={{ label: 'Apply now', href: '#apply' }}
+    secondary={{ label: 'All open roles', href: '/careers/#roles' }}
+    facts={[
+      { value: job.location.split(' (')[0], label: 'Location' },
+      { value: shortType[job.type], label: 'Job type' },
+      { value: shortDate, label: 'Closing date' },
+    ]}
+    scrollTarget="#role"
+  />
+
+  <section id="role" class="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+    <div class="mx-auto grid max-w-[1320px] grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
+      <!-- The advert -->
+      <div class="lg:col-span-7">
+        <div data-reveal>
+          <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 01 / About the role</p>
+          <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">{job.title}</h2>
+          {job.about.map((paragraph, i) => (
+            <p class={i === 0 ? 'mt-8 text-lg leading-8 text-musenga-muted' : 'mt-5 text-base leading-7 text-musenga-muted'}>{paragraph}</p>
+          ))}
+        </div>
+
+        {sections.map((section, s) => (
+          <div id={section.id} data-reveal class="mt-16 scroll-mt-28">
+            <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> {String(s + 2).padStart(2, '0')} / {section.label}</p>
+            <h3 class={h2}>{section.title}</h3>
+            <ol class="mt-8 divide-y divide-musenga-line border-y border-musenga-line">
+              {section.items.map((item, i) => (
+                <li class="flex gap-5 py-4">
+                  <span class="w-5 shrink-0 pt-0.5 text-xs font-semibold text-musenga-green">{String(i + 1).padStart(2, '0')}</span>
+                  <p class="text-base leading-7">{item}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+
+        <div data-reveal class="mt-16">
+          <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 06 / Skills &amp; competencies</p>
+          <p class="mt-6 text-[11px] font-bold uppercase tracking-[.14em]">
+            {job.skills.map((skill, i) => <>{i > 0 && <span class="mx-2 text-musenga-line" aria-hidden="true">/</span>}{skill}</>)}
+          </p>
+        </div>
+      </div>
+
+      <!-- Job details + how to apply -->
+      <aside id="apply" class="scroll-mt-28 lg:col-span-4 lg:col-start-9">
+        <div class="lg:sticky lg:top-28">
+          <h3 class="text-2xl font-semibold tracking-[-.03em] sm:text-3xl">Job details</h3>
+          <dl class="mt-6 divide-y divide-musenga-line border-y border-musenga-line">
+            {details.map(([label, value]) => (
+              <div class="grid grid-cols-[110px_1fr] gap-4 py-3.5">
+                <dt class="pt-0.5 text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">{label}</dt>
+                <dd class:list={['text-sm leading-6', label === 'Reference' && 'font-semibold']}>{value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <a href={applyHref} class="btn btn-solid focus-ring mt-8 flex w-full">
+            Apply by email <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+          <p class="mt-4 text-sm leading-6 text-musenga-muted">Email your CV to <a href={`mailto:${company.careersEmail}`} class="font-semibold text-musenga-ink hover:text-musenga-green">{company.careersEmail}</a>, quoting reference <strong class="text-musenga-ink">{reference}</strong>.</p>
+
+          <div class="mt-8 space-y-3 border-t border-musenga-line pt-6 text-xs leading-5 text-musenga-muted">
+            <p>If you have not heard from us within two weeks of the closing date, please consider your application unsuccessful.</p>
+            <p>Musenga Investments is committed to employment equity. Preference may be given to candidates from designated groups in line with our Employment Equity plan.</p>
+            <p>By applying, you consent to Musenga processing your personal information for recruitment purposes, as set out in our <a href="/privacy/#applicants" class="text-musenga-ink underline decoration-musenga-line underline-offset-4 hover:decoration-musenga-green">Privacy Policy</a>.</p>
+            <p><strong class="text-musenga-ink">We never ask for payment</strong> at any stage of recruitment.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#202521">
+  <title>Musenga Investments | Corporate Website Concept</title>
+  <meta name="description" content="Concept homepage for Musenga Investments, shaped around its published waste management, construction, maintenance, cleaning and hygiene services.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            musenga: {
+              green: '#27A247',
+              deep: '#1F5B2F',
+              ink: '#202521',
+              muted: '#666D68',
+              mist: '#F3F4F1',
+              line: '#DDE1DC'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif']
+          },
+          letterSpacing: {
+            editorial: '.18em'
+          },
+          boxShadow: {
+            soft: '0 24px 80px rgba(0,0,0,.10)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; }
+    h1, h2, h3, .display { font-family: 'Manrope', sans-serif; }
+    .hero-image {
+      background-image:
+        linear-gradient(90deg, rgba(20,25,22,.82) 0%, rgba(20,25,22,.53) 48%, rgba(20,25,22,.16) 100%),
+        linear-gradient(0deg, rgba(20,25,22,.30), rgba(20,25,22,.06)),
+        url('assets/hero/heroImagev1.jpg');
+      background-position: center;
+      background-size: cover;
+    }
+    .service-image { transition: transform .65s cubic-bezier(.2,.7,.2,1); }
+    .service-card:hover .service-image { transform: scale(1.045); }
+    .project-image { transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+    .project-card:hover .project-image { transform: scale(1.035); }
+    .showcase-panel img { filter: grayscale(.85) brightness(.7); transition: filter .7s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+    .showcase-panel .showcase-tint { transition: opacity .7s ease; }
+    .showcase-panel:hover img, .showcase-panel:focus-visible img { filter: none; transform: scale(1.03); }
+    .showcase-panel:hover .showcase-tint, .showcase-panel:focus-visible .showcase-tint { opacity: 0; }
+    .showcase-zoom {
+      position: absolute; left: 50%; top: 50%;
+      display: flex; align-items: center; justify-content: center;
+      width: 64px; height: 64px; border-radius: 9999px;
+      background: rgba(39,162,71,.88); color: #fff;
+      opacity: 0; transform: translate(-50%,-50%) scale(.7);
+      transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1);
+    }
+    .showcase-panel:hover .showcase-zoom, .showcase-panel:focus-visible .showcase-zoom { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    .focus-ring:focus-visible { outline: 3px solid #27A247; outline-offset: 4px; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body class="bg-white text-musenga-ink antialiased">
+  <!-- Concept only: validate wording, services, credentials, projects and imagery with Musenga before publication. -->
+
+  <header class="absolute inset-x-0 top-0 z-50 border-b border-white/20 text-white">
+    <div class="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 sm:px-8 lg:px-14">
+      <a href="#top" class="focus-ring flex items-center gap-3 rounded-sm" aria-label="Musenga Investments home">
+        <span class="flex h-10 w-10 items-center justify-center border border-white/60 text-lg font-bold tracking-tight">M</span>
+        <span class="leading-tight">
+          <span class="block text-sm font-bold uppercase tracking-[.16em]">Musenga</span>
+          <span class="mt-1 block text-[9px] uppercase tracking-[.29em] text-white/70">Investments (Pty) Ltd</span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-8 text-[11px] font-semibold uppercase tracking-[.14em] lg:flex" aria-label="Main navigation">
+        <a class="focus-ring rounded-sm text-white/85 transition hover:text-white" href="#about">About</a>
+        <a class="focus-ring rounded-sm text-white/85 transition hover:text-white" href="#services">Services</a>
+        <a class="focus-ring rounded-sm text-white/85 transition hover:text-white" href="#capabilities">Capabilities</a>
+        <a class="focus-ring rounded-sm text-white/85 transition hover:text-white" href="#contact">Contact</a>
+      </nav>
+
+      <a href="#contact" class="focus-ring hidden items-center gap-3 border border-white/60 px-5 py-3 text-[10px] font-semibold uppercase tracking-[.15em] transition hover:border-musenga-green hover:bg-musenga-green sm:inline-flex">
+        Discuss an enquiry <span aria-hidden="true">↗</span>
+      </a>
+      <button id="menuButton" class="focus-ring rounded-sm border border-white/50 p-2 lg:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileMenu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+    </div>
+    <nav id="mobileMenu" class="hidden border-t border-white/20 bg-musenga-ink/95 px-5 py-5 sm:px-8 lg:hidden" aria-label="Mobile navigation">
+      <div class="flex flex-col gap-5 text-xs font-semibold uppercase tracking-[.14em]">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero-image relative flex min-h-[100dvh] items-end overflow-hidden text-white sm:min-h-[820px] lg:min-h-[900px]">
+      <div class="absolute inset-0 bg-gradient-to-t from-musenga-ink/55 via-transparent to-transparent"></div>
+      <div class="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 items-end gap-12 px-5 pb-16 pt-36 sm:px-8 sm:pb-20 lg:grid-cols-12 lg:px-14 lg:pb-24">
+        <div class="lg:col-span-8">
+          <div class="mb-7 flex items-center gap-4">
+            <span class="h-px w-12 bg-musenga-green"></span>
+            <p class="text-[10px] font-semibold uppercase tracking-editorial text-white/85">100% Black woman-owned <span class="mx-2 text-musenga-green">·</span> Est. 2002</p>
+          </div>
+          <h1 class="display max-w-4xl text-4xl font-semibold leading-[1.08] tracking-[-.045em] sm:text-6xl lg:text-[76px]">
+            Practical solutions.<br>
+            <span class="font-normal text-white/75">Built around your needs.</span>
+          </h1>
+          <p class="mt-7 max-w-xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
+            Waste management, cleaning and hygiene, and building construction and maintenance for public- and private-sector clients.
+          </p>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a href="#services" class="focus-ring inline-flex min-h-14 items-center justify-center gap-8 bg-musenga-green px-6 text-[11px] font-bold uppercase tracking-[.13em] transition hover:bg-musenga-deep">
+              Explore our services <span aria-hidden="true">↗</span>
+            </a>
+            <a href="#about" class="focus-ring inline-flex min-h-14 items-center justify-center border border-white/60 px-6 text-[11px] font-bold uppercase tracking-[.13em] transition hover:bg-white hover:text-musenga-ink">
+              Discover Musenga
+            </a>
+          </div>
+        </div>
+        <div class="hidden border-l border-white/35 pl-6 lg:col-span-4 lg:block lg:justify-self-end">
+          <p class="text-[10px] uppercase tracking-editorial text-white/60">Ownership</p>
+          <p class="mt-3 max-w-[220px] text-sm leading-6 text-white/90">A 100% Black woman-owned company delivering dependable service to public- and private-sector clients since 2002.</p>
+        </div>
+      </div>
+      <div class="absolute bottom-0 left-0 right-0 hidden border-t border-white/20 lg:block">
+        <div class="mx-auto flex max-w-[1440px] items-center justify-between px-14 py-4 text-[9px] uppercase tracking-[.2em] text-white/60">
+          <span>Midrand, Gauteng · South Africa</span>
+          <a href="#about" class="focus-ring rounded-sm transition hover:text-white">Scroll to explore ↓</a>
+          <span>01 / Company overview</span>
+        </div>
+      </div>
+    </section>
+
+   
+
+    <!-- INTRO -->
+    <section id="about" class="scroll-mt-20 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+      <div class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-20">
+        <div class="lg:col-span-5">
+          <img src="assets/whoWeAre/company%20owner.jpg" alt="Musenga Investments company owner" class="aspect-[3/4] w-full object-cover" loading="lazy">
+        </div>
+        <div class="lg:col-span-6 lg:col-start-7">
+          <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 01 / Who we are</p>
+          <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">A broad range of services, with one clear commitment.</h2>
+          <p class="mt-8 text-lg leading-8 text-musenga-muted">Musenga Investments (Pty) Ltd grew out of Musengavhadzimu Business Enterprise cc, founded in 2002 to provide waste management, cleaning and hygiene services. Since then the business has expanded into building construction and maintenance, census work in informal settlements, and waste-bin supply for suburbs and complexes.</p>
+          <p class="mt-5 text-base leading-7 text-musenga-muted">Whatever the scope, the commitment stays the same: superior service, delivered by teams drawn from the communities we work in.</p>
+          <a href="#capabilities" class="focus-ring mt-8 inline-flex items-center gap-5 border-b border-musenga-ink pb-3 text-[10px] font-bold uppercase tracking-[.15em] transition hover:border-musenga-green hover:text-musenga-green">Learn about our capabilities <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION / VISION / VALUES -->
+    <section aria-label="Mission, vision and values" class="bg-musenga-deep text-white">
+      <div class="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-5 py-14 sm:px-8 md:grid-cols-3 md:gap-0 lg:px-14 lg:py-20">
+        <div class="md:border-r md:border-white/20 md:pr-10">
+          <p class="text-[10px] font-semibold uppercase tracking-editorial text-white/65">Our mission</p>
+          <p class="mt-4 text-lg font-medium leading-snug tracking-[-.02em] sm:text-xl">Deliver a wide range of services while uplifting local communities: hiring residents first and supporting community programmes.</p>
+        </div>
+        <div class="md:border-r md:border-white/20 md:px-10">
+          <p class="text-[10px] font-semibold uppercase tracking-editorial text-white/65">Our vision</p>
+          <p class="mt-4 text-lg font-medium leading-snug tracking-[-.02em] sm:text-xl">To be an enterprise of choice in waste management, commercial and industrial cleaning, and building construction and maintenance.</p>
+        </div>
+        <div class="md:pl-10">
+          <p class="text-[10px] font-semibold uppercase tracking-editorial text-white/65">Our values</p>
+          <p class="mt-4 text-lg font-medium leading-snug tracking-[-.02em] sm:text-xl">Rooted in good family values: accountability, commitment, trustworthiness, a high work ethic, and respect and empathy for everyone we serve.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="scroll-mt-20 bg-musenga-mist px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+      <div class="mx-auto max-w-[1320px]">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7">
+            <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 02 / What we do</p>
+            <h2 class="mt-7 max-w-2xl text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Services designed around real operating needs.</h2>
+          </div>
+          <p class="max-w-md text-base leading-7 text-musenga-muted md:col-span-5 md:justify-self-end">Three divisions, one standard of service, for public- and private-sector clients.</p>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <article class="service-card group overflow-hidden bg-white">
+            <a href="#contact" class="focus-ring block">
+              <div class="relative h-[280px] overflow-hidden sm:h-[330px]">
+                <img class="service-image h-full w-full object-cover" src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?auto=format&fit=crop&w=1000&q=85" alt="Recycling and environmental management facility" loading="lazy">
+                <span class="absolute left-5 top-5 bg-white px-3 py-2 text-[9px] font-bold uppercase tracking-[.15em] text-musenga-ink">01 / Environment</span>
+                <span class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></span>
+                <span class="absolute bottom-5 right-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/70 text-xl text-white transition group-hover:bg-musenga-green group-hover:border-musenga-green" aria-hidden="true">↗</span>
+              </div>
+              <div class="p-7 sm:p-8">
+                <h3 class="text-2xl font-semibold tracking-[-.03em]">Waste management</h3>
+                <p class="mt-4 text-sm leading-6 text-musenga-muted">Waste separation, recycling and the safe disposal of general and hazardous waste, plus waste-bin supply for suburbs and residential complexes.</p>
+                <p class="mt-7 border-t border-musenga-line pt-5 text-[10px] font-bold uppercase tracking-[.15em]">Explore service <span class="ml-2 text-musenga-green">↗</span></p>
+              </div>
+            </a>
+          </article>
+
+          <article class="service-card group overflow-hidden bg-white">
+            <a href="#contact" class="focus-ring block">
+              <div class="relative h-[280px] overflow-hidden sm:h-[330px]">
+                <img class="service-image h-full w-full object-cover" src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1000&q=85" alt="Clean, maintained interior space" loading="lazy">
+                <span class="absolute left-5 top-5 bg-white px-3 py-2 text-[9px] font-bold uppercase tracking-[.15em] text-musenga-ink">02 / Facilities</span>
+                <span class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></span>
+                <span class="absolute bottom-5 right-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/70 text-xl text-white transition group-hover:bg-musenga-green group-hover:border-musenga-green" aria-hidden="true">↗</span>
+              </div>
+              <div class="p-7 sm:p-8">
+                <h3 class="text-2xl font-semibold tracking-[-.03em]">Cleaning &amp; hygiene</h3>
+                <p class="mt-4 text-sm leading-6 text-musenga-muted">Commercial and industrial cleaning and hygiene services for public- and private-sector clients, tailored to each site’s needs.</p>
+                <p class="mt-7 border-t border-musenga-line pt-5 text-[10px] font-bold uppercase tracking-[.15em]">Explore service <span class="ml-2 text-musenga-green">↗</span></p>
+              </div>
+            </a>
+          </article>
+
+          <article class="service-card group overflow-hidden bg-white md:col-span-2 xl:col-span-1">
+            <a href="#contact" class="focus-ring block">
+              <div class="relative h-[280px] overflow-hidden sm:h-[330px]">
+                <img class="service-image h-full w-full object-cover" src="assets/services/ConstructionWokerOnSite.jpg" alt="Construction worker on site" loading="lazy">
+                <span class="absolute left-5 top-5 bg-white px-3 py-2 text-[9px] font-bold uppercase tracking-[.15em] text-musenga-ink">03 / Built environment</span>
+                <span class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></span>
+                <span class="absolute bottom-5 right-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/70 text-xl text-white transition group-hover:bg-musenga-green group-hover:border-musenga-green" aria-hidden="true">↗</span>
+              </div>
+              <div class="p-7 sm:p-8">
+                <h3 class="text-2xl font-semibold tracking-[-.03em]">Building &amp; maintenance</h3>
+                <p class="mt-4 text-sm leading-6 text-musenga-muted">Turnkey construction, refurbishment and maintenance, from building on client-owned stands to full residential developments.</p>
+                <p class="mt-7 border-t border-musenga-line pt-5 text-[10px] font-bold uppercase tracking-[.15em]">Explore service <span class="ml-2 text-musenga-green">↗</span></p>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+     <!-- KEY FACTS -->
+    <section aria-label="Key facts" class="border-b border-musenga-line bg-white px-5 sm:px-8 lg:px-14">
+      <dl class="mx-auto grid max-w-[1320px] grid-cols-2 lg:grid-cols-5">
+        <div class="flex flex-col-reverse justify-end border-b border-r border-musenga-line py-8 pr-5 lg:border-b-0 lg:py-12">
+          <dt class="mt-3 text-[10px] font-bold uppercase tracking-[.15em] text-musenga-muted">Established</dt>
+          <dd class="display text-4xl font-semibold tracking-[-.04em] sm:text-5xl">2002</dd>
+        </div>
+        <div class="flex flex-col-reverse justify-end border-b border-musenga-line py-8 pl-5 lg:border-b-0 lg:border-r lg:py-12 lg:pr-5">
+          <dt class="mt-3 text-[10px] font-bold uppercase tracking-[.15em] text-musenga-muted">Black woman-owned</dt>
+          <dd class="display text-4xl font-semibold tracking-[-.04em] sm:text-5xl text-musenga-green">100%</dd>
+        </div>
+        <div class="flex flex-col-reverse justify-end border-b border-r border-musenga-line py-8 pr-5 lg:border-b-0 lg:py-12 lg:pl-5">
+          <dt class="mt-3 text-[10px] font-bold uppercase tracking-[.15em] text-musenga-muted">Quality management · 2015</dt>
+          <dd class="display text-4xl font-semibold tracking-[-.04em] sm:text-5xl">ISO 9001</dd>
+        </div>
+        <div class="flex flex-col-reverse justify-end border-b border-musenga-line py-8 pl-5 lg:border-b-0 lg:border-r lg:py-12 lg:pr-5">
+          <dt class="mt-3 text-[10px] font-bold uppercase tracking-[.15em] text-musenga-muted">CIDB · Civil &amp; building</dt>
+          <dd class="display text-4xl font-semibold tracking-[-.04em] sm:text-5xl">Grade 7</dd>
+        </div>
+        <div class="flex flex-col-reverse justify-end col-span-2 py-8 lg:col-span-1 lg:py-12 lg:pl-5">
+          <dt class="mt-3 text-[10px] font-bold uppercase tracking-[.15em] text-musenga-muted">Service divisions</dt>
+          <dd class="display text-4xl font-semibold tracking-[-.04em] sm:text-5xl">3</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- CAPABILITIES / COMPLIANCE -->
+    <section id="capabilities" class="scroll-mt-20 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+      <div class="mx-auto grid max-w-[1320px] grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
+        <div class="lg:col-span-6">
+          <div class="relative lg:h-full lg:min-h-[640px]">
+            <img src="assets/Capability & trust/ConstructionWokerOnSite.jpg" alt="Construction professionals working on site" class="h-[460px] w-full object-cover sm:h-[600px] lg:absolute lg:inset-0 lg:h-full" loading="lazy">
+            <div class="absolute -bottom-5 right-0 bg-musenga-green px-6 py-5 text-white sm:-right-5 sm:px-8 sm:py-7">
+              <p class="text-[9px] font-bold uppercase tracking-[.18em] text-white/75">A considered approach</p>
+              <p class="mt-2 max-w-[200px] text-lg font-semibold leading-snug">People, process and practical delivery.</p>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-5 lg:col-start-8 lg:self-center">
+          <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 03 / Capability &amp; trust</p>
+          <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Certified, registered and ready to deliver.</h2>
+          <p class="mt-6 text-base leading-7 text-musenga-muted">Musenga works to recognised quality standards and holds the industry registrations that public- and private-sector buyers expect.</p>
+          <div class="mt-9 divide-y divide-musenga-line border-y border-musenga-line">
+            <div class="flex gap-5 py-5">
+              <span class="w-5 shrink-0 text-xs font-semibold text-musenga-green">01</span>
+              <div>
+                <h3 class="text-sm font-bold">Quality certified</h3>
+                <p class="mt-2 text-sm leading-6 text-musenga-muted">An ISO 9001:2015 quality management system across all three service divisions.</p>
+              </div>
+            </div>
+            <div class="flex gap-5 py-5">
+              <span class="w-5 shrink-0 text-xs font-semibold text-musenga-green">02</span>
+              <div>
+                <h3 class="text-sm font-bold">Industry registered</h3>
+                <p class="mt-2 text-sm leading-6 text-musenga-muted">Registered with the relevant construction, cleaning and waste management industry bodies.</p>
+              </div>
+            </div>
+            <div class="flex gap-5 py-5">
+              <span class="w-5 shrink-0 text-xs font-semibold text-musenga-green">03</span>
+              <div>
+                <h3 class="text-sm font-bold">Tender ready</h3>
+                <p class="mt-2 text-sm leading-6 text-musenga-muted">Compliance documentation in place for public- and private-sector procurement.</p>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="focus-ring mt-8 inline-flex items-center gap-5 bg-musenga-ink px-6 py-4 text-[10px] font-bold uppercase tracking-[.14em] text-white transition hover:bg-musenga-green">Request our company profile <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04 / CINEMATIC FOUR-PANEL SERVICE SHOWCASE -->
+    <section id="projects" aria-label="Our services and work" class="w-full bg-[#1b1e1d]">
+     
+      <div id="showcase" class="relative">
+        <div class="grid grid-cols-2 lg:grid-cols-4">
+          <a href="#services" class="showcase-panel focus-ring group relative block h-[440px] overflow-hidden border-r border-white/10 sm:h-[580px] lg:h-[760px]" aria-label="Cleaning and hygiene services">
+            <img class="absolute inset-0 h-full w-full object-cover object-center" src="assets/Our%20Work/Cleaning%26Hygeine.jpg" alt="Professional cleaning and facilities care" loading="lazy">
+            <span class="showcase-tint absolute inset-0 bg-[#1b1e1d]/45"></span>
+            <span class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/50 to-transparent"></span>
+            <span class="absolute left-5 top-6 text-[11px] font-semibold uppercase leading-[1.5] tracking-[.1em] text-white sm:left-7 sm:top-8 sm:text-[13px]">Cleaning &amp; Hygiene<br>Facilities Care</span>
+            <span class="showcase-zoom" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4 4M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="absolute bottom-6 left-5 rotate-180 text-[8px] font-semibold uppercase tracking-[.35em] text-white/85 [writing-mode:vertical-rl] sm:bottom-8 sm:left-7">Facilities</span>
+          </a>
+          <a href="#services" class="showcase-panel focus-ring group relative block h-[440px] overflow-hidden border-white/10 sm:h-[580px] lg:h-[760px] lg:border-r" aria-label="Construction and maintenance services">
+            <img class="absolute inset-0 h-full w-full object-cover object-center" src="assets/Our%20Work/Building%26Maintance.jpg" alt="Construction work on a building site" loading="lazy">
+            <span class="showcase-tint absolute inset-0 bg-[#1b1e1d]/45"></span>
+            <span class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/50 to-transparent"></span>
+            <span class="absolute left-5 top-6 text-[11px] font-semibold uppercase leading-[1.5] tracking-[.1em] text-white sm:left-7 sm:top-8 sm:text-[13px]">Construction<br>&amp; Maintenance</span>
+            <span class="showcase-zoom" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4 4M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="absolute bottom-6 left-5 rotate-180 text-[8px] font-semibold uppercase tracking-[.35em] text-white/85 [writing-mode:vertical-rl] sm:bottom-8 sm:left-7">Built Environment</span>
+          </a>
+          <a href="#services" class="showcase-panel focus-ring group relative block h-[440px] overflow-hidden border-r border-t border-white/10 sm:h-[580px] lg:h-[760px] lg:border-t-0" aria-label="Waste management services">
+            <img class="absolute inset-0 h-full w-full object-cover object-center" src="assets/Our%20Work/wasteManagement.jpg" alt="Recycling and waste management" loading="lazy">
+            <span class="showcase-tint absolute inset-0 bg-[#1b1e1d]/45"></span>
+            <span class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/50 to-transparent"></span>
+            <span class="absolute left-5 top-6 text-[11px] font-semibold uppercase leading-[1.5] tracking-[.1em] text-white sm:left-7 sm:top-8 sm:text-[13px]">Waste Management<br>Responsible Disposal</span>
+            <span class="showcase-zoom" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4 4M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="absolute bottom-6 left-5 rotate-180 text-[8px] font-semibold uppercase tracking-[.35em] text-white/85 [writing-mode:vertical-rl] sm:bottom-8 sm:left-7">Environment</span>
+          </a>
+          <a href="#services" class="showcase-panel focus-ring group relative block h-[440px] overflow-hidden border-t border-white/10 sm:h-[580px] lg:h-[760px] lg:border-t-0" aria-label="Commercial facilities and property services">
+            <img class="absolute inset-0 h-full w-full object-cover object-center" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=88" alt="Modern commercial building exterior" loading="lazy">
+            <span class="showcase-tint absolute inset-0 bg-[#1b1e1d]/45"></span>
+            <span class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/50 to-transparent"></span>
+            <span class="absolute left-5 top-6 text-[11px] font-semibold uppercase leading-[1.5] tracking-[.1em] text-white sm:left-7 sm:top-8 sm:text-[13px]">Commercial Sites<br>Property Services</span>
+            <span class="showcase-zoom" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4 4M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="absolute bottom-6 left-5 rotate-180 text-[8px] font-semibold uppercase tracking-[.35em] text-white/85 [writing-mode:vertical-rl] sm:bottom-8 sm:left-7">Infrastructure</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNERSHIPS -->
+    <section id="partnerships" class="scroll-mt-20 bg-musenga-mist px-5 py-20 sm:px-8 sm:py-24 lg:px-14 lg:py-28">
+      <div class="mx-auto grid max-w-[1320px] grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-20">
+        <div class="lg:col-span-6">
+          <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 05 / Partnerships</p>
+          <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Stronger together.</h2>
+        </div>
+        <div class="lg:col-span-5 lg:col-start-8">
+          <p class="text-base leading-7 text-musenga-muted">We pursue joint ventures with reputable organisations in government and the private sector, built on skills transfer, capacity building and creating opportunities for previously disadvantaged individuals and communities.</p>
+          <a href="#contact" class="focus-ring mt-8 inline-flex items-center gap-5 bg-musenga-ink px-6 py-4 text-[10px] font-bold uppercase tracking-[.14em] text-white transition hover:bg-musenga-green">Discuss a partnership <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="scroll-mt-20 bg-white px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+      <div class="mx-auto grid max-w-[1320px] grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
+        <div class="lg:col-span-6">
+          <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> 06 / Contact</p>
+          <h2 class="mt-7 max-w-xl text-4xl font-semibold leading-tight tracking-[-.045em] sm:text-6xl">Let's discuss what you need.</h2>
+          <p class="mt-6 max-w-lg text-base leading-7 text-musenga-muted">For a service enquiry or a potential partnership, call, email or send us an enquiry and our team will get back to you.</p>
+          <div class="mt-10 space-y-6 border-t border-musenga-line pt-8">
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Telephone</p>
+              <a class="focus-ring mt-2 inline-block rounded-sm text-lg font-semibold hover:text-musenga-green" href="tel:+27110243412">+27 11 024 3412</a>
+            </div>
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Email</p>
+              <a class="focus-ring mt-2 inline-block rounded-sm text-lg font-semibold hover:text-musenga-green" href="mailto:info@musenga.co.za">info@musenga.co.za</a>
+            </div>
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Head office</p>
+              <p class="mt-2 text-base leading-7 text-musenga-ink">64 Dane Road, Glen Austin<br>Midrand, South Africa</p>
+              <a class="focus-ring mt-3 inline-flex items-center gap-3 border-b border-musenga-ink pb-1 text-[10px] font-bold uppercase tracking-[.15em] transition hover:border-musenga-green hover:text-musenga-green" href="https://www.google.com/maps/search/?api=1&amp;query=64+Dane+Road,+Glen+Austin,+Midrand" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a>
+            </div>
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Office hours</p>
+              <p class="mt-2 text-base leading-7 text-musenga-ink">Monday – Friday<br>08:00 – 17:00</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-musenga-mist p-6 sm:p-9 lg:col-span-5 lg:col-start-8">
+          <p class="text-[10px] font-bold uppercase tracking-editorial text-musenga-green">Make an enquiry</p>
+          <h3 class="mt-4 text-2xl font-semibold tracking-[-.03em]">Tell us how we can help.</h3>
+          <p class="mt-3 text-sm leading-6 text-musenga-muted">This prototype form is for visual review only. It does not send or store submissions until a backend or approved form service is connected.</p>
+          <form id="enquiryForm" class="mt-8 space-y-5">
+            <div>
+              <label for="name" class="mb-2 block text-[10px] font-bold uppercase tracking-[.12em]">Full name</label>
+              <input id="name" name="name" required autocomplete="name" class="focus-ring w-full border border-musenga-line bg-white px-4 py-3.5 text-sm outline-none transition focus:border-musenga-green" placeholder="Your name">
+            </div>
+            <div>
+              <label for="email" class="mb-2 block text-[10px] font-bold uppercase tracking-[.12em]">Work email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" class="focus-ring w-full border border-musenga-line bg-white px-4 py-3.5 text-sm outline-none transition focus:border-musenga-green" placeholder="you@company.co.za">
+            </div>
+            <div>
+              <label for="phone" class="mb-2 block text-[10px] font-bold uppercase tracking-[.12em]">Phone <span class="font-medium normal-case tracking-normal text-musenga-muted">(optional)</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" class="focus-ring w-full border border-musenga-line bg-white px-4 py-3.5 text-sm outline-none transition focus:border-musenga-green" placeholder="+27 ...">
+            </div>
+            <div>
+              <label for="service" class="mb-2 block text-[10px] font-bold uppercase tracking-[.12em]">Service of interest</label>
+              <select id="service" name="service" required class="focus-ring w-full border border-musenga-line bg-white px-4 py-3.5 text-sm outline-none transition focus:border-musenga-green">
+                <option value="">Select a service</option>
+                <option>Waste management</option>
+                <option>Cleaning and hygiene</option>
+                <option>Building construction and maintenance</option>
+                <option>Partnership or procurement enquiry</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class="mb-2 block text-[10px] font-bold uppercase tracking-[.12em]">How can we help?</label>
+              <textarea id="message" name="message" rows="4" required class="focus-ring w-full resize-y border border-musenga-line bg-white px-4 py-3.5 text-sm outline-none transition focus:border-musenga-green" placeholder="Briefly describe your requirements"></textarea>
+            </div>
+            <button type="submit" class="focus-ring flex min-h-14 w-full items-center justify-between bg-musenga-green px-5 text-left text-[10px] font-bold uppercase tracking-[.14em] text-white transition hover:bg-musenga-deep">
+              <span>Prepare enquiry email</span><span aria-hidden="true">↗</span>
+            </button>
+            <p id="formNotice" class="hidden text-sm leading-6 text-musenga-deep" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-musenga-ink px-5 pt-16 text-white sm:px-8 lg:px-14 lg:pt-20">
+    <div class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 pb-14 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-4">
+        <a href="#top" class="focus-ring inline-flex w-fit items-center gap-3 rounded-sm" aria-label="Musenga Investments home">
+          <span class="flex h-10 w-10 items-center justify-center border border-white/50 text-lg font-bold">M</span>
+          <span class="leading-tight">
+            <span class="block text-sm font-bold uppercase tracking-[.16em]">Musenga</span>
+            <span class="mt-1 block text-[9px] uppercase tracking-[.29em] text-white/60">Investments (Pty) Ltd</span>
+          </span>
+        </a>
+        <p class="mt-6 max-w-xs text-sm leading-6 text-white/60">A 100% Black woman-owned company providing waste management, cleaning and hygiene, and building construction and maintenance since 2002.</p>
+        <!-- Social links: replace "#" with Musenga's real profile URLs before launch. -->
+        <div class="mt-7 flex gap-2">
+          <a href="#" class="focus-ring flex h-9 w-9 items-center justify-center border border-white/25 text-white/75 transition hover:border-musenga-green hover:bg-musenga-green hover:text-white" aria-label="Musenga on Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 8h2.5V4.5H14c-2.5 0-4 1.6-4 4V11H7.5v3.5H10V20h3.5v-5.5H16l.5-3.5h-3V8.7c0-.4.2-.7.5-.7z" fill="currentColor"/></svg></a>
+          <a href="#" class="focus-ring flex h-9 w-9 items-center justify-center border border-white/25 text-white/75 transition hover:border-musenga-green hover:bg-musenga-green hover:text-white" aria-label="Musenga on Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="1.6"/><circle cx="16.8" cy="7.2" r="1" fill="currentColor"/></svg></a>
+          <a href="#" class="focus-ring flex h-9 w-9 items-center justify-center border border-white/25 text-white/75 transition hover:border-musenga-green hover:bg-musenga-green hover:text-white" aria-label="Musenga on YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 9.5v5l4.2-2.5-4.2-2.5z" fill="currentColor"/></svg></a>
+          <a href="#" class="focus-ring flex h-9 w-9 items-center justify-center border border-white/25 text-white/75 transition hover:border-musenga-green hover:bg-musenga-green hover:text-white" aria-label="Musenga on X"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h3.6l10.4 15H15.4L5 4.5zM18.6 4.5L13.3 10.6M5.4 19.5l5.4-6.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+      <nav class="lg:col-span-2 lg:col-start-6" aria-label="Footer services">
+        <p class="text-[10px] font-bold uppercase tracking-[.16em] text-white/50">Services</p>
+        <ul class="mt-5 space-y-3">
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="#services">Waste management</a></li>
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="#services">Cleaning &amp; hygiene</a></li>
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="#services">Building &amp; maintenance</a></li>
+        </ul>
+      </nav>
+      <nav class="lg:col-span-2" aria-label="Footer company">
+        <p class="text-[10px] font-bold uppercase tracking-[.16em] text-white/50">Company</p>
+        <ul class="mt-5 space-y-3">
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="#about">About us</a></li>
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="#capabilities">Capabilities</a></li>
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="#partnerships">Partnerships</a></li>
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="lg:col-span-3">
+        <p class="text-[10px] font-bold uppercase tracking-[.16em] text-white/50">Get in touch</p>
+        <ul class="mt-5 space-y-3 text-sm leading-6 text-white/80">
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="tel:+27110243412">+27 11 024 3412</a></li>
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="mailto:info@musenga.co.za">info@musenga.co.za</a></li>
+          <li><a class="focus-ring rounded-sm text-sm text-white/80 transition hover:text-white" href="https://www.google.com/maps/search/?api=1&amp;query=64+Dane+Road,+Glen+Austin,+Midrand" target="_blank" rel="noopener">64 Dane Road, Glen Austin,<br>Midrand, South Africa</a></li>
+          <li class="text-white/60">Mon – Fri · 08:00 – 17:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mx-auto flex max-w-[1320px] flex-col gap-4 border-t border-white/15 py-7 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-xs leading-5 text-white/50">© <span id="year">2026</span> Musenga Investments (Pty) Ltd. All rights reserved.</p>
+      <p class="text-xs leading-5 text-white/35">Website concept for discussion · Not an approved or published company website.</p>
+    </div>
+  </footer>
+
+  <a id="backToTop" href="#top" class="focus-ring fixed bottom-5 right-5 z-40 flex h-12 w-12 translate-y-4 items-center justify-center rounded-full bg-musenga-green text-white opacity-0 shadow-soft transition duration-300 hover:bg-musenga-deep pointer-events-none sm:bottom-8 sm:right-8 sm:h-14 sm:w-14" aria-label="Back to top" tabindex="-1">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
+      mobileMenu.classList.toggle('hidden', isOpen);
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation');
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const backToTop = document.getElementById('backToTop');
+    const toggleBackToTop = () => {
+      const show = window.scrollY > window.innerHeight * 0.8;
+      backToTop.classList.toggle('opacity-0', !show);
+      backToTop.classList.toggle('translate-y-4', !show);
+      backToTop.classList.toggle('pointer-events-none', !show);
+      backToTop.tabIndex = show ? 0 : -1;
+    };
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    toggleBackToTop();
+
+    const form = document.getElementById('enquiryForm');
+    const notice = document.getElementById('formNotice');
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = new FormData(form);
+      const subject = encodeURIComponent('Website enquiry: ' + data.get('service'));
+      const body = encodeURIComponent(
+        'Name: ' + data.get('name') + '\n' +
+        'Email: ' + data.get('email') + '\n' +
+        'Phone: ' + (data.get('phone') || '-') + '\n' +
+        'Service: ' + data.get('service') + '\n\n' +
+        'Message:\n' + data.get('message')
+      );
+      notice.textContent = 'Your email application should open with the enquiry prepared. This demo does not submit information to a server.';
+      notice.classList.remove('hidden');
+      window.location.href = 'mailto:info@musenga.co.za?subject=' + subject + '&body=' + body;
+    });
+  </script>
+</body>
+</html>

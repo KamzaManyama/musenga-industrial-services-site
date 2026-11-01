@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactSection from '../components/ContactSection.astro';
+import SplitHero from '../components/SplitHero.astro';
+import { iso, divisions } from '../data/certifications';
+
+const eyebrow = 'flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green';
+const total = divisions.reduce((n, d) => n + d.registrations.length, 0) + 1;
+---
+
+<BaseLayout
+  title="Certifications & Registrations | Musenga Investments"
+  description="Musenga Investments' ISO 9001:2015 quality management system and industry registrations across construction, cleaning and waste management."
+>
+  <SplitHero
+    eyebrow="Certifications · ISO 9001:2015"
+    line1Bold="Certified."
+    line1="Registered."
+    line2="Fully"
+    line2Bold="accountable."
+    intro={`Our quality management system and ${total - 1} industry registrations across ${divisions.length} service divisions, in one place for procurement and tender teams.`}
+    // PLACEHOLDER (Pinterest photo, not Musenga's; another company's name on the vests is blurred).
+    // Replace with Musenga's own photo before going live.
+    image={{ src: '/assets/placeholder/certifications-placeholder.jpg', alt: 'A team in hard hats and hi-vis vests on a site visit', position: 'center 58%' }}
+    primary={{ label: 'Request certificates', href: '#contact', service: 'Partnership or procurement enquiry' }}
+    secondary={{ label: 'View registrations', href: '#registrations' }}
+    indexLabel="Jump to"
+    index={[{ number: '01', label: 'ISO 9001:2015', href: '#quality' }, ...divisions.map((d, i) => ({ number: String(i + 2).padStart(2, '0'), label: d.title, href: `#${d.id}` }))]}
+    scrollTarget="#quality"
+  />
+
+  <!-- ISO -->
+  <section id="quality" class="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+    <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-20">
+      <div class="lg:col-span-5">
+        <!-- Musenga's own site photo. Swap for their ISO certificate (thumbnail + details) once supplied. -->
+        <img src="/assets/building/foundation-concrete-pour.jpg" alt="Musenga team in hard hats and safety gear pouring a concrete foundation on site" class="aspect-[4/5] w-full object-cover" loading="lazy">
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 01 / Quality</p>
+        <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">One quality standard across every division.</h2>
+        <p class="mt-8 text-lg leading-8 text-musenga-muted">{iso.detail}</p>
+        <ul class="mt-10 divide-y divide-musenga-line border-y border-musenga-line">
+          {divisions.map((d) => (
+            <li>
+              <a href={`#${d.id}`} class="focus-ring flex items-center justify-between py-4 text-sm font-semibold transition hover:text-musenga-green">
+                {d.title} <span class="text-musenga-green" aria-hidden="true">↓</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRATIONS BY DIVISION -->
+  <section id="registrations" class="scroll-mt-24 bg-musenga-mist px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+    <div class="mx-auto max-w-[1320px]">
+      <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 02 / Registrations</p>
+      <h2 class="mt-7 max-w-2xl text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Industry registrations by division.</h2>
+
+      <div class="mt-16 space-y-20">
+        {divisions.map((division, i) => (
+          <div id={division.id} class="scroll-mt-32">
+            <div class="flex flex-col gap-4 border-b border-musenga-ink pb-5 sm:flex-row sm:items-end sm:justify-between">
+              <h3 class="text-2xl font-semibold tracking-[-.03em] sm:text-3xl"><span class="mr-3 text-base text-musenga-green">{String(i + 1).padStart(2, '0')}</span>{division.title}</h3>
+              <a href={division.serviceHref} class="link-line focus-ring w-fit rounded-sm">View service</a>
+            </div>
+            <ul data-reveal-stagger class="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {division.registrations.map((reg) => (
+                <li class="flex flex-col bg-white p-6 sm:p-7">
+                  <div class="flex h-14 items-center">
+                    {reg.logo ? (
+                      <img src={reg.logo} alt="" class="max-h-14 max-w-[130px] object-contain" loading="lazy">
+                    ) : (
+                      <span class="display flex h-12 w-12 items-center justify-center bg-musenga-mist text-sm font-bold text-musenga-green" aria-hidden="true">{reg.name.slice(0, 2).toUpperCase()}</span>
+                    )}
+                  </div>
+                  <h4 class="mt-6 text-lg font-semibold tracking-[-.02em]">{reg.name}</h4>
+                  <p class="mt-1 text-[10px] font-bold uppercase tracking-[.12em] text-musenga-muted">{reg.body}</p>
+                  <p class="mt-4 text-sm leading-6 text-musenga-muted">{reg.detail}</p>
+                  <div class="mt-auto pt-6">
+                    {reg.document ? (
+                      <a href={reg.document} target="_blank" rel="noopener" class="link-line focus-ring rounded-sm">View certificate <span aria-hidden="true">↗</span></a>
+                    ) : (
+                      <span class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.14em] text-musenga-green"><span class="h-1.5 w-1.5 rounded-full bg-musenga-green"></span> Registered</span>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES ON REQUEST -->
+  <section class="bg-musenga-deep px-5 py-16 text-white sm:px-8 lg:px-14 lg:py-20">
+    <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-8 md:grid-cols-12 md:items-center">
+      <div class="md:col-span-8">
+        <p class="text-[10px] font-semibold uppercase tracking-editorial text-white/65">For procurement &amp; tender teams</p>
+        <p class="mt-3 max-w-2xl text-2xl font-medium leading-snug tracking-[-.025em] sm:text-3xl">Need copies of our certificates for a tender or supplier application?</p>
+      </div>
+      <div class="md:col-span-4 md:justify-self-end">
+        <a href="#contact" class="btn btn-outline-light focus-ring">Request certificates <span class="btn-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <ContactSection number="03" service="Partnership or procurement enquiry" />
+</BaseLayout>

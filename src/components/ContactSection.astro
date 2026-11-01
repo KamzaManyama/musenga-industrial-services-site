@@ -1,0 +1,263 @@
+---
+interface Props {
+  /** Section number shown in the label, e.g. "06". */
+  number?: string;
+  /** Preselects this option in the service dropdown. */
+  service?: string;
+}
+const { number = '06', service } = Astro.props;
+const address = '64 Dane Road, Glen Austin, Midrand';
+const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+const options = [
+  'Waste management',
+  'Cleaning and hygiene',
+  'Building construction and maintenance',
+  'Partnership or procurement enquiry',
+  'Job application',
+  'Other',
+];
+---
+
+<!-- CONTACT -->
+<section id="contact" class="scroll-mt-20 bg-white px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+  <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
+    <div class="lg:col-span-6">
+      <p class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green"><span class="h-px w-9 bg-musenga-green"></span> {number} / Contact</p>
+      <h2 class="mt-7 max-w-xl text-4xl font-semibold leading-tight tracking-[-.045em] sm:text-6xl">Let's discuss what you need.</h2>
+      <p class="mt-6 max-w-lg text-base leading-7 text-musenga-muted">For a service enquiry or a potential partnership, call, email or send us an enquiry and our team will get back to you.</p>
+      <!-- Telephone · Email · Office hours -->
+      <dl class="mt-10 grid grid-cols-1 divide-y divide-musenga-line border-y border-musenga-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <div class="py-6 sm:pr-6">
+          <dt class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Telephone</dt>
+          <dd class="mt-3"><a class="focus-ring rounded-sm text-base font-semibold transition hover:text-musenga-green" href="tel:+27110243412">+27 11 024 3412</a></dd>
+        </div>
+        <div class="py-6 sm:px-6">
+          <dt class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Email</dt>
+          <dd class="mt-3"><a class="focus-ring rounded-sm text-base font-semibold transition hover:text-musenga-green" href="mailto:info@musenga.co.za">info@musenga.co.za</a></dd>
+        </div>
+        <div class="py-6 sm:pl-6">
+          <dt class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Office hours</dt>
+          <dd class="mt-3 text-base font-semibold">Mon – Fri<br><span class="font-normal text-musenga-muted">08:00 – 17:00</span></dd>
+        </div>
+      </dl>
+
+      <!-- Head office -->
+      <div class="mt-8">
+        <p class="text-[9px] font-bold uppercase tracking-editorial text-musenga-muted">Head office</p>
+        <p class="mt-3 text-base leading-7 text-musenga-ink">64 Dane Road, Glen Austin, Midrand, South Africa</p>
+        <a class="link-line focus-ring mt-4 rounded-sm" href={directionsUrl} target="_blank" rel="noopener">
+          Get directions <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Enquiry form: line-style fields on white, matching the site's divider lines. -->
+    <!-- lg:pt-11 lines the form heading up with the main heading on the left (below its section label). -->
+    <div class="lg:col-span-5 lg:col-start-8 lg:pt-11">
+      <h3 class="text-2xl font-semibold tracking-[-.03em] sm:text-3xl">Send us a message</h3>
+      <form id="enquiryForm" novalidate class="mt-8 grid grid-cols-1 gap-x-8 gap-y-9 sm:grid-cols-2">
+        <!-- Honeypot: hidden from people, but spam bots tend to fill it in. -->
+        <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+          <label for="company_website">Company website</label>
+          <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div>
+          <label for="name" class="field-label">Full name</label>
+          <input id="name" name="name" autocomplete="name" maxlength="80" aria-describedby="name-error" class="field-line" placeholder="Your name">
+          <p id="name-error" class="field-error" hidden></p>
+        </div>
+        <div>
+          <label for="email" class="field-label">Work email</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" aria-describedby="email-error" class="field-line" placeholder="you@company.co.za">
+          <p id="email-error" class="field-error" hidden></p>
+        </div>
+        <div>
+          <label for="phone" class="field-label">Phone <span class="font-medium normal-case tracking-normal text-musenga-muted">(optional)</span></label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" aria-describedby="phone-error" class="field-line" placeholder="e.g. 082 123 4567">
+          <p id="phone-error" class="field-error" hidden></p>
+        </div>
+        <div>
+          <label for="service" class="field-label">Service of interest</label>
+          <div class="relative">
+            <select id="service" name="service" aria-describedby="service-error" class="field-line appearance-none pr-8">
+              <option value="">Select a service</option>
+              {options.map((option) => <option selected={option === service}>{option}</option>)}
+            </select>
+            <svg class="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-musenga-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p id="service-error" class="field-error" hidden></p>
+          <p id="jobHint" class="mt-2 text-xs leading-5 text-musenga-muted" hidden>Looking for work? Please apply through our <a href="/careers/" class="font-semibold text-musenga-ink underline decoration-musenga-line underline-offset-4 hover:decoration-musenga-green">Careers page</a> instead.</p>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="message" class="field-label">How can we help?</label>
+          <textarea id="message" name="message" rows="3" maxlength="2000" aria-describedby="message-error message-count" class="field-line resize-y" placeholder="Briefly describe your requirements"></textarea>
+          <div class="mt-2 flex items-start justify-between gap-4">
+            <p id="message-error" class="field-error !mt-0" hidden></p>
+            <p id="message-count" class="ml-auto shrink-0 text-[11px] text-musenga-muted" aria-live="polite">0 / 2000</p>
+          </div>
+        </div>
+        <div class="sm:col-span-2">
+          <button id="submitButton" type="submit" class="btn btn-solid focus-ring flex w-full disabled:cursor-wait disabled:opacity-80">
+            <span id="submitLabel">Send enquiry</span>
+            <span id="submitIcon" class="btn-arrow" aria-hidden="true">→</span>
+            <span id="submitSpinner" class="hidden h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true"></span>
+          </button>
+          <p class="mt-5 max-w-md text-xs leading-5 text-musenga-muted">By sending this enquiry, you agree to Musenga using your details to respond to you, as set out in our <a href="/privacy/" class="text-musenga-ink underline decoration-musenga-line underline-offset-4 transition hover:decoration-musenga-green">Privacy Policy</a>.</p>
+          <p id="formNotice" class="mt-4 hidden text-sm leading-6 text-musenga-deep" role="status"></p>
+        </div>
+      </form>
+
+      <!-- Shown after a successful send -->
+      <div id="formSuccess" class="mt-8 border-t-2 border-musenga-green pt-8" tabindex="-1" hidden>
+        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-musenga-green text-white" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <p class="mt-6 text-2xl font-semibold tracking-[-.03em]">Thank you<span id="successName"></span>.</p>
+        <p class="mt-3 max-w-md text-base leading-7 text-musenga-muted">Your enquiry has been sent to the Musenga team. We'll get back to you as soon as possible.</p>
+        <button id="sendAnother" type="button" class="link-line focus-ring mt-8 rounded-sm">
+          Send another enquiry
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Job seekers: point them to the Careers page when they pick "Job application".
+const serviceSelect = document.getElementById('service') as HTMLSelectElement;
+const jobHint = document.getElementById('jobHint')!;
+serviceSelect.addEventListener('change', () => { jobHint.hidden = serviceSelect.value !== 'Job application'; });
+
+// Links with data-contact-service="…" preselect that option when they jump to the form.
+document.querySelectorAll<HTMLElement>('[data-contact-service]').forEach((link) => {
+  link.addEventListener('click', () => {
+    const select = document.getElementById('service') as HTMLSelectElement | null;
+    if (select) select.value = link.dataset.contactService ?? '';
+  });
+});
+
+// ---- Enquiry form validation ----
+const form = document.getElementById('enquiryForm') as HTMLFormElement;
+const notice = document.getElementById('formNotice')!;
+const field = (id: string) => document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
+// Each rule returns an error message, or '' when the value is fine.
+const rules: Record<string, (value: string) => string> = {
+  name: (v) => {
+    if (!v) return 'Please enter your name.';
+    if (v.length < 2) return 'Your name looks too short.';
+    if (!/^[\p{L}][\p{L}\s.'-]*$/u.test(v)) return 'Please use letters only (spaces, hyphens and apostrophes are fine).';
+    return '';
+  },
+  email: (v) => {
+    if (!v) return 'Please enter your email address.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return 'Please enter a valid email address, e.g. name@company.co.za.';
+    return '';
+  },
+  phone: (v) => {
+    if (!v) return ''; // optional
+    const digits = v.replace(/[\s\-()]/g, '');
+    if (!/^(\+27|0)\d{9}$/.test(digits)) return 'Please enter a valid South African number, e.g. 082 123 4567 or +27 82 123 4567.';
+    return '';
+  },
+  service: (v) => (v ? '' : 'Please choose the service you are interested in.'),
+  message: (v) => {
+    if (!v) return 'Please tell us a little about what you need.';
+    if (v.length < 10) return 'Please add a bit more detail (at least 10 characters).';
+    return '';
+  },
+};
+
+const showError = (id: string, message: string) => {
+  const input = field(id);
+  const error = document.getElementById(`${id}-error`)!;
+  input.setAttribute('aria-invalid', message ? 'true' : 'false');
+  error.textContent = message;
+  error.hidden = !message;
+  // Clear the "please fix" banner once the last error is fixed.
+  if (!form.querySelector('[aria-invalid="true"]') && notice.classList.contains('is-error')) {
+    notice.classList.add('hidden');
+    notice.classList.remove('is-error');
+  }
+};
+const validate = (id: string) => {
+  const message = rules[id](field(id).value.trim());
+  showError(id, message);
+  return !message;
+};
+
+// Check a field when the visitor leaves it; once it has an error, re-check as they type.
+Object.keys(rules).forEach((id) => {
+  const input = field(id);
+  input.addEventListener('blur', () => { if (input.value.trim() || input.getAttribute('aria-invalid') === 'true') validate(id); });
+  input.addEventListener(id === 'service' ? 'change' : 'input', () => { if (input.getAttribute('aria-invalid') === 'true') validate(id); });
+});
+
+const message = field('message');
+const counter = document.getElementById('message-count')!;
+message.addEventListener('input', () => { counter.textContent = `${message.value.length} / 2000`; });
+
+const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
+const success = document.getElementById('formSuccess')!;
+const setSending = (sending: boolean) => {
+  submitButton.disabled = sending;
+  document.getElementById('submitLabel')!.textContent = sending ? 'Sending…' : 'Send enquiry';
+  document.getElementById('submitIcon')!.classList.toggle('hidden', sending);
+  document.getElementById('submitSpinner')!.classList.toggle('hidden', !sending);
+};
+const showNotice = (html: string) => {
+  notice.innerHTML = html;
+  notice.classList.remove('hidden');
+  notice.classList.add('is-error');
+};
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (submitButton.disabled) return;
+  const invalid = Object.keys(rules).filter((id) => !validate(id));
+  if (invalid.length) {
+    field(invalid[0]).focus();
+    showNotice(invalid.length === 1 ? 'Please fix the highlighted field.' : `Please fix the ${invalid.length} highlighted fields.`);
+    return;
+  }
+
+  const payload = Object.fromEntries(new FormData(form)) as Record<string, string>;
+  setSending(true);
+  try {
+    const response = await fetch('/api/enquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const result = await response.json().catch(() => ({}));
+
+    if (response.ok && result.ok) {
+      document.getElementById('successName')!.textContent = payload.name ? `, ${payload.name.trim().split(/\s+/)[0]}` : '';
+      form.hidden = true;
+      notice.classList.add('hidden');
+      success.hidden = false;
+      success.focus();
+      form.reset();
+      counter.textContent = '0 / 2000';
+      return;
+    }
+    // Server-side validation errors: show them on the matching fields.
+    if (result.errors) {
+      Object.entries(result.errors as Record<string, string>).forEach(([id, msg]) => showError(id, msg));
+      const first = Object.keys(result.errors)[0];
+      if (first) field(first).focus();
+    }
+    showNotice(`${result.message ?? 'Sorry, something went wrong.'} You can also email us at <a class="underline underline-offset-2" href="mailto:info@musenga.co.za">info@musenga.co.za</a>.`);
+  } catch {
+    showNotice('We couldn’t reach the server. Please check your connection and try again, or email us at <a class="underline underline-offset-2" href="mailto:info@musenga.co.za">info@musenga.co.za</a>.');
+  } finally {
+    setSending(false);
+  }
+});
+
+document.getElementById('sendAnother')!.addEventListener('click', () => {
+  success.hidden = true;
+  form.hidden = false;
+  field('name').focus();
+});
+</script>

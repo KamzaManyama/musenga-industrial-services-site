@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+@theme {
+  --color-musenga-green: #27A247;
+  --color-musenga-deep: #1F5B2F;
+  --color-musenga-ink: #202521;
+  --color-musenga-muted: #666D68;
+  --color-musenga-mist: #F3F4F1;
+  --color-musenga-line: #DDE1DC;
+
+  --font-sans: 'DM Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Manrope Variable', 'Helvetica Neue', Arial, sans-serif;
+
+  --tracking-editorial: .18em;
+  --shadow-soft: 0 24px 80px rgba(0, 0, 0, .10);
+}
+
+html { scroll-behavior: smooth; }
+h1, h2, h3, .display { font-family: var(--font-display); }
+button { cursor: pointer; }
+
+/* BUTTONS AND LINKS: the site's three levels, defined once.
+   1. .btn .btn-solid    green box, only for submitting (Send enquiry, Apply by email)
+   2. .btn .btn-outline  outlined box, one key call to action per section (.btn-outline-light on dark backgrounds)
+   3. .link-line         green line + text, everything else that moves the reader on (.link-line-light on dark)
+      .link-quiet        the plain text link that sits beside a .link-line (e.g. a hero's second link)
+   Arrows: → stays on the site, ↗ opens something outside it (Google Maps, a PDF). */
+@layer components {
+  .btn, .link-line, .link-quiet { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .13em; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    min-height: 3.5rem; padding: 0 1.75rem; border: 1px solid transparent;
+    transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+  }
+  .btn-sm { min-height: 2.75rem; padding: 0 1.25rem; gap: 1rem; }
+  .btn-solid { background: var(--color-musenga-green); color: #fff; }
+  .btn-solid:hover { background: var(--color-musenga-deep); }
+  .btn-outline { border-color: var(--color-musenga-ink); color: var(--color-musenga-ink); }
+  .btn-outline:hover { border-color: var(--color-musenga-green); background: var(--color-musenga-green); color: #fff; }
+  .btn-outline-light { border-color: rgb(255 255 255 / .55); color: #fff; }
+  .btn-outline-light:hover { border-color: #fff; background: #fff; color: var(--color-musenga-ink); }
+  .btn-arrow { display: inline-block; transition: transform .3s ease; }
+  .btn:hover .btn-arrow { transform: translateX(4px); }
+  .btn:hover .btn-arrow-back { transform: translateX(-4px); }
+
+  .link-line { display: inline-flex; align-items: center; gap: 1rem; color: var(--color-musenga-green); }
+  .link-line::before { content: ''; flex: none; width: 2.5rem; height: 1px; background: var(--link-line, currentColor); transition: width .3s ease; }
+  .link-line:hover::before, .link-line:focus-visible::before { width: 3.5rem; }
+  .link-line-light { color: #fff; --link-line: var(--color-musenga-green); }
+  .link-quiet { color: var(--color-musenga-ink); transition: color .2s ease; }
+  .link-quiet:hover { color: var(--color-musenga-green); }
+}
+
+.hero-image {
+  background-image:
+    linear-gradient(90deg, rgba(20,25,22,.82) 0%, rgba(20,25,22,.53) 48%, rgba(20,25,22,.16) 100%),
+    linear-gradient(0deg, rgba(20,25,22,.30), rgba(20,25,22,.06)),
+    url('/assets/hero/hero-image-v1.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Header colours. Default: white text over dark heroes. */
+.site-header { --hdr-fg: #fff; --hdr-muted: rgba(255,255,255,.75); --hdr-border: rgba(255,255,255,.6); --hdr-line: rgba(255,255,255,.2); }
+/* "Light" tone: dark text while over a white hero; reverts when scrolled or the mobile menu is open. */
+.site-header.on-light:not(.is-scrolled):not(.menu-open) { --hdr-fg: #202521; --hdr-muted: #4d544f; --hdr-border: rgba(32,37,33,.45); --hdr-line: #DDE1DC; }
+.site-header.menu-open { background-color: rgba(32, 37, 33, .96); }
+.site-header { transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease; }
+/* Header height is defined once here. Heroes use --header-offset (height + 1px bottom border)
+   so their photos always start exactly below the header. */
+:root { --header-height: 84px; --header-height-compact: 64px; --header-offset: calc(var(--header-height) + 1px); }
+.site-header .header-inner { height: var(--header-height); transition: height .3s ease; }
+.site-header.is-scrolled { background-color: rgba(32, 37, 33, .96); border-color: transparent; box-shadow: 0 8px 30px rgba(0, 0, 0, .18); backdrop-filter: blur(8px); }
+.site-header.is-scrolled .header-inner { height: var(--header-height-compact); }
+
+/* Light tone (white home hero): when scrolled, stay white with dark text and keep full height. */
+.site-header.on-light.is-scrolled:not(.menu-open) { --hdr-fg: #202521; --hdr-muted: #4d544f; --hdr-border: rgba(32,37,33,.45); --hdr-line: #DDE1DC; background-color: rgba(255, 255, 255, .96); border-color: #DDE1DC; box-shadow: 0 8px 30px rgba(0, 0, 0, .06); }
+.site-header.on-light.is-scrolled .header-inner { height: var(--header-height); }
+
+.service-image { transition: transform .65s cubic-bezier(.2,.7,.2,1); }
+.service-card:hover .service-image { transform: scale(1.045); }
+
+.showcase-panel img { filter: grayscale(.85) brightness(.7); transition: filter .7s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+.showcase-panel .showcase-tint { transition: opacity .7s ease; }
+.showcase-panel:hover img, .showcase-panel:focus-visible img { filter: none; transform: scale(1.03); }
+.showcase-panel:hover .showcase-tint, .showcase-panel:focus-visible .showcase-tint { opacity: 0; }
+.showcase-zoom {
+  position: absolute; left: 50%; top: 50%;
+  display: flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; border-radius: 9999px;
+  background: rgba(39,162,71,.88); color: #fff;
+  opacity: 0; transform: translate(-50%,-50%) scale(.7);
+  transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.showcase-panel:hover .showcase-zoom, .showcase-panel:focus-visible .showcase-zoom { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+/* Line-style form fields: a single underline that turns green on focus. */
+.field-label { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--color-musenga-ink); }
+.field-line {
+  display: block; width: 100%; margin-top: .5rem; padding: .75rem 0;
+  background: transparent; border: 0; border-bottom: 1px solid var(--color-musenga-line); border-radius: 0;
+  font-size: 1rem; color: var(--color-musenga-ink); outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field-line::placeholder { color: #9aa19c; }
+.field-line:hover { border-bottom-color: #b9c0ba; }
+.field-line:focus { border-bottom-color: var(--color-musenga-green); box-shadow: 0 1px 0 0 var(--color-musenga-green); }
+/* Validation errors (set by the form script via aria-invalid). */
+.field-line[aria-invalid="true"] { border-bottom-color: #c2410c; box-shadow: 0 1px 0 0 #c2410c; }
+div:has(> .field-line[aria-invalid="true"]) > .field-label,
+div:has(> div > .field-line[aria-invalid="true"]) > .field-label { color: #c2410c; }
+.field-error { margin-top: .5rem; display: flex; gap: .4rem; align-items: flex-start; font-size: 12px; line-height: 1.4; color: #c2410c; }
+.field-error[hidden] { display: none; }
+#formNotice.is-error { color: #c2410c; font-weight: 600; }
+.field-error::before { content: "!"; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; margin-top: 1px; border-radius: 9999px; background: #c2410c; color: #fff; font-size: 10px; font-weight: 700; }
+
+/* Map placeholder: a faint street-grid pattern behind the pin. */
+.map-grid {
+  background-image:
+    linear-gradient(rgba(32,37,33,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32,37,33,.06) 1px, transparent 1px),
+    linear-gradient(35deg, transparent 48%, rgba(39,162,71,.12) 48.5%, rgba(39,162,71,.12) 51.5%, transparent 52%),
+    linear-gradient(-55deg, transparent 49%, rgba(32,37,33,.08) 49.5%, rgba(32,37,33,.08) 50.5%, transparent 51%);
+  background-size: 36px 36px, 36px 36px, 100% 100%, 100% 100%;
+}
+
+/* ---------- Animations (opacity / transform / clip-path only, so they stay smooth) ---------- */
+/* Scroll reveal: elements get .reveal from the Animations component, then .is-visible when on screen. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* Hero entrance on page load: text rises in, photo settles, green bar wipes in. */
+@keyframes hero-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes hero-photo { from { opacity: .4; transform: scale(1.06); } to { opacity: 1; transform: scale(1); } }
+@keyframes hero-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.hero-rise { animation: hero-rise .8s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
+.hero-photo { animation: hero-photo 1.4s cubic-bezier(.2,.7,.2,1) both; }
+.hero-wipe { animation: hero-wipe .9s cubic-bezier(.65,0,.35,1) .3s both; }
+
+/* Scroll-down arrow: drifts down and fades, then repeats. Hovering pauses it. */
+@keyframes scroll-cue {
+  0%   { transform: translateY(-10px); opacity: 0; }
+  25%  { opacity: 1; }
+  70%  { transform: translateY(6px); opacity: 1; }
+  100% { transform: translateY(14px); opacity: 0; }
+}
+.scroll-cue { animation: scroll-cue 2.2s cubic-bezier(.45, 0, .25, 1) infinite; }
+a:hover > .scroll-cue, a:focus-visible > .scroll-cue { animation-play-state: paused; opacity: 1; transform: none; }
+
+.focus-ring:focus-visible { outline: 3px solid #27A247; outline-offset: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .scroll-cue, .hero-rise, .hero-photo, .hero-wipe { animation: none; }
+}

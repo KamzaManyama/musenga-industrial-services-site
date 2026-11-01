@@ -1,0 +1,130 @@
+---
+// POPIA privacy notice. This is a template for Musenga to review with a legal adviser before launch.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { company } from '../data/company';
+import PageHero from '../components/PageHero.astro';
+
+const sections = [
+  { id: 'who-we-are', title: 'Who we are' },
+  { id: 'what-we-collect', title: 'What we collect' },
+  { id: 'why', title: 'Why we use it' },
+  { id: 'sharing', title: 'Who we share it with' },
+  { id: 'retention', title: 'How long we keep it' },
+  { id: 'security', title: 'How we protect it' },
+  { id: 'applicants', title: 'Job applicants' },
+  { id: 'cookies', title: 'Cookies' },
+  { id: 'your-rights', title: 'Your rights' },
+  { id: 'contact', title: 'Contact & complaints' },
+];
+
+const h2 = 'scroll-mt-28 text-2xl font-semibold tracking-[-.03em] sm:text-3xl';
+const p = 'mt-4 text-base leading-7 text-musenga-muted';
+const li = 'flex gap-3 text-base leading-7 text-musenga-muted before:mt-3 before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-musenga-green';
+const todo = 'rounded-sm bg-amber-100 px-1.5 py-0.5 text-sm font-semibold text-amber-900';
+---
+
+<BaseLayout
+  title="Privacy Policy | Musenga Investments"
+  hasContact={false}
+  description="How Musenga Investments collects, uses and protects your personal information, in line with POPIA."
+>
+  <PageHero
+    breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Privacy policy' }]}
+    titleBold="Privacy"
+    title="policy"
+    intro="How we collect, use and protect your personal information, in line with the Protection of Personal Information Act (POPIA)."
+  >
+    <p class="text-[10px] font-semibold uppercase tracking-editorial text-musenga-muted">Last updated<br><span class="mt-2 block text-sm normal-case tracking-normal text-musenga-ink">{company.privacyPolicyUpdated}</span></p>
+  </PageHero>
+  <div class="border-t border-musenga-line"></div>
+
+  <!-- POLICY -->
+  <section class="px-5 py-20 sm:px-8 sm:py-24 lg:px-14 lg:py-28">
+    <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
+      <aside class="lg:col-span-3">
+        <nav aria-label="On this page" class="lg:sticky lg:top-28">
+          <p class="text-[10px] font-bold uppercase tracking-editorial text-musenga-green">On this page</p>
+          <ol class="mt-5 space-y-3 border-l border-musenga-line pl-5 text-sm">
+            {sections.map((s) => (
+              <li><a href={`#${s.id}`} class="focus-ring rounded-sm text-musenga-muted transition hover:text-musenga-ink">{s.title}</a></li>
+            ))}
+          </ol>
+        </nav>
+      </aside>
+
+      <article class="max-w-3xl space-y-14 lg:col-span-8 lg:col-start-5">
+        <div>
+          <h2 id="who-we-are" class={h2}>Who we are</h2>
+          <p class={p}>{company.legalName} (“Musenga”, “we”, “us”) is the responsible party for personal information collected through this website.</p>
+          <p class={p}>
+            Registration number: {company.registrationNumber ?? <span class={todo}>to be confirmed</span>}<br>
+            Address: {company.address}<br>
+            Email: <a href={`mailto:${company.email}`} class="text-musenga-ink underline decoration-musenga-line underline-offset-4 hover:decoration-musenga-green">{company.email}</a>
+          </p>
+        </div>
+
+        <div>
+          <h2 id="what-we-collect" class={h2}>What we collect</h2>
+          <p class={p}>We only collect the information you choose to give us when you send an enquiry:</p>
+          <ul class="mt-4 space-y-2">
+            <li class={li}>your name and email address</li>
+            <li class={li}>your phone number, if you provide it</li>
+            <li class={li}>the service you are interested in and the details in your message</li>
+          </ul>
+          <p class={p}>Providing this information is voluntary, but we need your name and a way to contact you in order to respond.</p>
+        </div>
+
+        <div>
+          <h2 id="why" class={h2}>Why we use it</h2>
+          <p class={p}>We use your information only to respond to your enquiry, prepare quotes or proposals you ask for, and manage any resulting business relationship. We do not sell your information, and we will not send you marketing messages unless you have agreed to receive them.</p>
+        </div>
+
+        <div>
+          <h2 id="sharing" class={h2}>Who we share it with</h2>
+          <p class={p}>Your information is handled by the Musenga team members who need it to respond to you. It may be processed by service providers that host our website, email and enquiry forms on our behalf, under agreements that require them to keep it secure. We will only disclose it to anyone else where the law requires us to.</p>
+        </div>
+
+        <div>
+          <h2 id="retention" class={h2}>How long we keep it</h2>
+          <p class={p}>We keep enquiry information only for as long as we need it to respond and to manage any resulting business relationship, or for as long as the law requires. After that it is deleted or de-identified.</p>
+        </div>
+
+        <div>
+          <h2 id="security" class={h2}>How we protect it</h2>
+          <p class={p}>We take reasonable technical and organisational measures to protect your information against loss, misuse and unauthorised access, including limiting access to the people who need it.</p>
+        </div>
+
+        <div>
+          <h2 id="applicants" class={h2}>Job applicants</h2>
+          <p class={p}>If you apply for a role, we collect the details you give us, such as your name, contact details and your CV.</p>
+          <p class={p}>We use this information only to assess your application and contact you about work opportunities. Unsuccessful applications are kept for up to 12 months, with your consent, in case a suitable opportunity comes up, and are then deleted. You can ask us to delete your details at any time.</p>
+        </div>
+
+        <div>
+          <h2 id="cookies" class={h2}>Cookies</h2>
+          <p class={p}>This website does not use cookies or tracking technologies of its own, and our fonts are served from our own website. Our About page offers a map of our head office provided by Google Maps. The map only loads if you choose “Show map”; Google may then set cookies and receive information such as your IP address, under Google’s own privacy policy. We remember that choice in your browser so the map loads straight away on later visits. If we introduce analytics or other tools that use cookies, we will update this policy and ask for your consent where required.</p>
+        </div>
+
+        <div>
+          <h2 id="your-rights" class={h2}>Your rights</h2>
+          <p class={p}>Under POPIA you have the right to:</p>
+          <ul class="mt-4 space-y-2">
+            <li class={li}>ask whether we hold personal information about you, and request a copy of it</li>
+            <li class={li}>ask us to correct or delete information that is inaccurate, out of date or no longer needed</li>
+            <li class={li}>object to us processing your information</li>
+            <li class={li}>withdraw any consent you have given</li>
+            <li class={li}>lodge a complaint with the Information Regulator</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 id="contact" class={h2}>Contact &amp; complaints</h2>
+          <p class={p}>
+            To exercise your rights or ask a question about this policy, contact our Information Officer, {company.informationOfficer ?? <span class={todo}>name to be confirmed</span>}, at <a href={`mailto:${company.email}`} class="text-musenga-ink underline decoration-musenga-line underline-offset-4 hover:decoration-musenga-green">{company.email}</a> or {company.phone}.
+          </p>
+          <p class={p}>If you are not satisfied with how we have handled your request, you may complain to the Information Regulator (South Africa) via <a href="https://inforegulator.org.za" target="_blank" rel="noopener" class="text-musenga-ink underline decoration-musenga-line underline-offset-4 hover:decoration-musenga-green">inforegulator.org.za</a>.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

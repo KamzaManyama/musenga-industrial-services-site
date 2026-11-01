@@ -1,0 +1,26 @@
+---
+// 05 / Registered & accredited: what Musenga is registered with, the bodies' logos,
+// and a link through to the full Certifications page. Used on the About page.
+import { logos } from '../data/certifications';
+
+const eyebrow = 'flex items-center gap-3 text-[10px] font-bold uppercase tracking-editorial text-musenga-green';
+---
+
+<section id="registrations" class="scroll-mt-24 bg-musenga-mist px-5 py-24 sm:px-8 sm:py-32 lg:px-14 lg:py-36">
+  <div data-reveal-stagger class="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-20">
+    <div class="lg:col-span-5">
+      <p class={eyebrow}><span class="h-px w-9 bg-musenga-green"></span> 05 / Registered &amp; accredited</p>
+      <h2 class="mt-7 text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-5xl">Registered with the bodies that regulate our work.</h2>
+      <p class="mt-6 max-w-md text-base leading-7 text-musenga-muted">From CIDB grading and NHBRC registration to the contract cleaning industry's councils, Musenga is registered across all three divisions, so public- and private-sector clients can contract us with confidence.</p>
+      <a href="/certifications/" class="btn btn-outline focus-ring mt-9">View our certifications <span class="btn-arrow" aria-hidden="true">→</span></a>
+    </div>
+
+    <ul class="grid grid-cols-2 border-l border-t border-musenga-line bg-white sm:grid-cols-3 lg:col-span-7">
+      {logos.map((logo) => (
+        <li class="flex h-28 items-center justify-center border-b border-r border-musenga-line px-6 sm:h-32">
+          <img src={logo.src} alt={logo.alt} class="max-h-14 max-w-[130px] object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0" loading="lazy">
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
