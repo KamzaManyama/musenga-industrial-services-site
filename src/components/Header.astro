@@ -9,14 +9,20 @@ const { hasContact = true, tone = 'dark' } = Astro.props;
 const contactHref = hasContact ? '#contact' : '/#contact';
 const path = Astro.url.pathname;
 const isHome = path === '/';
+// The nav mirrors the home page sections, in page order. On the home page each item scrolls to its
+// section (whose own button leads on to the full page). Elsewhere it opens the full page where one
+// exists, or the home section where it doesn't. Careers has no home section, so it is always a page link.
+// Contact is left out on purpose: the "Discuss an enquiry" button already covers it.
 const links = [
-  // On the home page "About" scrolls to the "Who we are" section; elsewhere it opens the About page.
-  { label: 'About', href: isHome ? '#about' : '/about/', active: path.startsWith('/about') },
-  { label: 'Services', href: '/#services', active: path.startsWith('/services') },
-  { label: 'Certifications', href: '/certifications/', active: path.startsWith('/certifications') },
-  { label: 'Careers', href: '/careers/', active: path.startsWith('/careers') },
-  { label: 'Contact', href: contactHref, active: false },
-];
+  { label: 'About', section: 'about', page: '/about/', active: path.startsWith('/about') },
+  { label: 'Who we serve', section: 'sectors', active: false },
+  { label: 'Certifications', section: 'capabilities', page: '/certifications/', active: path.startsWith('/certifications') },
+  { label: 'Services', section: 'services', active: path.startsWith('/services') },
+  { label: 'Careers', page: '/careers/', active: path.startsWith('/careers') },
+].map((link) => ({
+  ...link,
+  href: isHome && link.section ? `#${link.section}` : link.page ?? `/#${link.section}`,
+}));
 ---
 
 <header id="siteHeader" class:list={['site-header fixed inset-x-0 top-0 z-50 border-b border-[var(--hdr-line)] text-[var(--hdr-fg)]', tone === 'light' && 'on-light']}>
@@ -30,6 +36,7 @@ const links = [
         <a
           class:list={['focus-ring relative rounded-sm py-1 transition', link.active ? 'text-[var(--hdr-fg)] after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-musenga-green' : 'text-[var(--hdr-muted)] hover:text-[var(--hdr-fg)]']}
           href={link.href}
+          data-section={isHome ? link.section : undefined}
           aria-current={link.active ? 'page' : undefined}
         >{link.label}</a>
       ))}
@@ -47,6 +54,8 @@ const links = [
       {links.map((link) => (
         <a href={link.href} class={link.active ? 'text-musenga-green' : ''} aria-current={link.active ? 'page' : undefined}>{link.label}</a>
       ))}
+      <!-- The header enquiry button is hidden on small phones, so it lives in the menu there. -->
+      <a href={contactHref} class="text-musenga-green sm:hidden">Discuss an enquiry →</a>
     </div>
   </nav>
 </header>
@@ -68,6 +77,25 @@ menuButton.addEventListener('click', () => {
   mobileMenu.classList.toggle('hidden', isOpen);
   header.classList.toggle('menu-open', !isOpen);
 });
+// On the home page, underline the nav item for the section currently in view.
+const sectionLinks = [...document.querySelectorAll<HTMLAnchorElement>('nav a[data-section]')];
+const sections = sectionLinks
+  .map(link => document.getElementById(link.dataset.section!))
+  .filter((el): el is HTMLElement => el !== null);
+if (sections.length) {
+  const setActive = () => {
+    const line = window.innerHeight * 0.35;
+    let current: string | undefined;
+    for (const el of sections) if (el.getBoundingClientRect().top <= line) current = el.id;
+    // Past the end of the last nav section (e.g. in Contact), nothing is highlighted.
+    const last = sections.find(el => el.id === current);
+    if (last && last.getBoundingClientRect().bottom < line) current = undefined;
+    for (const link of sectionLinks) link.classList.toggle('is-current', link.dataset.section === current);
+  };
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+}
+
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     mobileMenu.classList.add('hidden');
