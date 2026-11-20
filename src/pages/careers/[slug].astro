@@ -57,6 +57,11 @@ const details: [string, string][] = [
   title={`${job.title} | Careers | Musenga Investments`}
   description={job.summary}
   hasContact={false}
+  back={{ label: 'All roles', href: '/careers/#roles' }}
+  nav={[
+    { label: 'About the role', href: '#role' },
+    { label: 'How to apply', href: '#apply' },
+  ]}
 >
   <SplitHero
     eyebrow={`Careers · ${job.division}`}

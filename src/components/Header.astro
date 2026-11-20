@@ -1,28 +1,20 @@
 ---
-// Pages with a contact section keep "Contact" on the page; others send it to the home page form.
+// Each page passes its own sections as the nav, so every item scrolls within the page you're on
+// (the section in view is underlined while scrolling). Inner pages also get a back link ("← Home", or
+// "← All roles" on job pages), and the logo always goes home. There is no Contact item: the
+// "Discuss an enquiry" button covers it.
 interface Props {
   hasContact?: boolean;
   /** 'light' = dark text while the header sits over a white hero (until the page scrolls). */
   tone?: 'dark' | 'light';
+  nav?: { label: string; href: string }[];
+  back?: { label: string; href: string };
 }
-const { hasContact = true, tone = 'dark' } = Astro.props;
+const { hasContact = true, tone = 'dark', nav = [] } = Astro.props;
 const contactHref = hasContact ? '#contact' : '/#contact';
-const path = Astro.url.pathname;
-const isHome = path === '/';
-// The nav mirrors the home page sections, in page order. On the home page each item scrolls to its
-// section (whose own button leads on to the full page). Elsewhere it opens the full page where one
-// exists, or the home section where it doesn't. Careers has no home section, so it is always a page link.
-// Contact is left out on purpose: the "Discuss an enquiry" button already covers it.
-const links = [
-  { label: 'About', section: 'about', page: '/about/', active: path.startsWith('/about') },
-  { label: 'Who we serve', section: 'sectors', active: false },
-  { label: 'Certifications', section: 'capabilities', page: '/certifications/', active: path.startsWith('/certifications') },
-  { label: 'Services', section: 'services', active: path.startsWith('/services') },
-  { label: 'Careers', page: '/careers/', active: path.startsWith('/careers') },
-].map((link) => ({
-  ...link,
-  href: isHome && link.section ? `#${link.section}` : link.page ?? `/#${link.section}`,
-}));
+const isHome = Astro.url.pathname === '/';
+const back = Astro.props.back ?? (isHome ? undefined : { label: 'Home', href: '/' });
+const linkClass = 'focus-ring relative rounded-sm py-1 text-[var(--hdr-muted)] transition hover:text-[var(--hdr-fg)]';
 ---
 
 <header id="siteHeader" class:list={['site-header fixed inset-x-0 top-0 z-50 border-b border-[var(--hdr-line)] text-[var(--hdr-fg)]', tone === 'light' && 'on-light']}>
@@ -31,28 +23,31 @@ const links = [
       <img src="/assets/Musenga-Logo.png" alt="Musenga Investments" width="350" height="100" class="h-10 w-auto sm:h-11">
     </a>
 
-    <nav class="hidden items-center gap-8 text-[11px] font-semibold uppercase tracking-[.14em] lg:flex" aria-label="Main navigation">
-      {links.map((link) => (
-        <a
-          class:list={['focus-ring relative rounded-sm py-1 transition', link.active ? 'text-[var(--hdr-fg)] after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-musenga-green' : 'text-[var(--hdr-muted)] hover:text-[var(--hdr-fg)]']}
-          href={link.href}
-          data-section={isHome ? link.section : undefined}
-          aria-current={link.active ? 'page' : undefined}
-        >{link.label}</a>
+    <nav class="hidden items-center gap-7 text-[11px] font-semibold uppercase tracking-[.14em] xl:flex" aria-label="Main navigation">
+      {back && (
+        <a href={back.href} class="focus-ring flex items-center gap-2 rounded-sm py-1 text-[var(--hdr-fg)] transition hover:text-musenga-green">
+          <span aria-hidden="true">←</span> {back.label}
+        </a>
+      )}
+      {back && nav.length > 0 && <span class="h-4 w-px bg-[var(--hdr-line)]" aria-hidden="true"></span>}
+      {nav.map((link) => (
+        <a class={linkClass} href={link.href} data-section={link.href.startsWith('#') ? link.href.slice(1) : undefined}>{link.label}</a>
       ))}
     </nav>
 
     <a href={contactHref} class="btn btn-sm focus-ring hidden border-[var(--hdr-border)] hover:border-musenga-green hover:bg-musenga-green hover:text-white sm:inline-flex">
       Discuss an enquiry <span class="btn-arrow" aria-hidden="true">→</span>
     </a>
-    <button id="menuButton" class="focus-ring rounded-sm border border-[var(--hdr-border)] p-2 lg:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileMenu">
+    <button id="menuButton" class="focus-ring rounded-sm border border-[var(--hdr-border)] p-2 xl:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileMenu">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.5"/></svg>
     </button>
   </div>
-  <nav id="mobileMenu" class="hidden border-t border-white/20 bg-musenga-ink/95 text-white px-5 py-5 sm:px-8 lg:hidden" aria-label="Mobile navigation">
+  <nav id="mobileMenu" class="hidden border-t border-white/20 bg-musenga-ink/95 text-white px-5 py-5 sm:px-8 xl:hidden" aria-label="Mobile navigation">
     <div class="flex flex-col gap-5 text-xs font-semibold uppercase tracking-[.14em]">
-      {links.map((link) => (
-        <a href={link.href} class={link.active ? 'text-musenga-green' : ''} aria-current={link.active ? 'page' : undefined}>{link.label}</a>
+      {back && <a href={back.href} class="flex items-center gap-2"><span aria-hidden="true">←</span> {back.label}</a>}
+      {back && nav.length > 0 && <span class="h-px w-full bg-white/15" aria-hidden="true"></span>}
+      {nav.map((link) => (
+        <a href={link.href} data-section={link.href.startsWith('#') ? link.href.slice(1) : undefined}>{link.label}</a>
       ))}
       <!-- The header enquiry button is hidden on small phones, so it lives in the menu there. -->
       <a href={contactHref} class="text-musenga-green sm:hidden">Discuss an enquiry →</a>
@@ -77,7 +72,7 @@ menuButton.addEventListener('click', () => {
   mobileMenu.classList.toggle('hidden', isOpen);
   header.classList.toggle('menu-open', !isOpen);
 });
-// On the home page, underline the nav item for the section currently in view.
+// Highlight the nav item for the section currently in view.
 const sectionLinks = [...document.querySelectorAll<HTMLAnchorElement>('nav a[data-section]')];
 const sections = sectionLinks
   .map(link => document.getElementById(link.dataset.section!))

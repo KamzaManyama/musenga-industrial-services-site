@@ -76,9 +76,10 @@ button { cursor: pointer; }
 /* Light tone (white home hero): when scrolled, stay white with dark text and keep full height. */
 .site-header.on-light.is-scrolled:not(.menu-open) { --hdr-fg: #202521; --hdr-muted: #4d544f; --hdr-border: rgba(32,37,33,.45); --hdr-line: #DDE1DC; background-color: rgba(255, 255, 255, .96); border-color: #DDE1DC; box-shadow: 0 8px 30px rgba(0, 0, 0, .06); }
 .site-header.on-light.is-scrolled .header-inner { height: var(--header-height); }
-/* Home page: the nav item for the section in view. Matches the active-page underline. */
-.site-header nav a.is-current { color: var(--hdr-fg); }
-.site-header nav a.is-current::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.25rem; height: 1px; background: var(--color-musenga-green); }
+/* The nav item for the section in view (set while scrolling, see Header.astro). */
+.site-header nav[aria-label="Main navigation"] a.is-current { color: var(--hdr-fg); }
+.site-header nav[aria-label="Main navigation"] a.is-current::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.25rem; height: 1px; background: var(--color-musenga-green); }
+#mobileMenu a.is-current { color: var(--color-musenga-green); }
 
 .service-image { transition: transform .65s cubic-bezier(.2,.7,.2,1); }
 .service-card:hover .service-image { transform: scale(1.045); }

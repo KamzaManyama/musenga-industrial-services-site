@@ -29,6 +29,11 @@ const eyebrow = 'flex items-center gap-3 text-[10px] font-bold uppercase trackin
 <BaseLayout
   title={`${service.title} | Musenga Investments`}
   description={service.summary}
+  nav={[
+    { label: 'Overview', href: '#overview' },
+    { label: 'What we offer', href: '#offer' },
+    ...(service.showcase ? [{ label: 'Our work', href: '#showcase' }] : []),
+  ]}
 >
   <SplitHero
     eyebrow={`Our services · ${service.number} / ${service.category}`}

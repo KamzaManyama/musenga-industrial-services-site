@@ -19,6 +19,10 @@ interface Props {
   noindex?: boolean;
   /** Page without header, footer and back-to-top (e.g. the 404 page). */
   bare?: boolean;
+  /** Header nav: this page's own sections, in page order (e.g. { label: 'Team', href: '#team' }). */
+  nav?: { label: string; href: string }[];
+  /** Header link back up a level. Defaults to Home on every page except the home page. */
+  back?: { label: string; href: string };
 }
 
 const {
@@ -26,6 +30,8 @@ const {
   headerTone = 'light',
   noindex = false,
   bare = false,
+  nav = [],
+  back,
   title = 'Musenga Investments',
   description = 'Musenga Investments provides waste management, cleaning and hygiene, and building construction and maintenance for public- and private-sector clients.',
 } = Astro.props;
@@ -43,7 +49,7 @@ const {
 </head>
 <body class="bg-white text-musenga-ink antialiased">
   <!-- Concept only: validate wording, services, credentials, projects and imagery with Musenga before publication. -->
-  {!bare && <Header hasContact={hasContact} tone={headerTone} />}
+  {!bare && <Header hasContact={hasContact} tone={headerTone} nav={nav} back={back} />}
   <main id="top">
     <slot />
   </main>

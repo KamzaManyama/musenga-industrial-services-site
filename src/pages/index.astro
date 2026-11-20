@@ -8,6 +8,7 @@ import CtaBand from '../components/home/CtaBand.astro';
 import { keyFacts } from '../data/company';
 import Capabilities from '../components/home/Capabilities.astro';
 import Showcase from '../components/home/Showcase.astro';
+import Careers from '../components/home/Careers.astro';
 import ContactSection from '../components/ContactSection.astro';
 
 // Which hero to show on the home page:
@@ -22,6 +23,13 @@ const heroImage = { src: '/assets/placeholder/home-hero-placeholder.jpg', alt: '
 
 <BaseLayout
   headerTone={hero === 'split' ? 'light' : 'dark'}
+  nav={[
+    { label: 'About', href: '#about' },
+    { label: 'Who we serve', href: '#sectors' },
+    { label: 'Certifications', href: '#capabilities' },
+    { label: 'Services', href: '#services' },
+    { label: 'Careers', href: '#careers' },
+  ]}
   title="Musenga Investments | Waste Management, Cleaning & Construction"
   description="Musenga Investments is a 100% Black woman-owned company providing waste management, cleaning and hygiene, and building construction and maintenance since 2002."
 >
@@ -31,5 +39,6 @@ const heroImage = { src: '/assets/placeholder/home-hero-placeholder.jpg', alt: '
   <CtaBand />
   <Capabilities />
   <Showcase />
-  <ContactSection number="04" />
+  <Careers />
+  <ContactSection number="05" />
 </BaseLayout>

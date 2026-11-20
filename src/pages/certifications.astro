@@ -11,6 +11,10 @@ const total = divisions.reduce((n, d) => n + d.registrations.length, 0) + 1;
 <BaseLayout
   title="Certifications & Registrations | Musenga Investments"
   description="Musenga Investments' ISO 9001:2015 quality management system and industry registrations across construction, cleaning and waste management."
+  nav={[
+    { label: 'Quality', href: '#quality' },
+    { label: 'Registrations', href: '#registrations' },
+  ]}
 >
   <SplitHero
     eyebrow="Certifications · ISO 9001:2015"
